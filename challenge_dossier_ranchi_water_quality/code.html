@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"inverse-surface":"#293040","on-primary-container":"#d7dcff","surface-container":"#e9edff","primary-fixed-dim":"#b8c4ff","on-primary-fixed":"#001354","background":"#f9f9ff","surface-container-high":"#e1e8fd","primary-fixed":"#dde1ff","surface-bright":"#f9f9ff","surface":"#f9f9ff","on-secondary-fixed":"#25005a","error-container":"#ffdad6","on-surface":"#141b2b","on-tertiary-fixed":"#002109","tertiary":"#005723","on-surface-variant":"#444654","on-primary-fixed-variant":"#0036bb","outline":"#747686","primary":"#063ac1","primary-container":"#3155d9","surface-variant":"#dce2f7","on-error-container":"#93000a","tertiary-fixed-dim":"#62df7d","outline-variant":"#c4c5d7","surface-container-lowest":"#ffffff","on-background":"#141b2b","secondary":"#712ae2","surface-container-low":"#f1f3ff","inverse-primary":"#b8c4ff","inverse-on-surface":"#edf0ff","tertiary-fixed":"#7ffc97","surface-dim":"#d3daef","error":"#ba1a1a","on-secondary-fixed-variant":"#5a00c6","on-primary":"#ffffff","surface-tint":"#2c51d5","surface-container-highest":"#dce2f7","on-secondary-container":"#fffbff","secondary-container":"#8a4cfc","on-error":"#ffffff","tertiary-container":"#007230","secondary-fixed":"#eaddff","on-tertiary":"#ffffff","on-tertiary-container":"#7bf893","on-secondary":"#ffffff","secondary-fixed-dim":"#d2bbff","on-tertiary-fixed-variant":"#005320"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-sm":"0.5rem","space-xs":"0.25rem","space-md":"1rem","space-xl":"2rem","space-lg":"1.5rem","gutter-mobile":"1rem","margin-mobile":"1rem","gutter":"1.5rem","margin":"2rem"},fontFamily:{"headline-lg-mobile":["Manrope"],"display-lg-mobile":["Manrope"],"body-sm":["Manrope"],"display-lg":["Manrope"],"headline-lg":["Manrope"],"title-md":["Manrope"],"label-sm":["Manrope"],"headline-md":["Manrope"],"body-lg":["Manrope"],"label-lg":["Manrope"],"title-lg":["Manrope"],"label-md":["Manrope"],"headline-sm":["Manrope"],"body-md":["Manrope"]},fontSize:{"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"700"}],"display-lg-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"display-lg":["48px",{"lineHeight":"56px","letterSpacing":"-0.025em","fontWeight":"800"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"title-md":["16px",{"lineHeight":"24px","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.04em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.005em","fontWeight":"600"}],"title-lg":["18px",{"lineHeight":"26px","letterSpacing":"-0.005em","fontWeight":"600"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-hidden"><div class="flex flex-col"><div class="h-16 px-space-md flex items-center justify-between bg-surface-container-lowest"><div class="flex items-center gap-space-sm"><img alt="CivicPulse AI Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Xdx9XkKBLxGBKAFI6KroURTOIWsZilA-xt3myCzgtjpOYvk2adOUkOfQlp6x7y6wWOBGx2tlbGqZZ2JOuUkvArcEUqDhSihcxo1XlkwHLLlP2IBrJn_10_pI45UnGrhMX97WuFHyjMxCWrh40oPLLRXv0BDNso1femQRjIqby7boRCiSg1xMrvkCbTubgnWDI4mXmlm-HjAFm-GBYfd-vhq07RwTtY2uaN5pcO-JD85sPOUbz6dJk-RCE"/><div class="flex flex-col"><span class="font-title-md text-title-md text-on-surface tracking-tight leading-none">CivicPulse</span><span class="font-label-sm text-label-sm text-primary font-bold uppercase tracking-wider">SIH26043</span></div></div><span class="px-space-xs py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm">v2.4</span></div><div class="px-space-md py-space-sm"><div class="p-1 bg-surface-container-low rounded-lg flex items-center justify-between text-center"><button class="flex-1 py-1 px-1 rounded-md bg-surface-container-lowest text-on-surface font-label-sm text-label-sm shadow-[0_1px_3px_rgba(0,0,0,0.04)]" type="button">Student</button><button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">Univ</button><button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">Mentor</button><button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm" type="button">Admin</button></div></div><nav class="px-space-sm py-space-xs flex flex-col gap-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary font-title-md rounded-lg shadow-[0_1px_3px_rgba(0,0,0,0.08)]"><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="dashboard" href="#"><span class="material-symbols-outlined text-lg">dashboard</span><span>Dashboard</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="challenges-marketplace" href="#"><span class="material-symbols-outlined text-lg">travel_explore</span><span>Discover Challenges</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="report" href="#"><span class="material-symbols-outlined text-lg">add_circle</span><span>Report a Problem</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="ai-analysis" href="#"><span class="material-symbols-outlined text-lg">psychology</span><span>AI Analysis Lab</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="team-workspace" href="#"><span class="material-symbols-outlined text-lg">group_work</span><span>Team Workspace</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="mentorship" href="#"><span class="material-symbols-outlined text-lg">supervisor_account</span><span>Mentorship Hub</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="impact" href="#"><span class="material-symbols-outlined text-lg">query_stats</span><span>Impact Analytics</span></a><a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors font-body-md text-body-md" data-path="admin-moderation" href="#"><span class="material-symbols-outlined text-lg">gavel</span><span>Admin Moderation</span></a></nav></div><div class="p-space-sm bg-surface-container-lowest"><div class="p-space-sm rounded-xl bg-surface-container-low flex items-center justify-between"><div class="flex items-center gap-space-sm overflow-hidden"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shrink-0" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUDsvvhLAAxLtYbVCOt9sX2Z7tkB7ZPn9CTxKNG6Id-mTEEkx89WtXo_Gf_vkQJVumrNIaq0KGaES0uXxQX4qd96vg88WWFzPQcnJVUEFu-jvfv63s3ewq3T5FK4B6mx6fbuH2Qd5A0oEBT2TEympmD3c0ymhj8zmVZZuiXuLfuJFtDrwRRE9kpm5T1RQW4-o8xZJstZA2tMYVhYjPAAbrKAAjXHOM22Zi1Wlqoq2u5Af53P-ch4yU"/><div class="flex flex-col truncate"><span class="font-label-lg text-label-lg text-on-surface truncate">Rahul Sharma</span><span class="font-label-sm text-label-sm text-on-surface-variant truncate">BIT Mesra · Lead</span></div></div><button class="p-1 text-on-surface-variant hover:text-error hover:bg-surface-container-high rounded-lg transition-colors shrink-0" title="Logout" type="button"><span class="material-symbols-outlined text-lg">logout</span></button></div></div></aside><div class="pl-64 flex flex-col min-h-screen"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-space-lg"><div class="w-full max-w-lg relative"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full h-10 pl-10 pr-12 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline font-body-md text-body-md outline-none focus:ring-2 focus:ring-primary-container shadow-[0_1px_3px_rgba(0,0,0,0.02)]" placeholder="Search civic problems, skills, locations, or universities..." type="search"/><span class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-surface-container font-label-sm text-label-sm text-on-surface-variant">⌘K</span></div><div class="flex items-center gap-space-md shrink-0"><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span>SIH Finalist · Ranchi Pilot Active</span></div><a class="flex items-center gap-space-xs h-10 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg shadow-[0_1px_3px_rgba(0,0,0,0.04)] transition-all" data-path="report" href="#"><span class="material-symbols-outlined text-base">add</span><span>Report Problem</span></a><div class="flex items-center gap-space-xs"><button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-error text-on-error font-label-sm text-[9px] flex items-center justify-center font-bold">3</span></button><button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-xl">help_outline</span></button><div class="flex items-center pl-2 ml-1"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-fixed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUDsvvhLAAxLtYbVCOt9sX2Z7tkB7ZPn9CTxKNG6Id-mTEEkx89WtXo_Gf_vkQJVumrNIaq0KGaES0uXxQX4qd96vg88WWFzPQcnJVUEFu-jvfv63s3ewq3T5FK4B6mx6fbuH2Qd5A0oEBT2TEympmD3c0ymhj8zmVZZuiXuLfuJFtDrwRRE9kpm5T1RQW4-o8xZJstZA2tMYVhYjPAAbrKAAjXHOM22Zi1Wlqoq2u5Af53P-ch4yU"/></div></div></div></header><main class="w-full pt-16 bg-surface px-space-lg py-space-lg flex-1"><div class="flex flex-col w-full">
+<!-- Breadcrumb Navigation Ribbon -->
+<div class="flex items-center gap-space-xs text-on-surface-variant mb-space-md overflow-x-auto whitespace-nowrap py-1">
+<a class="font-label-md text-label-md hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span>Challenges</span>
+</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<a class="font-label-md text-label-md hover:text-primary transition-colors" href="#">Water &amp; Sanitation</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<a class="font-label-md text-label-md hover:text-primary transition-colors" href="#">Ranchi Water Quality</a>
+<span class="material-symbols-outlined text-xs text-outline">chevron_right</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold bg-surface-container px-2 py-0.5 rounded">Dossier #WT-09</span>
+</div>
+<!-- Hero Banner & Dossier Title Card -->
+<div class="relative w-full rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm overflow-hidden mb-space-lg">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-64 h-64 rounded-full bg-secondary-fixed/20 blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-space-md">
+<!-- Badges Cluster -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-sm">water_drop</span>
+          Water &amp; Sanitation
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+          Severity: High (Critical Potable Water)
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+          Angara, Ranchi, Jharkhand (23.36°N, 85.54°E)
+        </span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm ml-auto">
+<span class="material-symbols-outlined text-sm">verified</span>
+          Verified SIH26043 Problem Statement
+        </span>
+</div>
+<!-- Main Headline + Actions -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-space-md">
+<div class="max-w-4xl">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight leading-tight">
+            Low-Cost IoT-Based Potable Water Quality Monitoring &amp; Early Warning Mesh
+          </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1 max-w-3xl">
+            Autonomous solar telemetry deployed at public community hand pumps to detect seasonal heavy metal leaching, microbial saturation, and industrial particulate contamination across the Subarnarekha River watershed.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="h-10 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm" id="saveWatchlistBtn" onclick="toggleBookmark(this)" type="button">
+<span class="material-symbols-outlined text-lg" id="bookmarkIcon">bookmark_border</span>
+<span id="bookmarkText">Watchlist</span>
+</button>
+<button class="h-10 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md flex items-center gap-1.5 transition-all shadow-sm" title="Download Official SIH Dossier PDF" type="button">
+<span class="material-symbols-outlined text-lg">download</span>
+<span>PDF Dossier</span>
+</button>
+<button class="h-10 px-space-md rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-lg text-label-lg shadow-md flex items-center gap-2 transition-all hover:scale-[1.01] active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-lg">group_add</span>
+<span>Form / Register Student Team</span>
+</button>
+</div>
+</div>
+<!-- Key Stat Strip Metric Tiles -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-space-sm pt-space-xs mt-space-xs">
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Impact Priority Score</span>
+<span class="material-symbols-outlined text-primary text-base">emergency</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-primary font-bold">92</span>
+<span class="font-label-sm text-label-sm text-outline">/ 100</span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary mt-0.5">Top 2% Municipal Urgency</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>At-Risk Population</span>
+<span class="material-symbols-outlined text-error text-base">group</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">2,500</span>
+<span class="font-label-sm text-label-sm text-outline">villagers</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">14 Hamlet Deep Wells</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Prototyping Grant</span>
+<span class="material-symbols-outlined text-secondary text-base">payments</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-secondary font-bold">₹75,000</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Disbursed upon Stage 3</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Active Contenders</span>
+<span class="material-symbols-outlined text-tertiary-container text-base">science</span>
+</div>
+<div class="mt-2 flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">4</span>
+<span class="font-label-sm text-label-sm text-outline">Academic Labs</span>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-semibold mt-0.5">Registration Open</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container-low col-span-2 md:col-span-1 flex flex-col justify-between">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span>Lead Industry Mentor</span>
+<span class="material-symbols-outlined text-secondary text-base">engineering</span>
+</div>
+<div class="mt-2 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs">
+              M
+            </div>
+<div class="flex flex-col truncate">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate">Dr. S. K. Mukherjee</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">Tata Steel R&amp;D</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold mt-0.5">Bi-weekly Reviews</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Progress Lifecycle Tracker Ribbon -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-sm mb-space-lg">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">conversion_path</span>
+<span class="font-title-md text-title-md text-on-surface">Challenge Lifecycle Pipeline</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold bg-secondary-fixed px-2.5 py-0.5 rounded-full">
+        Current Stage: Teams Formation (Phase 4 of 7)
+      </span>
+</div>
+<!-- Stepper Pipeline -->
+<div class="grid grid-cols-1 md:grid-cols-7 gap-2">
+<!-- Stage 1 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-tertiary-fixed/40">
+<div class="flex items-center justify-between text-tertiary mb-1">
+<span class="font-label-sm text-label-sm font-bold">STAGE 01</span>
+<span class="material-symbols-outlined text-base">check_circle</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">Problem Reported</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 12 · Citizen Nodal</span>
+</div>
+<!-- Stage 2 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-tertiary-fixed/40">
+<div class="flex items-center justify-between text-tertiary mb-1">
+<span class="font-label-sm text-label-sm font-bold">STAGE 02</span>
+<span class="material-symbols-outlined text-base">check_circle</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">AI Triaged</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 13 · Vector Scored</span>
+</div>
+<!-- Stage 3 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-tertiary-fixed/40">
+<div class="flex items-center justify-between text-tertiary mb-1">
+<span class="font-label-sm text-label-sm font-bold">STAGE 03</span>
+<span class="material-symbols-outlined text-base">check_circle</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">Admin Approved</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Oct 14 · Ranchi PHED</span>
+</div>
+<!-- Stage 4 (Active) -->
+<div class="flex flex-col p-2.5 rounded-lg bg-primary-fixed text-on-primary-fixed shadow-sm">
+<div class="flex items-center justify-between text-primary font-bold mb-1">
+<span class="font-label-sm text-label-sm">STAGE 04 (ACTIVE)</span>
+<span class="material-symbols-outlined text-base animate-pulse">radio_button_checked</span>
+</div>
+<span class="font-title-md text-xs font-bold text-on-primary-fixed truncate">Teams Formed</span>
+<span class="font-body-sm text-body-sm text-on-primary-fixed-variant font-medium">4 Teams Engaged</span>
+</div>
+<!-- Stage 5 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-surface-container-low opacity-90">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-sm text-label-sm">STAGE 05</span>
+<span class="material-symbols-outlined text-base text-outline">schedule</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">Bench Test Lab</span>
+<span class="font-body-sm text-body-sm text-error font-medium">Due Nov 05</span>
+</div>
+<!-- Stage 6 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-surface-container-low opacity-75">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-sm text-label-sm">STAGE 06</span>
+<span class="material-symbols-outlined text-base text-outline">location_pin</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">Field Pilot Deploy</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Nov 20 · 3 Target Wells</span>
+</div>
+<!-- Stage 7 -->
+<div class="flex flex-col p-2.5 rounded-lg bg-surface-container-low opacity-60">
+<div class="flex items-center justify-between text-on-surface-variant mb-1">
+<span class="font-label-sm text-label-sm">STAGE 07</span>
+<span class="material-symbols-outlined text-base text-outline">handshake</span>
+</div>
+<span class="font-title-md text-xs font-semibold text-on-surface truncate">Municipal Handover</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Dec 10 · PHED Ranchi</span>
+</div>
+</div>
+</div>
+<!-- Main 2-Column Responsive Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN (70% on desktop: 8 cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-lg">
+<!-- Section 1: Problem Context & Ground Truth -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">pin_drop</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Problem Context &amp; Ground Truth</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded">
+            Report ID: #RNC-2024-WT982
+          </span>
+</div>
+<div class="prose max-w-none text-on-surface-variant font-body-md text-body-md space-y-3">
+<p>
+            During the monsoon and post-monsoon cycles in the Angara block (22km outside Ranchi city proper), local primary health sub-centers reported a <span class="font-semibold text-error">34% surge in waterborne gastrointestinal illnesses</span> within an 18-day window. Field spot-checks conducted by local volunteers and panchayat sevaks discovered critical turbidity spikes and industrial tailings contamination seeping into unlined borehole aquifers.
+          </p>
+<p>
+            Traditional municipal testing requires dispatching water sample vials to the Ranchi Central Laboratory with turnaround times spanning 11 to 14 days. By the time contamination advisories are issued, localized handpumps have already distributed contaminated water to over 500 households.
+          </p>
+</div>
+<!-- Ground Truth Data Grid: Satellite & Turbidity Comparison -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mt-space-md pt-space-xs">
+<!-- Satellite Map Thumbnail Container -->
+<div class="bg-surface-container rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="w-full h-48 bg-cover bg-center relative" data-location="Angara Ranchi Jharkhand" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDiC7V6Q32edULCzuP69HR8kvrI0GMs8t1cJUBsBbpJIdocMTcsrkFA-Pfo0SuOvjeJJTqsGRfp5JnLQTed7WhYo7uwvFtPGdt6ZRo8TeygwT49qzKjKT1o71YxWqC4A-79GnUequVcKr_UbOxr7soLHc8XROcM6Hgfk6TpgFkJjqYyYpQZvTLIkDrCpOHS1I-YS6d0u_wMVJrWrT-floaIk9aIIk6f3uwILl5yTxAwMPsphjP4K0tH')">
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent flex flex-col justify-end p-3">
+<span class="font-label-sm text-label-sm text-on-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-error">radio_button_checked</span>
+                  Hotspot Sector 3 (Borehole Cluster A-D)
+                </span>
+<span class="font-body-sm text-body-sm text-surface-container">23°21'44.2"N 85°32'18.7"E · Elevation 620m</span>
+</div>
+</div>
+<div class="p-3 bg-surface-container-low flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ground Water Source: Subarnarekha Basin</span>
+<a class="font-label-sm text-label-sm text-primary font-semibold hover:underline flex items-center gap-0.5" href="#">
+<span>View GIS Coordinates</span>
+<span class="material-symbols-outlined text-xs">open_in_new</span>
+</a>
+</div>
+</div>
+<!-- Baseline Turbidity & Chemical Diagnostics -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-surface font-semibold">Laboratory Baseline Test Results</span>
+<span class="font-label-sm text-label-sm text-error bg-error-container px-2 py-0.5 rounded-full font-bold">Severe Failure</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3">
+                Field spectrophotometer readings verified by BIT Mesra Department of Chemical Engineering on Oct 11, 2024.
+              </p>
+<!-- Comparison Bars -->
+<div class="space-y-2.5">
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1">
+<span class="text-on-surface">Turbidity (NTU)</span>
+<span class="text-error font-bold">42 NTU <span class="text-on-surface-variant font-normal">(Safe limit: &lt;5 NTU)</span></span>
+</div>
+<div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden flex">
+<div class="bg-error h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1">
+<span class="text-on-surface">Total Dissolved Solids (TDS)</span>
+<span class="text-secondary font-bold">840 ppm <span class="text-on-surface-variant font-normal">(Safe limit: &lt;300 ppm)</span></span>
+</div>
+<div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden flex">
+<div class="bg-secondary h-full rounded-full" style="width: 74%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1">
+<span class="text-on-surface">pH Balance</span>
+<span class="text-tertiary font-bold">6.1 pH <span class="text-on-surface-variant font-normal">(Safe limit: 6.5 - 8.5)</span></span>
+</div>
+<div class="w-full h-2.5 rounded-full bg-surface-container overflow-hidden flex">
+<div class="bg-tertiary h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-3 pt-2 text-xs text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary">info</span>
+<span>Autonomous sensor unit must survive high particulate abrasion.</span>
+</div>
+</div>
+</div>
+<!-- Field Photo Verification -->
+<div class="mt-space-md pt-space-xs">
+<span class="font-label-md text-label-md text-on-surface font-semibold mb-2 block">Site Evidence &amp; Handpump Context</span>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-space-sm">
+<div class="rounded-lg overflow-hidden bg-surface-container relative group">
+<img class="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Close up photograph of a rural Indian hand pump with discolored rust-tinged water pouring into a steel bucket in Jharkhand, bright daylight documentary style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7d5wbEFm00nAkgyrGKagPtO0GCBuUXBDPgOEMjdUcAUBIxL0QilMqY9inWZccwVFcHCPS3ibHbGT2quQAoudzAvAx_XG4kj9JkOVPBUxedntf3qXNxzVHcvgghVSBQfMhwoNQmFJk95BI8uL0dnvPnQA3YVTc_qeC62D3hcUyUAtPum9mhKESANthbBnrhcCw-IbXGmWcvGZrQVn7zZu27EcJVc3hQW_tT7uLB1Vtut_uqf_srBRH"/>
+<div class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded bg-inverse-surface/80 text-on-primary font-label-sm text-[10px]">Panchayat Well #3</div>
+</div>
+<div class="rounded-lg overflow-hidden bg-surface-container relative group">
+<img class="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Technician dipping a glass beaker into muddy borehole water testing turbidity on site in rural village, handheld test tube meter, precise documentary photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB14d5bb6g9TW3QPwTUTMABcq0B_2cwl_8_wQmeqXs2r3F9o24eRypbEoM_LzYAgpqm-tVyBK2WsKL2NF6UgydevNN3aY1GA9eCtzoqFMAI8mqVI7Sxo6h7dJmozDAO6oyOASFtcuamf_IUP7xCOB1Pnfy3-Mg8ABjztz_-2PJjCLt-OXSjpn8tGaSpUayzXOi45OMqo0mTMXeaBMNpTFbuzA_5M7-ILk16uq_Ffaxv2XLsmX9LyZ4r"/>
+<div class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded bg-inverse-surface/80 text-on-primary font-label-sm text-[10px]">Spot Sampling Field Lab</div>
+</div>
+<div class="rounded-lg overflow-hidden bg-surface-container relative group hidden sm:block">
+<img class="w-full h-28 object-cover group-hover:scale-105 transition-transform duration-300" data-alt="Community gathering around a dry stone masonry wellhead in Angara Jharkhand discussing water issues with civic surveyor holding clipboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqXT54EbkDkoBlF4xj9y8wNbPVXbirfNq2fxgiKS-bGXbdWNEMrMnZAVedgyhzqjwqV42TP1o1pX9U1-ZFCNrr_v18QT2eBJhtC1cosjjfFvDD4O00BfdEStBDvcOKYL7BobXtcESjhsKaWqWJkYKOibWUXAbEmsh86km2hHgS3vVRE-zQwJLBroMJeenUSHc5oM_8rtr1S1WyEtfI0LvETXoRVwUL2IR1AUB_3EA51O-rhznbyTys"/>
+<div class="absolute bottom-1 left-1.5 px-1.5 py-0.5 rounded bg-inverse-surface/80 text-on-primary font-label-sm text-[10px]">Angara Village Council</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Expected Technical Deliverables -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-2xl">developer_board</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Expected Technical Deliverables</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed px-2.5 py-0.5 rounded-full font-semibold">
+            Mandatory SIH Specifications
+          </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Deliverable 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">01</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold bg-surface-container px-2 py-0.5 rounded">Sensor Hardware</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Submersible Multi-Probe Array</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Low-power continuous submersible probe capable of measuring pH (0-14 range, ±0.1 accuracy), Turbidity (0-1000 NTU via nephelometric IR), and Electrical Conductivity for TDS conversion. Must withstand silt buildup for 30 consecutive days without mechanical intervention.
+              </p>
+</div>
+<div class="mt-3 pt-2 text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">check</span>
+<span>Industrial IP68 rated probe casing required</span>
+</div>
+</div>
+<!-- Deliverable 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-lg bg-secondary-container text-on-secondary flex items-center justify-center font-bold text-xs">02</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold bg-surface-container px-2 py-0.5 rounded">Telemetry Mesh</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Long-Range LoRaWAN Mesh Module</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Sub-GHz LoRa transceiver (865-867 MHz India band) transmitting hourly telemetry packets over a minimum 5km radial terrain to the Angara Panchayat Bhavan gateway. Must feature automatic offline buffering for up to 14 days during local cellular gateway blackouts.
+              </p>
+</div>
+<div class="mt-3 pt-2 text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">check</span>
+<span>AES-128 payload encryption enabled</span>
+</div>
+</div>
+<!-- Deliverable 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-lg bg-tertiary-container text-on-tertiary flex items-center justify-center font-bold text-xs">03</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold bg-surface-container px-2 py-0.5 rounded">Energy Subsystem</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Autonomous Solar Harvest Unit</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Monocrystalline 10W panel with integrated MPPT charge controller and LiFePO4 battery storage providing guaranteed 72-hour cloudy weather reserve autonomy. Tamper-evident enclosure with pole mount clamps for wellhead installation.
+              </p>
+</div>
+<div class="mt-3 pt-2 text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">check</span>
+<span>Battery cycle life &gt;2,000 charge cycles</span>
+</div>
+</div>
+<!-- Deliverable 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="w-7 h-7 rounded-lg bg-inverse-surface text-on-primary flex items-center justify-center font-bold text-xs">04</span>
+<span class="font-label-sm text-label-sm text-error font-semibold bg-surface-container px-2 py-0.5 rounded">Human Interface</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Zero-Literacy Audio-Visual Beacon</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                High-visibility tri-color LED beacon with clear universal pictogram signaling: Green (Potable), Amber (Boil Thoroughly Before Consumption), and Strobe Red with 85dB acoustic chime (Severely Contaminated / Do Not Ingest). Accessible for illiterate villagers.
+              </p>
+</div>
+<div class="mt-3 pt-2 text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">check</span>
+<span>Daylight-visible optical diffuse lenses</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Evaluation Criteria & Rubric -->
+<section class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-sm">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-2xl">fact_check</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Evaluation Criteria &amp; Jury Rubric</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Standardized 100-Point Scoring</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Rubric Item 1 -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 font-headline-sm text-primary font-bold">
+                30%
+              </div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Hardware Ruggedness &amp; BoM Constraints</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Strict Bill of Materials cap (&lt;₹15,000 per unit deployment). Resistance to water ingress, extreme temperatures (5°C - 48°C), and corrosion over prolonged submersion.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 self-end md:self-center">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Max 30 Pts</span>
+</div>
+</div>
+<!-- Rubric Item 2 -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 font-headline-sm text-secondary font-bold">
+                30%
+              </div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Telemetry Reliability &amp; Sensor Calibration Precision</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Packet delivery ratio &gt;98% over 5km mesh. Sensor deviation within ±5% of standard laboratory titration baselines.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 self-end md:self-center">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Max 30 Pts</span>
+</div>
+</div>
+<!-- Rubric Item 3 -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 font-headline-sm text-tertiary font-bold">
+                20%
+              </div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Community Usability &amp; Zero-Literacy Warning Siren</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Intuitive immediate visual comprehension verified via user test surveys in rural Angara test groups. Vandalism resistance.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 self-end md:self-center">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Max 20 Pts</span>
+</div>
+</div>
+<!-- Rubric Item 4 -->
+<div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 font-headline-sm text-on-surface-variant font-bold">
+                20%
+              </div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface">Municipal Dashboard &amp; Open REST API Architecture</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                  Automated SMS alert trigger to PHED engineers when turbidity exceeds 15 NTU. GeoJSON endpoints for Jharkhand State GIS integration.
+                </p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 self-end md:self-center">
+<span class="px-2.5 py-1 rounded bg-surface-container text-on-surface font-label-sm text-label-sm font-semibold">Max 20 Pts</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- RIGHT COLUMN (30% on desktop: 4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-lg">
+<!-- Widget 1: Competing University Teams -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">groups</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Registered Teams</h3>
+</div>
+<span class="w-6 h-6 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-bold text-xs">4</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+          Inter-university teams actively developing working prototypes for this specific challenge code.
+        </p>
+<div class="space-y-space-sm">
+<!-- Team 1 (Leader) -->
+<div class="p-3 rounded-xl bg-primary-fixed/25 flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center font-bold text-xs">
+                  AS
+                </div>
+<div>
+<div class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span>Team AquaSense</span>
+<span class="material-symbols-outlined text-xs text-primary font-bold">verified</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">BIT Mesra · 4 Members</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-primary font-bold bg-surface-container-lowest px-2 py-0.5 rounded shadow-sm">
+                Rank #1
+              </span>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs font-semibold text-on-surface-variant">
+<span>Prototype Phase</span>
+<span class="text-primary font-bold">64% Completed</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 64%"></div>
+</div>
+</div>
+</div>
+<!-- Team 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-secondary-container text-on-secondary flex items-center justify-center font-bold text-xs">
+                  JS
+                </div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">JalShakti Tech</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">IIT Kharagpur · 3 Members</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">
+                Bench Testing
+              </span>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs text-on-surface-variant">
+<span>Schematic Review</span>
+<span class="font-semibold text-on-surface">48%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 48%"></div>
+</div>
+</div>
+</div>
+<!-- Team 3 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-tertiary-container text-on-tertiary flex items-center justify-center font-bold text-xs">
+                  BM
+                </div>
+<div>
+<span class="font-label-md text-label-md text-on-surface font-bold block">BioMesh Innovators</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">NIT Jamshedpur · 4 Members</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">
+                Hardware Design
+              </span>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-xs text-on-surface-variant">
+<span>Sensor Probe Fab</span>
+<span class="font-semibold text-on-surface">35%</span>
+</div>
+<div class="w-full h-1.5 rounded-full bg-surface-container overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 35%"></div>
+</div>
+</div>
+</div>
+</div>
+<button class="w-full mt-space-sm py-2 rounded-lg bg-surface-container-high hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold text-center transition-colors" type="button">
+          View All Registered Competitors (4)
+        </button>
+</div>
+<!-- Widget 2: Assigned Mentors & Advisors -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">school</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Assigned Mentors</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed px-2 py-0.5 rounded-full font-semibold">Active Support</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Mentor 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start gap-2.5">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Professional headshot of senior Indian male scientist Dr S K Mukherjee wearing glasses and formal blazer, neutral academic background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvleVTsP60DYih4blcFQqw2RjZmajjZKZ9kDJS0O-goSP3_sqSswiEq5-eUs8DsPJqFXRMpBvZ7ZqhMpBdiW_37vdQK41-t38947PLf-rbbuElLI7YwztSA-Oj_dBPZ0G05ao3xai6YIF9P7eZUyev36IzkbxdX5Dx958xY2NvNMt7LIX6RSP5uDmbuG_n4L-l19JCplsU4KTCr-qUXQ1En-5uqYECKnZHJW06F1pK4p32i4r5r2pN"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Dr. S. K. Mukherjee</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Chief Scientist, Tata Steel Innovations</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold mt-0.5">Focus: Heavy Metals &amp; Sensor Calibration</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg flex items-center justify-between text-xs">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">calendar_clock</span>
+                Office Hours: Wed 5:00 PM IST
+              </span>
+<a class="text-primary font-bold hover:underline" href="#">Book Slot</a>
+</div>
+</div>
+<!-- Mentor 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start gap-2.5">
+<img class="w-10 h-10 rounded-full object-cover shrink-0" data-alt="Portrait of Indian civic civil engineer Er Rajesh Verma in safety vest holding blueprints on public infrastructure site in Ranchi." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZk7Kzi0DhHYLVQjwhOQUwdGTcAh-PreUiaJz5ah3_zsB9ikwSWyNBTWiG2TftGsJcMfXebND_K1xmL6a00cc-Yv1jGx9brFiEshNQni5QbXh0ryiLapd-OLlT1-M8HfvAT5zGRAG-hzYWvx3FnjkY2Eu4HC-dhNUQYu9lCnZm_N2T4aMLx_sBp8Vt9jLpa6whi9e16Tf9VBDXGhoqkb_Y_H_h1I_T_W1ThNFethJVuEDLqZbsTeLP"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-bold truncate">Er. Rajesh Verma</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Superintending Engineer, PHED Jharkhand</span>
+<span class="font-label-sm text-label-sm text-tertiary font-semibold mt-0.5">Focus: Municipal SCADA &amp; LoRa Infrastructure</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg flex items-center justify-between text-xs">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-tertiary">domain</span>
+                Panchayat Liaison
+              </span>
+<a class="text-primary font-bold hover:underline" href="#">Request Clarification</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Widget 3: Challenge Datasets & Schematics -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center gap-2 mb-space-sm">
+<span class="material-symbols-outlined text-tertiary text-xl">folder_zip</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Datasets &amp; Engineering Resources</h3>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Resource 1 -->
+<a class="p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors group" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container text-tertiary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">table_chart</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Angara_Rainfall_Aquifer_24mo.csv</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">14.2 MB · PHED Hydrology Archive</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-lg">download</span>
+</a>
+<!-- Resource 2 -->
+<a class="p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors group" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">memory</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Sensor_Calibration_Lib_v1.4.zip</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">C++ / Arduino IDE / PlatformIO</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-lg">download</span>
+</a>
+<!-- Resource 3 -->
+<a class="p-2.5 rounded-xl bg-surface-container-low hover:bg-surface-container flex items-center justify-between transition-colors group" href="#">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-8 h-8 rounded-lg bg-surface-container text-secondary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-lg">architecture</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">Enclosure_IP68_KiCad_Template.step</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">3D Print &amp; PCB Reference Gerber</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors text-lg">download</span>
+</a>
+</div>
+</div>
+<!-- Widget 4: Community Q&A / Clarifications -->
+<div class="bg-surface-container-lowest rounded-2xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl">forum</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Community Q&amp;A</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">3 Active Threads</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Question 1 -->
+<div class="p-3 rounded-xl bg-surface-container-low">
+<div class="flex items-center justify-between text-xs text-on-surface-variant mb-1">
+<span class="font-semibold text-on-surface">Arun K. (BIT Mesra)</span>
+<span>2 hours ago</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-medium mb-1.5">
+              "Is 4G/NB-IoT fallback mandatory if LoRaWAN gateway packet drop exceeds 5%?"
+            </p>
+<div class="p-2 rounded bg-surface-container text-xs text-on-surface flex items-start gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary shrink-0">reply</span>
+<p>
+<span class="font-bold text-secondary">Dr. S. K. Mukherjee:</span> No, local SD-card ring buffer backup is acceptable for bench test phase.
+              </p>
+</div>
+</div>
+<!-- Question 2 -->
+<div class="p-3 rounded-xl bg-surface-container-low">
+<div class="flex items-center justify-between text-xs text-on-surface-variant mb-1">
+<span class="font-semibold text-on-surface">Priya S. (IIT KGP)</span>
+<span>1 day ago</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface font-medium mb-1">
+              "What is the maximum permissible probe diameter for older Mark-II handpump casings?"
+            </p>
+<div class="flex items-center justify-between text-xs text-on-surface-variant mt-2">
+<span class="text-tertiary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check</span> Answered by Nodal Officer
+              </span>
+<a class="text-primary hover:underline font-semibold" href="#">View Thread</a>
+</div>
+</div>
+</div>
+<!-- Post Question Form -->
+<div class="mt-space-sm pt-2">
+<div class="relative">
+<input class="w-full h-9 pl-3 pr-9 rounded-lg bg-surface-container text-on-surface placeholder:text-outline font-body-sm text-body-sm outline-none focus:bg-surface-container-low" placeholder="Ask a technical clarification to mentors..." type="text"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 text-primary hover:text-primary-container p-0.5" type="button">
+<span class="material-symbols-outlined text-lg">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Script for micro-interactions -->
+<script>
+    function toggleBookmark(btn) {
+      const icon = document.getElementById('bookmarkIcon');
+      const text = document.getElementById('bookmarkText');
+      if (icon.textContent === 'bookmark_border') {
+        icon.textContent = 'bookmark';
+        icon.style.fontVariationSettings = "'FILL' 1";
+        text.textContent = 'Saved';
+        btn.classList.add('bg-secondary-fixed', 'text-on-secondary-fixed');
+        btn.classList.remove('bg-surface-container');
+      } else {
+        icon.textContent = 'bookmark_border';
+        icon.style.fontVariationSettings = "'FILL' 0";
+        text.textContent = 'Watchlist';
+        btn.classList.remove('bg-secondary-fixed', 'text-on-secondary-fixed');
+        btn.classList.add('bg-surface-container');
+      }
+    }
+  </script>
+</div></main></div></body></html>

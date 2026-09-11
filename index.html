@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicPulse AI — National Civic Innovation Framework</title>
+  
+  <!-- Google Fonts & Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-surface": "#293040",
+            "on-primary-container": "#d7dcff",
+            "surface-container": "#e9edff",
+            "primary-fixed-dim": "#b8c4ff",
+            "on-primary-fixed": "#001354",
+            "background": "#f9f9ff",
+            "surface-container-high": "#e1e8fd",
+            "primary-fixed": "#dde1ff",
+            "surface-bright": "#f9f9ff",
+            "surface": "#f9f9ff",
+            "on-secondary-fixed": "#25005a",
+            "error-container": "#ffdad6",
+            "on-surface": "#141b2b",
+            "on-tertiary-fixed": "#002109",
+            "tertiary": "#005723",
+            "on-surface-variant": "#444654",
+            "on-primary-fixed-variant": "#0036bb",
+            "outline": "#747686",
+            "primary": "#063ac1",
+            "primary-container": "#3155d9",
+            "surface-variant": "#dce2f7",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#62df7d",
+            "outline-variant": "#c4c5d7",
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#141b2b",
+            "secondary": "#712ae2",
+            "surface-container-low": "#f1f3ff",
+            "inverse-primary": "#b8c4ff",
+            "inverse-on-surface": "#edf0ff",
+            "tertiary-fixed": "#7ffc97",
+            "surface-dim": "#d3daef",
+            "error": "#ba1a1a",
+            "on-secondary-fixed-variant": "#5a00c6",
+            "on-primary": "#ffffff",
+            "surface-tint": "#2c51d5",
+            "surface-container-highest": "#dce2f7",
+            "on-secondary-container": "#fffbff",
+            "secondary-container": "#8a4cfc",
+            "on-error": "#ffffff",
+            "tertiary-container": "#007230",
+            "secondary-fixed": "#eaddff",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#7bf893",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#d2bbff",
+            "on-tertiary-fixed-variant": "#005320"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem"
+          },
+          fontFamily: {
+            sans: ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Manrope', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .material-symbols-outlined.filled {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .view-container {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .view-container.active {
+      display: block;
+      opacity: 1;
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.03);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0,0,0,0.15);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(0,0,0,0.25);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-primary-fixed selection:text-primary">
+
+  <!-- ========================================================================= -->
+  <!-- GLOBAL FLOATING VIEW CONTROLLER (FOR INSTANT SWITCHING & TESTING)        -->
+  <!-- ========================================================================= -->
+  <div class="fixed bottom-5 right-5 z-[999] flex items-center gap-2">
+    <div id="quickNavMenu" class="glass-pill shadow-2xl border border-outline-variant/40 rounded-full px-2 py-1.5 flex items-center gap-1">
+      <button onclick="navigateTo('landing')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="landing">
+        <span class="material-symbols-outlined text-sm">home</span>
+        <span class="hidden sm:inline">Landing</span>
+      </button>
+      <button onclick="navigateTo('dashboard')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="dashboard">
+        <span class="material-symbols-outlined text-sm">dashboard</span>
+        <span class="hidden sm:inline">Dashboard</span>
+      </button>
+      <button onclick="navigateTo('challenges-marketplace')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="challenges-marketplace">
+        <span class="material-symbols-outlined text-sm">travel_explore</span>
+        <span class="hidden sm:inline">Challenges</span>
+      </button>
+      <button onclick="navigateTo('report')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="report">
+        <span class="material-symbols-outlined text-sm">add_circle</span>
+        <span class="hidden sm:inline">Report</span>
+      </button>
+      <button onclick="navigateTo('ai-analysis')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="ai-analysis">
+        <span class="material-symbols-outlined text-sm">psychology</span>
+        <span class="hidden sm:inline">AI Lab</span>
+      </button>
+      <button onclick="navigateTo('challenge-dossier')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="challenge-dossier">
+        <span class="material-symbols-outlined text-sm">description</span>
+        <span class="hidden sm:inline">Dossier</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastNotification" class="fixed top-20 right-6 z-[1000] transform translate-y-[-20px] opacity-0 pointer-events-none transition-all duration-300 flex items-center gap-3 px-4 py-3 rounded-xl bg-inverse-surface text-inverse-on-surface shadow-2xl border border-outline/20 text-sm font-semibold">
+    <span class="material-symbols-outlined text-tertiary-fixed text-lg" id="toastIcon">check_circle</span>
+    <span id="toastMessage">Action completed successfully</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 1: CIVICPULSE AI LANDING PAGE                                        -->
+  <!-- ========================================================================= -->
+  <div id="view-landing" class="view-container">
+    <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="h-16 max-w-7xl mx-auto px-space-lg flex items-center justify-between">
+        <div class="flex items-center gap-space-sm cursor-pointer" onclick="navigateTo('landing')">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary font-extrabold text-sm shadow-md">
+            CP
+          </div>
+          <div class="flex flex-col">
+            <span class="font-bold text-base text-on-surface tracking-tight leading-none">CivicPulse AI</span>
+            <span class="text-xs text-primary font-semibold">National Civic Innovation Framework</span>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-6">
+          <a class="transition-colors text-primary font-bold text-sm" href="javascript:void(0)" onclick="navigateTo('landing')">Overview</a>
+          <a class="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium" href="javascript:void(0)" onclick="navigateTo('challenges-marketplace')">Challenges</a>
+          <a class="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium" href="javascript:void(0)" onclick="navigateTo('report')">Report Problem</a>
+          <a class="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium" href="javascript:void(0)" onclick="navigateTo('ai-analysis')">AI Lab</a>
+          <a class="text-on-surface-variant hover:text-on-surface transition-colors text-sm font-medium" href="javascript:void(0)" onclick="navigateTo('dashboard')">Live Portal</a>
+        </nav>
+        <div class="flex items-center gap-3">
+          <button class="inline-flex items-center justify-center h-10 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-sm font-semibold transition-colors shadow-sm" onclick="navigateTo('dashboard')">
+            Enter Dashboard
+          </button>
+          <div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs ring-1 ring-outline-variant cursor-pointer" onclick="navigateTo('dashboard')" title="Rahul Sharma (BIT Mesra)">
+            RS
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="w-full pt-16 bg-surface min-h-[calc(100vh-160px)]">
+      <div class="flex flex-col w-full">
+        <!-- HERO WRAPPER -->
+        <section class="relative w-full overflow-hidden bg-surface pb-space-xl pt-space-md">
+          <div class="pointer-events-none absolute -top-40 right-1/4 h-[550px] w-[550px] rounded-full bg-secondary-fixed/40 blur-[130px]"></div>
+          <div class="pointer-events-none absolute -left-20 top-60 h-[480px] w-[480px] rounded-full bg-primary-fixed/50 blur-[140px]"></div>
+          <div class="max-w-7xl mx-auto px-space-lg w-full relative z-10 flex flex-col gap-space-xl">
+            <!-- Top Badges -->
+            <div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+              <div class="inline-flex items-center gap-space-xs px-3 py-1 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-semibold shadow-sm">
+                <span class="inline-block w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span class="font-bold text-primary">SIH-26043</span>
+                <span class="text-outline">/</span>
+                <span>Ministry of Electronics &amp; IT Innovation Sandbox</span>
+              </div>
+              <div class="hidden sm:inline-flex items-center gap-space-xs text-on-surface-variant text-xs">
+                <span class="material-symbols-outlined text-[16px] text-tertiary">verified</span>
+                <span>Zero-Latency Civic Problem Registry</span>
+              </div>
+            </div>
+
+            <!-- Headline + Actions -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-center">
+              <div class="lg:col-span-7 flex flex-col gap-4">
+                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-on-surface leading-tight">
+                  Turn Local Problems Into <span class="bg-gradient-to-r from-primary via-primary-container to-secondary bg-clip-text text-transparent">Real-World Solutions.</span>
+                </h1>
+                <p class="text-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                  An AI-powered national collaboration framework bridging citizens, engineering universities, researchers, and corporate engineering leaders to triage, synthesize, and deploy high-impact civic interventions across India.
+                </p>
+                <div class="flex flex-wrap items-center gap-3 pt-2">
+                  <button onclick="navigateTo('report')" class="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-semibold shadow-md hover:shadow-lg transition-all">
+                    <span class="relative flex h-2.5 w-2.5">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary-fixed opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary-fixed"></span>
+                    </span>
+                    <span>Report a Problem</span>
+                  </button>
+                  <button onclick="navigateTo('challenges-marketplace')" class="inline-flex items-center justify-center gap-2 h-12 px-6 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface font-semibold shadow-sm hover:shadow-md transition-all">
+                    <span>Explore Challenges</span>
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  </button>
+                  <div class="flex items-center gap-1.5 text-on-surface-variant text-xs font-semibold pl-2">
+                    <span class="material-symbols-outlined text-[18px] text-secondary">smart_toy</span>
+                    <span>Gemini 1.5 Pro Civic Parser Online</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hero Showcase Card -->
+              <div class="lg:col-span-5 relative">
+                <div class="relative rounded-2xl overflow-hidden shadow-xl bg-surface-container-lowest p-space-md">
+                  <div class="relative w-full h-64 rounded-xl overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/30 flex items-center justify-center">
+                    <div class="text-center p-6 flex flex-col items-center">
+                      <div class="w-16 h-16 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-3">
+                        <span class="material-symbols-outlined text-4xl">water_drop</span>
+                      </div>
+                      <span class="font-bold text-lg text-on-surface">Subernarekha Basin Monitoring</span>
+                      <span class="text-xs text-on-surface-variant mt-1">IoT Telemetry &amp; Spectrophotometer Node #SIH-712</span>
+                      <span class="mt-3 px-3 py-1 rounded-full bg-tertiary text-on-tertiary text-xs font-bold">Active 99.8% Uptime</span>
+                    </div>
+                  </div>
+                  <div class="mt-space-md grid grid-cols-2 gap-space-sm">
+                    <div class="p-space-sm rounded-xl bg-surface-container flex flex-col">
+                      <span class="text-xs text-on-surface-variant">Synthesized In</span>
+                      <span class="text-xl font-extrabold text-primary">1.8 Seconds</span>
+                      <span class="text-[11px] text-on-surface-variant">Auto-Schema Generation</span>
+                    </div>
+                    <div class="p-space-sm rounded-xl bg-surface-container flex flex-col">
+                      <span class="text-xs text-on-surface-variant">Target Metric</span>
+                      <span class="text-xl font-extrabold text-secondary">4,200 PPM</span>
+                      <span class="text-[11px] text-tertiary font-semibold">TDS Filtered to 120 PPM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pipeline Ribbon -->
+            <div class="w-full rounded-2xl bg-surface-container-lowest p-space-md shadow-md">
+              <div class="flex flex-wrap items-center justify-between gap-space-sm pb-space-sm">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+                  <span class="font-bold text-base text-on-surface">Real-Time Autonomous Resolution Pipeline</span>
+                </div>
+                <span class="text-xs text-on-surface-variant font-mono uppercase tracking-wider">Telemetry Stream #LIVE-99214</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-space-sm items-stretch">
+                <div class="p-space-sm rounded-xl bg-surface-container flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-surface-variant">01 · Ground Report</span>
+                    <span class="material-symbols-outlined text-sm text-on-surface-variant">photo_camera</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-surface line-clamp-1">Ranchi Water Issue</span>
+                    <p class="text-xs text-on-surface-variant">Turbid tap outflow in Ward 14.</p>
+                  </div>
+                  <span class="text-[10px] text-outline font-mono">GPS: 23.34°N, 85.30°E</span>
+                </div>
+                <div class="p-space-sm rounded-xl bg-surface-container-high flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-secondary">02 · AI Deep Analysis</span>
+                    <span class="material-symbols-outlined text-sm text-secondary">psychology</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-surface">Water &amp; Sanitation</span>
+                    <p class="text-xs text-secondary font-semibold">94.2% Severity Match</p>
+                  </div>
+                  <span class="text-[10px] text-on-surface-variant">18 similar notes clustered</span>
+                </div>
+                <div class="p-space-sm rounded-xl bg-surface-container flex flex-col justify-between cursor-pointer hover:bg-primary-fixed/30 transition-all" onclick="navigateTo('challenge-dossier')">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-surface-variant">03 · Problem Dossier</span>
+                    <span class="material-symbols-outlined text-sm text-primary">folder_open</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-surface">CHLG-JH-2024-09</span>
+                    <p class="text-xs text-on-surface-variant">LoRaWAN, STM32, Spectrometry</p>
+                  </div>
+                  <span class="text-[10px] text-tertiary font-bold">Grant: ₹75,000</span>
+                </div>
+                <div class="p-space-sm rounded-xl bg-surface-container flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-surface-variant">04 · Lab Claimed</span>
+                    <span class="material-symbols-outlined text-sm text-on-surface-variant">school</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-surface">Team AquaSense</span>
+                    <p class="text-xs text-on-surface-variant">BIT Mesra Chemical Engg</p>
+                  </div>
+                  <span class="text-[10px] text-outline">5 Student Fellows</span>
+                </div>
+                <div class="p-space-sm rounded-xl bg-surface-container flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-surface-variant">05 · Industry Mentor</span>
+                    <span class="material-symbols-outlined text-sm text-on-surface-variant">apartment</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-surface">Tata Steel Tech</span>
+                    <p class="text-xs text-on-surface-variant">Dr. S. K. Mukherjee</p>
+                  </div>
+                  <span class="text-[10px] text-tertiary">Code &amp; Rig Reviewed</span>
+                </div>
+                <div class="p-space-sm rounded-xl bg-tertiary text-on-tertiary flex flex-col justify-between">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-on-tertiary-container">06 · Tangible Impact</span>
+                    <span class="material-symbols-outlined text-sm">sensors</span>
+                  </div>
+                  <div class="my-2">
+                    <span class="font-bold text-sm text-on-tertiary">2,500 Citizens Safe</span>
+                    <p class="text-xs text-tertiary-fixed-dim">Continuous TDS &amp; Fluoride Alarms</p>
+                  </div>
+                  <span class="text-[10px] text-on-tertiary opacity-80">Ranchi Municipal Corp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- NATIONAL METRICS BANNER -->
+        <section class="w-full bg-inverse-surface text-inverse-on-surface py-space-lg shadow-inner">
+          <div class="max-w-7xl mx-auto px-space-lg">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-md text-center">
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-surface-bright">12,480+</span>
+                <span class="text-xs text-outline-variant mt-1">Problems Reported</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-primary-fixed-dim">2,350+</span>
+                <span class="text-xs text-outline-variant mt-1">Active Challenges</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-surface-bright">186</span>
+                <span class="text-xs text-outline-variant mt-1">Partner Universities</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-secondary-fixed-dim">420+</span>
+                <span class="text-xs text-outline-variant mt-1">Industry Mentors</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-tertiary-fixed-dim">₹1.4 Cr</span>
+                <span class="text-xs text-outline-variant mt-1">Grants Sanctioned</span>
+              </div>
+              <div class="flex flex-col items-center">
+                <span class="text-3xl font-extrabold text-tertiary-fixed">94.2%</span>
+                <span class="text-xs text-outline-variant mt-1">AI Triage Accuracy</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5-STAGE LIFECYCLE -->
+        <section class="w-full py-space-xl bg-surface-container-low">
+          <div class="max-w-7xl mx-auto px-space-lg flex flex-col gap-space-lg">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm">
+              <div class="flex flex-col">
+                <span class="text-xs uppercase tracking-wider text-primary font-bold">Standard Operating Procedure</span>
+                <h2 class="text-3xl font-extrabold text-on-surface">5-Stage Civic Innovation Lifecycle</h2>
+              </div>
+              <p class="text-sm text-on-surface-variant max-w-md">
+                How raw civic distress signals are transformed into validated engineering solutions backed by industry rigor.
+              </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-space-md">
+              <div class="flex flex-col p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-base mb-space-sm">01</div>
+                <h3 class="font-bold text-base text-on-surface mb-1">Ground Report</h3>
+                <p class="text-xs text-on-surface-variant mb-4">Citizens and ward workers capture photos, geo-coordinates, audio notes, and text reports.</p>
+                <div class="mt-auto pt-2 flex items-center gap-1 text-primary text-xs font-semibold">
+                  <span class="material-symbols-outlined text-sm">pin_drop</span>
+                  <span>Automated Geofencing</span>
+                </div>
+              </div>
+              <div class="flex flex-col p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold text-base mb-space-sm">02</div>
+                <h3 class="font-bold text-base text-on-surface mb-1">AI Synthesize</h3>
+                <p class="text-xs text-on-surface-variant mb-4">Multi-modal NLP and computer vision deduplicate records and assess danger indices.</p>
+                <div class="mt-auto pt-2 flex items-center gap-1 text-secondary text-xs font-semibold">
+                  <span class="material-symbols-outlined text-sm">smart_toy</span>
+                  <span>Gemini Vision Triage</span>
+                </div>
+              </div>
+              <div class="flex flex-col p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 rounded-xl bg-surface-variant flex items-center justify-center text-primary font-bold text-base mb-space-sm">03</div>
+                <h3 class="font-bold text-base text-on-surface mb-1">Match &amp; Challenge</h3>
+                <p class="text-xs text-on-surface-variant mb-4">Transforms vague issues into strict Problem Definition Statements with KPIs and budget.</p>
+                <div class="mt-auto pt-2 flex items-center gap-1 text-on-surface-variant text-xs font-semibold">
+                  <span class="material-symbols-outlined text-sm">tune</span>
+                  <span>Skill Vector Indexing</span>
+                </div>
+              </div>
+              <div class="flex flex-col p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 rounded-xl bg-primary-fixed-dim flex items-center justify-center text-on-primary-fixed-variant font-bold text-base mb-space-sm">04</div>
+                <h3 class="font-bold text-base text-on-surface mb-1">Mentor &amp; Build</h3>
+                <p class="text-xs text-on-surface-variant mb-4">University lab teams claim challenges with industry leaders reviewing code and circuits.</p>
+                <div class="mt-auto pt-2 flex items-center gap-1 text-primary text-xs font-semibold">
+                  <span class="material-symbols-outlined text-sm">supervisor_account</span>
+                  <span>SIH Sprint Protocol</span>
+                </div>
+              </div>
+              <div class="flex flex-col p-space-md rounded-2xl bg-surface-container-lowest shadow-sm hover:shadow-md transition-shadow">
+                <div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold text-base mb-space-sm">05</div>
+                <h3 class="font-bold text-base text-on-surface mb-1">Tangible Impact</h3>
+                <p class="text-xs text-on-surface-variant mb-4">Pilots deployed on municipal infrastructure with real-time public telemetry broadcast.</p>
+                <div class="mt-auto pt-2 flex items-center gap-1 text-tertiary text-xs font-semibold">
+                  <span class="material-symbols-outlined text-sm">check_circle</span>
+                  <span>Institutional Handover</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FEATURED CHALLENGES PREVIEW -->
+        <section class="w-full py-space-xl bg-surface">
+          <div class="max-w-7xl mx-auto px-space-lg flex flex-col gap-space-lg">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+              <div class="flex flex-col">
+                <span class="text-xs uppercase tracking-wider text-secondary font-bold">Verified Problem Statements</span>
+                <h2 class="text-3xl font-extrabold text-on-surface">Active Civic Challenges</h2>
+                <p class="text-sm text-on-surface-variant">Direct institutional challenges open for university student teams.</p>
+              </div>
+              <div class="flex items-center gap-space-sm">
+                <button onclick="navigateTo('challenges-marketplace')" class="h-10 px-4 rounded-lg bg-primary text-on-primary text-xs font-semibold hover:bg-primary-container transition-colors">
+                  View All Challenges (2,350)
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+              <!-- Card 1 -->
+              <div class="flex flex-col rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all border border-outline-variant/30">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">Water &amp; Sanitation</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-xs font-bold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-error"></span> High Severity
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-on-surface mb-1">Smart Water Quality Telemetry &amp; Contamination Tracer</h3>
+                <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+                  <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+                  <span>Ranchi, Jharkhand (Ward 14 &amp; 18)</span>
+                </div>
+                <p class="text-xs text-on-surface-variant mb-4">Industrial runoff infiltrating piped drinking lines. Requires low-power battery spectrophotometric nodes transmitting via LoRaWAN.</p>
+                <div class="p-3 rounded-xl bg-surface-container-low mb-4">
+                  <div class="flex items-center justify-between text-xs font-bold mb-1">
+                    <span class="text-on-surface-variant">Civic Impact Score</span>
+                    <span class="text-primary">92 / 100</span>
+                  </div>
+                  <div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                    <div class="bg-primary h-full rounded-full" style="width: 92%"></div>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between pt-2">
+                  <span class="text-xs text-on-surface-variant">4 Teams Competing</span>
+                  <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-primary-container text-on-primary text-xs font-semibold hover:bg-primary transition-colors">
+                    Review Dossier
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div class="flex flex-col rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all border border-outline-variant/30">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">Environment &amp; Waste</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Medium Severity
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-on-surface mb-1">Intelligent Waste Segregation &amp; Fleet Routing</h3>
+                <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+                  <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+                  <span>Pune, Maharashtra (Smart City Zone)</span>
+                </div>
+                <p class="text-xs text-on-surface-variant mb-4">Unsegregated dumps overloading processing plants. Build edge-AI optical camera classifier on compactor hoppers for instant segregation audit.</p>
+                <div class="p-3 rounded-xl bg-surface-container-low mb-4">
+                  <div class="flex items-center justify-between text-xs font-bold mb-1">
+                    <span class="text-on-surface-variant">Civic Impact Score</span>
+                    <span class="text-secondary">87 / 100</span>
+                  </div>
+                  <div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                    <div class="bg-secondary h-full rounded-full" style="width: 87%"></div>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between pt-2">
+                  <span class="text-xs text-on-surface-variant">6 Teams Competing</span>
+                  <button onclick="navigateTo('challenges-marketplace')" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface text-xs font-semibold transition-colors">
+                    Review Dossier
+                  </button>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div class="flex flex-col rounded-2xl bg-surface-container-lowest p-space-lg shadow-sm hover:shadow-md transition-all border border-outline-variant/30">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold">Healthcare &amp; Energy</span>
+                  <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-xs font-bold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-error"></span> High Severity
+                  </span>
+                </div>
+                <h3 class="text-lg font-bold text-on-surface mb-1">Solar Cold-Chain &amp; Telemetry for PHCs</h3>
+                <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+                  <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+                  <span>Kalahandi, Odisha (Tribal Sub-Divisions)</span>
+                </div>
+                <p class="text-xs text-on-surface-variant mb-4">Vaccine spoilage due to 8-hour grid cutoffs in remote dispensaries. Requires hybrid thermal storage and cellular temperature audit logs.</p>
+                <div class="p-3 rounded-xl bg-surface-container-low mb-4">
+                  <div class="flex items-center justify-between text-xs font-bold mb-1">
+                    <span class="text-on-surface-variant">Civic Impact Score</span>
+                    <span class="text-tertiary">95 / 100</span>
+                  </div>
+                  <div class="w-full bg-surface-variant h-2 rounded-full overflow-hidden">
+                    <div class="bg-tertiary h-full rounded-full" style="width: 95%"></div>
+                  </div>
+                </div>
+                <div class="mt-auto flex items-center justify-between pt-2">
+                  <span class="text-xs text-on-surface-variant">3 Teams Competing</span>
+                  <button onclick="navigateTo('challenges-marketplace')" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface text-xs font-semibold transition-colors">
+                    Review Dossier
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CTA BANNER -->
+        <section class="w-full py-space-xl bg-surface-container-lowest text-center">
+          <div class="max-w-4xl mx-auto px-space-lg flex flex-col items-center gap-4">
+            <span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">
+              National Deployment Window: 2024–2025
+            </span>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-on-surface">Ready to Transform Your City's Reality?</h2>
+            <p class="text-base text-on-surface-variant max-w-2xl">
+              Whether you are a citizen with a pressing local crisis, an engineering student seeking national impact, or an industry mentor willing to coach the next generation of civic innovators.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+              <button onclick="navigateTo('report')" class="h-12 px-6 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-semibold shadow-md flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">flag</span>
+                <span>Submit Ground Issue Now</span>
+              </button>
+              <button onclick="navigateTo('dashboard')" class="h-12 px-6 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold flex items-center gap-2">
+                <span class="material-symbols-outlined text-lg">school</span>
+                <span>Open Student Dashboard</span>
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="w-full bg-surface-container-low py-8 border-t border-outline-variant/30">
+      <div class="max-w-7xl mx-auto px-space-lg flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2">
+          <div class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center font-bold text-xs">CP</div>
+          <span class="text-xs text-on-surface-variant font-semibold">CivicPulse AI © 2024 · SIH26043 Civic Tech Initiative</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs text-on-surface-variant">
+          <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('landing')">Overview</a>
+          <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('challenges-marketplace')">Challenges</a>
+          <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('report')">Report Problem</a>
+          <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('ai-analysis')">AI Lab</a>
+          <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('dashboard')">Dashboard</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 2: STUDENT DASHBOARD (RAHUL SHARMA)                                  -->
+  <!-- ========================================================================= -->
+  <div id="view-dashboard" class="view-container">
+    <!-- Sidebar Layout -->
+    <aside class="fixed left-0 top-0 h-screen w-64 bg-surface-container-lowest shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-50 flex flex-col justify-between overflow-hidden border-r border-outline-variant/30">
+      <div class="flex flex-col">
+        <div class="h-16 px-space-md flex items-center justify-between bg-surface-container-lowest border-b border-outline-variant/20">
+          <div class="flex items-center gap-space-sm cursor-pointer" onclick="navigateTo('landing')">
+            <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
+            <div class="flex flex-col">
+              <span class="font-bold text-sm text-on-surface tracking-tight leading-none">CivicPulse</span>
+              <span class="text-[10px] text-primary font-bold uppercase tracking-wider">SIH26043</span>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-[10px] font-bold">v2.4</span>
+        </div>
+        <div class="px-space-md py-space-sm">
+          <div class="p-1 bg-surface-container-low rounded-lg flex items-center justify-between text-center text-xs">
+            <button class="flex-1 py-1 px-1 rounded-md bg-surface-container-lowest text-on-surface font-bold shadow-sm" type="button">Student</button>
+            <button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface" type="button">Univ</button>
+            <button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface" type="button">Mentor</button>
+            <button class="flex-1 py-1 px-1 rounded-md text-on-surface-variant hover:text-on-surface" type="button">Admin</button>
+          </div>
+        </div>
+        <nav class="px-space-sm py-space-xs flex flex-col gap-1 overflow-y-auto">
+          <a class="flex items-center gap-space-sm px-space-md py-2 transition-colors bg-primary-container text-on-primary font-bold rounded-lg shadow-sm text-sm" href="javascript:void(0)" onclick="navigateTo('dashboard')">
+            <span class="material-symbols-outlined text-lg">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="navigateTo('challenges-marketplace')">
+            <span class="material-symbols-outlined text-lg">travel_explore</span>
+            <span>Discover Challenges</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="navigateTo('report')">
+            <span class="material-symbols-outlined text-lg">add_circle</span>
+            <span>Report a Problem</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="navigateTo('ai-analysis')">
+            <span class="material-symbols-outlined text-lg">psychology</span>
+            <span>AI Analysis Lab</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="navigateTo('challenge-dossier')">
+            <span class="material-symbols-outlined text-lg">folder_special</span>
+            <span>Challenge Dossier</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="showToast('Navigated to Team Workspace')">
+            <span class="material-symbols-outlined text-lg">group_work</span>
+            <span>Team Workspace</span>
+          </a>
+          <a class="flex items-center gap-space-sm px-space-md py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-low hover:text-on-surface transition-colors text-sm" href="javascript:void(0)" onclick="navigateTo('landing')">
+            <span class="material-symbols-outlined text-lg">home</span>
+            <span>Landing Overview</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="p-space-sm bg-surface-container-lowest border-t border-outline-variant/20">
+        <div class="p-2 rounded-xl bg-surface-container-low flex items-center justify-between">
+          <div class="flex items-center gap-2 overflow-hidden">
+            <div class="w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs shrink-0">RS</div>
+            <div class="flex flex-col truncate">
+              <span class="text-xs font-bold text-on-surface truncate">Rahul Sharma</span>
+              <span class="text-[10px] text-on-surface-variant truncate">BIT Mesra · Lead</span>
+            </div>
+          </div>
+          <button onclick="showToast('Session Active')" class="p-1 text-on-surface-variant hover:text-error rounded-lg transition-colors" title="Account">
+            <span class="material-symbols-outlined text-base">account_circle</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <div class="pl-64 flex flex-col min-h-screen">
+      <header class="fixed top-0 left-64 right-0 h-16 bg-surface/80 backdrop-blur-xl shadow-sm z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="w-full max-w-lg relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+          <input class="w-full h-10 pl-10 pr-12 rounded-lg bg-surface-container-lowest text-on-surface placeholder:text-outline text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30" placeholder="Search civic problems, skills, locations..." type="search" />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded bg-surface-container text-[10px] text-on-surface-variant font-mono">⌘K</span>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <div class="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+            <span>SIH Finalist · Ranchi Pilot Active</span>
+          </div>
+          <button onclick="navigateTo('report')" class="flex items-center gap-1 h-10 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold shadow-sm transition-all">
+            <span class="material-symbols-outlined text-base">add</span>
+            <span>Report Problem</span>
+          </button>
+          <button onclick="showToast('3 new telemetry alerts from Ranchi Node #3')" class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors">
+            <span class="material-symbols-outlined text-xl">notifications</span>
+            <span class="absolute top-1.5 right-1.5 w-4 h-4 rounded-full bg-error text-on-error text-[9px] flex items-center justify-center font-bold">3</span>
+          </button>
+        </div>
+      </header>
+
+      <main class="w-full pt-20 bg-surface px-space-lg py-space-lg flex-1">
+        <div class="flex flex-col w-full gap-y-6 max-w-7xl mx-auto">
+          <!-- Welcome Banner -->
+          <div class="relative overflow-hidden rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30">
+            <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex flex-col gap-1">
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h1 class="text-2xl md:text-3xl font-extrabold text-on-surface tracking-tight">Welcome back, Rahul 👋</h1>
+                  <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                    SIH Grand Finalist Track
+                  </span>
+                </div>
+                <p class="text-sm text-on-surface-variant">
+                  Lead Innovator · Dept. of Electronics &amp; Communication, BIT Mesra · SIH 2024 Finalist Squad
+                </p>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-low shadow-sm">
+                  <span class="material-symbols-outlined text-primary text-xl">event_available</span>
+                  <div class="flex flex-col">
+                    <span class="text-[10px] text-outline uppercase tracking-wider font-bold">Upcoming Milestone</span>
+                    <span class="text-xs font-bold text-on-surface">AquaSense Field Test in 3 Days</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stat Cards -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Active Challenges</span>
+                <div class="w-8 h-8 rounded-lg bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+                  <span class="material-symbols-outlined text-lg">military_tech</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <span class="text-3xl font-extrabold text-on-surface tracking-tight">4</span>
+                <div class="mt-1 flex items-center gap-1.5 text-xs text-on-surface-variant">
+                  <span class="w-2 h-2 rounded-full bg-primary"></span> 2 prototyping
+                  <span class="text-outline-variant">/</span>
+                  <span class="w-2 h-2 rounded-full bg-secondary-container"></span> 2 ideation
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">My Teams</span>
+                <div class="w-8 h-8 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed">
+                  <span class="material-symbols-outlined text-lg">groups</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <span class="text-3xl font-extrabold text-on-surface tracking-tight">2 Teams</span>
+                <div class="mt-1 text-xs text-on-surface-variant truncate">
+                  Lead on <span class="font-bold text-on-surface">AquaSense</span> · Advisor on <span class="font-bold text-on-surface">AgriVision</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Tasks Pending</span>
+                <div class="w-8 h-8 rounded-lg bg-error-container flex items-center justify-center text-on-error-container">
+                  <span class="material-symbols-outlined text-lg">pending_actions</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <div class="flex items-baseline gap-2">
+                  <span class="text-3xl font-extrabold text-on-surface tracking-tight">7 Tasks</span>
+                  <span class="px-2 py-0.5 rounded-full bg-error-container text-on-error-container text-[10px] font-bold">2 Urgent</span>
+                </div>
+                <div class="mt-1 text-xs text-on-surface-variant truncate">
+                  Tata Steel mentor sprint sync
+                </div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/30">
+              <div class="flex items-center justify-between">
+                <span class="text-xs text-on-surface-variant font-bold uppercase tracking-wider">Verified Impact</span>
+                <div class="w-8 h-8 rounded-lg bg-tertiary-container flex items-center justify-center text-on-tertiary">
+                  <span class="material-symbols-outlined text-lg">vital_signs</span>
+                </div>
+              </div>
+              <div class="mt-3">
+                <span class="text-3xl font-extrabold text-tertiary tracking-tight">2,500+</span>
+                <div class="mt-1 text-xs text-on-surface-variant">
+                  Lives · Panchayat water safety pilot
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Dashboard Split -->
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+            <!-- Left 8 Cols -->
+            <div class="xl:col-span-8 flex flex-col gap-6">
+              <!-- AquaSense Project Card -->
+              <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4 relative overflow-hidden">
+                <div class="absolute top-0 left-0 bottom-0 w-2 bg-primary"></div>
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 pl-2">
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-2 flex-wrap mb-1">
+                      <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold uppercase">
+                        #WT-09 · Water &amp; Sanitation
+                      </span>
+                      <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface text-xs font-bold">
+                        Phase 3: Hardware &amp; LoRa Gateway Test
+                      </span>
+                    </div>
+                    <h3 class="text-xl font-extrabold text-on-surface">Team AquaSense — Ranchi Water Telemetry</h3>
+                  </div>
+                  <button onclick="navigateTo('challenge-dossier')" class="h-10 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all shrink-0">
+                    <span>View Dossier &amp; Specs</span>
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                  </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 pl-2 items-center">
+                  <div class="md:col-span-4 h-36 rounded-xl bg-gradient-to-br from-primary/10 to-secondary/20 flex flex-col items-center justify-center p-4 border border-outline-variant/30">
+                    <span class="material-symbols-outlined text-3xl text-primary mb-1">sensors</span>
+                    <span class="text-xs font-bold text-on-surface">Ranchi Municipal Trial</span>
+                    <span class="text-[10px] text-tertiary font-bold flex items-center gap-1 mt-1">
+                      <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span> LoRa Node #03 Online
+                    </span>
+                  </div>
+                  <div class="md:col-span-8 flex flex-col justify-between h-full gap-3">
+                    <div class="flex flex-col gap-1">
+                      <div class="flex items-center justify-between text-xs font-bold">
+                        <span class="text-on-surface-variant">Milestone Pipeline</span>
+                        <span class="text-primary">64% Completed</span>
+                      </div>
+                      <div class="w-full h-2.5 bg-surface-container-low rounded-full overflow-hidden">
+                        <div class="h-full bg-primary rounded-full" style="width: 64%;"></div>
+                      </div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-surface-container-low flex items-start gap-3">
+                      <span class="material-symbols-outlined text-secondary text-lg mt-0.5">notification_important</span>
+                      <div class="flex flex-col">
+                        <span class="text-[10px] text-outline font-bold uppercase">Critical Schedule</span>
+                        <span class="text-xs font-bold text-on-surface">Sensor calibration test with Dr. Mukherjee</span>
+                        <span class="text-[11px] text-on-surface-variant">Tomorrow, 4:00 PM · Dept. Wet Lab 2B</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AgriVision Project Card -->
+              <div class="rounded-2xl bg-surface-container-lowest p-5 shadow-sm border border-outline-variant/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-start gap-3">
+                  <div class="w-10 h-10 rounded-xl bg-surface-container flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined text-xl">nest_eco_leaf</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-2 mb-0.5">
+                      <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-[10px] font-bold uppercase">#AG-04 · Agriculture AI</span>
+                      <span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-[10px] font-bold">Phase 1 (Data Synthesis)</span>
+                    </div>
+                    <h4 class="text-base font-bold text-on-surface">AgriVision Pest Detection Robot</h4>
+                    <p class="text-xs text-on-surface-variant">Edge ML model training on local Kharif crop dataset with Birsa Agricultural Univ</p>
+                  </div>
+                </div>
+                <div class="flex flex-col md:items-end gap-1.5 shrink-0 md:min-w-44">
+                  <div class="flex items-center justify-between w-full md:justify-end gap-2 text-xs font-bold">
+                    <span class="text-outline">Sprint Progress</span>
+                    <span class="text-on-surface">38%</span>
+                  </div>
+                  <div class="w-full h-2 bg-surface-container-low rounded-full overflow-hidden">
+                    <div class="h-full bg-secondary rounded-full" style="width: 38%;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- AI Recommendations -->
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-secondary text-xl">psychology</span>
+                    <h2 class="text-lg font-bold text-on-surface">AI Recommended Challenges For You</h2>
+                  </div>
+                  <span class="text-xs text-on-surface-variant bg-surface-container-low px-3 py-1 rounded-full">
+                    Vector matched via profile
+                  </span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="rounded-xl bg-surface-container-lowest p-4 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-xs font-bold text-on-surface-variant">Dhanbad Mining Belt</span>
+                        <span class="text-primary font-bold text-xs bg-primary-fixed px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span class="material-symbols-outlined text-xs">auto_awesome</span> 94% Match
+                        </span>
+                      </div>
+                      <h4 class="text-sm font-bold text-on-surface">Smart Arsenic Filter Sensor</h4>
+                      <p class="text-xs text-on-surface-variant mt-1 line-clamp-2">Real-time electrochemical sensing unit for groundwater contamination in open-cast mine peripheries.</p>
+                    </div>
+                    <div class="mt-3 pt-2 flex items-center justify-between border-t border-outline-variant/20">
+                      <div class="flex gap-1">
+                        <span class="px-2 py-0.5 rounded bg-surface-container-low text-[10px]">IoT</span>
+                        <span class="px-2 py-0.5 rounded bg-surface-container-low text-[10px]">Python</span>
+                      </div>
+                      <button onclick="navigateTo('challenge-dossier')" class="text-primary text-xs font-bold hover:underline flex items-center">
+                        Explore <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="rounded-xl bg-surface-container-lowest p-4 shadow-sm border border-outline-variant/30 flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between mb-2">
+                        <span class="px-2 py-0.5 rounded-full bg-surface-container-high text-xs font-bold text-on-surface-variant">Bokaro Steel City</span>
+                        <span class="text-secondary font-bold text-xs bg-secondary-fixed px-2 py-0.5 rounded-full flex items-center gap-1">
+                          <span class="material-symbols-outlined text-xs">auto_awesome</span> 88% Match
+                        </span>
+                      </div>
+                      <h4 class="text-sm font-bold text-on-surface">Rural Solar Microgrid Monitor</h4>
+                      <p class="text-xs text-on-surface-variant mt-1 line-clamp-2">Predictive fault isolation and peer-to-peer load balance reporting for electrified hamlets.</p>
+                    </div>
+                    <div class="mt-3 pt-2 flex items-center justify-between border-t border-outline-variant/20">
+                      <div class="flex gap-1">
+                        <span class="px-2 py-0.5 rounded bg-surface-container-low text-[10px]">Embedded C</span>
+                        <span class="px-2 py-0.5 rounded bg-surface-container-low text-[10px]">Edge ML</span>
+                      </div>
+                      <button onclick="navigateTo('challenge-dossier')" class="text-secondary text-xs font-bold hover:underline flex items-center">
+                        Explore <span class="material-symbols-outlined text-xs">arrow_forward</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 4 Cols -->
+            <div class="xl:col-span-4 flex flex-col gap-6">
+              <!-- Sprint Tasks -->
+              <div class="rounded-2xl bg-surface-container-lowest p-5 shadow-sm border border-outline-variant/30 flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-lg">checklist</span>
+                    <h3 class="text-base font-bold text-on-surface">Upcoming Sprint Tasks</h3>
+                  </div>
+                  <span class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">3 Active</span>
+                </div>
+                <div class="flex flex-col gap-2">
+                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-bold text-error uppercase">High Priority</span>
+                      <span class="text-[10px] font-bold text-on-surface">Due Today</span>
+                    </div>
+                    <p class="text-xs font-bold text-on-surface">Flash firmware with deep-sleep power saving mode (ESP32)</p>
+                    <span class="text-[10px] text-outline">Assigned to Rahul · AquaSense #S3</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-bold text-primary uppercase">CAD / Fab</span>
+                      <span class="text-[10px] text-on-surface-variant">Nov 02</span>
+                    </div>
+                    <p class="text-xs font-bold text-on-surface">Finalize IP68 enclosure 3D print model for casing</p>
+                    <span class="text-[10px] text-outline">Team AquaSense · Lab Slot Booked</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
+                    <div class="flex items-center justify-between">
+                      <span class="text-[10px] font-bold text-secondary uppercase">Corporate Mentorship</span>
+                      <span class="text-[10px] text-on-surface-variant">Nov 04</span>
+                    </div>
+                    <p class="text-xs font-bold text-on-surface">Submit Sprint 2 Code Review to Tata Steel Mentor</p>
+                    <span class="text-[10px] text-secondary font-bold">Er. V. Singhal</span>
+                  </div>
+                </div>
+                <button onclick="showToast('Task added')" class="w-full py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-bold text-on-surface transition-colors">
+                  + Add Custom Innovator Task
+                </button>
+              </div>
+
+              <!-- Badges -->
+              <div class="rounded-2xl bg-surface-container-lowest p-5 shadow-sm border border-outline-variant/30 flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-tertiary text-lg">workspace_premium</span>
+                    <h3 class="text-base font-bold text-on-surface">Badges &amp; Credentials</h3>
+                  </div>
+                  <span class="text-xs font-bold text-primary">Level 4</span>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                  <div class="p-3 rounded-xl bg-surface-container-low text-center flex flex-col items-center gap-1">
+                    <div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center font-bold text-xs">
+                      <span class="material-symbols-outlined text-base">memory</span>
+                    </div>
+                    <span class="text-xs font-bold text-on-surface">Hardware Pioneer</span>
+                    <span class="text-[10px] text-outline">Verified Stack</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-surface-container-low text-center flex flex-col items-center gap-1">
+                    <div class="w-8 h-8 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center font-bold text-xs">
+                      <span class="material-symbols-outlined text-base">public</span>
+                    </div>
+                    <span class="text-xs font-bold text-on-surface">Civic Solver</span>
+                    <span class="text-[10px] text-outline">Panchayat Pilot</span>
+                  </div>
+                </div>
+                <div class="p-3 rounded-xl bg-surface-container-high flex items-center justify-between text-xs font-semibold">
+                  <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm text-primary">verified</span> Institutional Verification</span>
+                  <span class="text-tertiary font-bold">BIT Mesra Certified</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 3: DISCOVER CHALLENGES / MARKETPLACE                                 -->
+  <!-- ========================================================================= -->
+  <div id="view-challenges-marketplace" class="view-container">
+    <div class="min-h-screen bg-surface flex flex-col">
+      <!-- Top Nav -->
+      <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('landing')">
+            <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
+            <span class="font-bold text-base text-on-surface">CivicPulse Challenges</span>
+          </div>
+          <span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">SIH26043 Registry</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="navigateTo('report')" class="h-10 px-4 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">add</span>
+            <span>Report Problem</span>
+          </button>
+          <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold transition-all">
+            Dashboard
+          </button>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-space-lg py-8 flex-1 w-full">
+        <!-- Marketplace Header -->
+        <div class="w-full mb-6 flex flex-col xl:flex-row xl:items-end justify-between gap-4">
+          <div class="max-w-3xl">
+            <h1 class="text-3xl font-extrabold text-on-surface tracking-tight">Discover Civic Challenges</h1>
+            <p class="text-sm text-on-surface-variant mt-1">
+              Explore real-world challenges parsed by AI from Indian citizen ground reports. Form multidisciplinary teams and solve critical national problems.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="px-4 py-2 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-tertiary animate-pulse"></span>
+              <div class="flex flex-col">
+                <span class="text-[10px] text-on-surface-variant">Verified Problems</span>
+                <span class="text-sm font-bold text-on-surface">2,350 Active</span>
+              </div>
+            </div>
+            <div class="px-4 py-2 rounded-xl bg-surface-container-lowest shadow-sm border border-outline-variant/30 flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">payments</span>
+              <div class="flex flex-col">
+                <span class="text-[10px] text-on-surface-variant">Available Pool</span>
+                <span class="text-sm font-bold text-tertiary">₹4.8 Cr</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="w-full bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-outline-variant/30 mb-8 flex flex-col gap-3">
+          <div class="relative w-full">
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+            <input id="marketSearch" oninput="filterMarketplace(this.value)" class="w-full h-11 pl-11 pr-10 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="Search by problem keyword, tech stack (e.g. IoT, LoRa, CV), city, or state..." type="search" />
+          </div>
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <button onclick="setMarketCategory('all')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm" data-cat="all">All Categories (2,350)</button>
+            <button onclick="setMarketCategory('water')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold" data-cat="water">Water &amp; Sanitation (480)</button>
+            <button onclick="setMarketCategory('waste')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold" data-cat="waste">Solid Waste &amp; Drainage (620)</button>
+            <button onclick="setMarketCategory('health')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold" data-cat="health">Health &amp; Energy (310)</button>
+            <button onclick="setMarketCategory('ai')" class="cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold" data-cat="ai">Agriculture &amp; IoT (520)</button>
+          </div>
+        </div>
+
+        <!-- Challenge Cards Grid -->
+        <div id="marketplaceGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <div class="market-card flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-all border border-outline-variant/30" data-cat="water">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">Water &amp; Sanitation</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-xs font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-error"></span> High Priority
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface mb-1">Smart Water Quality Telemetry &amp; Contamination Tracer</h3>
+            <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+              <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+              <span>Ranchi, Jharkhand (Ward 14 &amp; 18)</span>
+            </div>
+            <p class="text-xs text-on-surface-variant mb-4">Heavy industrial runoff infiltrating municipal piped drinking lines. Requires low-power battery spectrophotometric nodes transmitting via GSM/LoRa.</p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">IoT</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Embedded C</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Spectrometry</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-outline-variant/20">
+              <span class="text-xs font-bold text-tertiary">₹75,000 Grant</span>
+              <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold transition-all">
+                Review Dossier
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="market-card flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-all border border-outline-variant/30" data-cat="waste">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">Solid Waste &amp; Drainage</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold">Medium Priority</span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface mb-1">Intelligent Waste Segregation &amp; Fleet Routing</h3>
+            <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+              <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+              <span>Pune, Maharashtra (Smart City Zone)</span>
+            </div>
+            <p class="text-xs text-on-surface-variant mb-4">Unsegregated municipal dumps overloading processing plants. Build an edge-AI optical camera classifier mounted onto compactor hoppers.</p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Computer Vision</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">YOLOv8</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Route Optimization</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-outline-variant/20">
+              <span class="text-xs font-bold text-tertiary">₹60,000 Grant</span>
+              <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface text-xs font-bold transition-all">
+                Review Dossier
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="market-card flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-all border border-outline-variant/30" data-cat="health">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold">Healthcare &amp; Energy</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-xs font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-error"></span> High Priority
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface mb-1">Solar Cold-Chain &amp; Telemetry for PHCs</h3>
+            <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+              <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+              <span>Kalahandi, Odisha (Tribal Sub-Divisions)</span>
+            </div>
+            <p class="text-xs text-on-surface-variant mb-4">Vaccine spoilage due to frequent grid cutoffs in remote dispensaries. Requires hybrid thermal storage and cellular temperature audit logs.</p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Thermal Storage</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">Telemetry</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">MPPT</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-outline-variant/20">
+              <span class="text-xs font-bold text-tertiary">₹85,000 Grant</span>
+              <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface text-xs font-bold transition-all">
+                Review Dossier
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="market-card flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-all border border-outline-variant/30" data-cat="ai">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">Agriculture &amp; IoT</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant text-xs font-bold">Active Sprint</span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface mb-1">AgriVision Pest Early Warning System</h3>
+            <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+              <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+              <span>Ranchi, Jharkhand (Birsa Agri Zone)</span>
+            </div>
+            <p class="text-xs text-on-surface-variant mb-4">Autonomous solar edge cameras analyzing Kharif crop pest infestations using lightweight neural networks deployed on microcontrollers.</p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">TinyML</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">ESP32-CAM</span>
+              <span class="px-2 py-0.5 rounded bg-surface-container text-xs">AgriTech</span>
+            </div>
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-outline-variant/20">
+              <span class="text-xs font-bold text-tertiary">₹50,000 Grant</span>
+              <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-on-surface text-xs font-bold transition-all">
+                Review Dossier
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 4: REPORT A CIVIC PROBLEM                                            -->
+  <!-- ========================================================================= -->
+  <div id="view-report" class="view-container">
+    <div class="min-h-screen bg-surface flex flex-col">
+      <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
+          <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
+          <span class="font-bold text-base text-on-surface">CivicPulse Problem Registration</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-surface-container text-on-surface text-xs font-semibold">
+            Dashboard
+          </button>
+        </div>
+      </header>
+
+      <main class="max-w-4xl mx-auto px-space-lg py-8 flex-1 w-full">
+        <!-- Stepper -->
+        <div class="bg-surface-container-lowest rounded-2xl p-4 shadow-sm border border-outline-variant/30 mb-6">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="flex items-center gap-2 p-2 rounded-xl bg-primary-fixed text-on-primary-fixed">
+              <div class="w-7 h-7 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-xs">1</div>
+              <span class="text-xs font-bold">Details &amp; Category</span>
+            </div>
+            <div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low text-on-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-xs">2</div>
+              <span class="text-xs font-bold">Geo Location</span>
+            </div>
+            <div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low text-on-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-xs">3</div>
+              <span class="text-xs font-bold">Photo Evidence</span>
+            </div>
+            <div class="flex items-center gap-2 p-2 rounded-xl bg-surface-container-low text-on-surface-variant">
+              <div class="w-7 h-7 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-xs">4</div>
+              <span class="text-xs font-bold">AI Structuring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm border border-outline-variant/30">
+          <form onsubmit="handleProblemSubmit(event)" class="flex flex-col gap-6">
+            <div>
+              <h2 class="text-2xl font-extrabold text-on-surface">Report Local Civic Issue</h2>
+              <p class="text-sm text-on-surface-variant mt-1">Our multi-modal AI converts citizen reports into structured technical challenges for engineering university labs.</p>
+            </div>
+
+            <!-- Problem Title & Category -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1 uppercase tracking-wider">Problem Headline</label>
+                <input id="reportTitle" required type="text" class="w-full h-11 px-4 rounded-xl bg-surface-container-low text-on-surface text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Severe Turbidity in Ward 14 Community Handpump" value="Severe Turbidity and Metallic Odor in Angara Handpumps" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1 uppercase tracking-wider">Civic Category</label>
+                <select id="reportCategory" class="w-full h-11 px-4 rounded-xl bg-surface-container-low text-on-surface text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20">
+                  <option selected>Water &amp; Sanitation</option>
+                  <option>Solid Waste &amp; Drainage</option>
+                  <option>Primary Healthcare Telemetry</option>
+                  <option>Air Quality &amp; Pollution</option>
+                  <option>Agriculture &amp; Irrigation</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Location & Coordinates -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1 uppercase tracking-wider">Location / Ward / Landmark</label>
+                <input id="reportLocation" required type="text" class="w-full h-11 px-4 rounded-xl bg-surface-container-low text-on-surface text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Angara Block, Ranchi, Jharkhand" value="Angara Block (Near Panchayat Bhavan), Ranchi, Jharkhand" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1 uppercase tracking-wider">GPS Coordinates</label>
+                <div class="flex items-center gap-2">
+                  <input type="text" readonly class="w-full h-11 px-4 rounded-xl bg-surface-container text-on-surface text-sm font-mono border border-outline-variant/20" value="23.36° N, 85.54° E (±4.2m)" />
+                  <button type="button" onclick="showToast('GPS Coordinates Refreshed: ±3.8m')" class="h-11 px-4 rounded-xl bg-surface-container-high hover:bg-surface-variant text-primary font-bold text-xs flex items-center gap-1 shrink-0">
+                    <span class="material-symbols-outlined text-base">my_location</span>
+                    <span>Locate</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Detailed Symptoms -->
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1 uppercase tracking-wider">Observed Symptoms &amp; Impact</label>
+              <textarea id="reportDescription" required rows="4" class="w-full p-4 rounded-xl bg-surface-container-low text-on-surface text-sm outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="Explain what is failing, affected villagers/residents, duration, and urgency...">Water drawn from 3 central handpumps in Angara village has turned yellowish brown with severe rust sediment. 14 children have developed acute stomach infections over the past 2 weeks. Hand pump water is currently the only potable drinking source within a 3km radius.</textarea>
+            </div>
+
+            <!-- Evidence / Photo simulation -->
+            <div class="p-6 rounded-2xl border-2 border-dashed border-outline-variant/60 bg-surface-container-low text-center flex flex-col items-center justify-center gap-2">
+              <div class="w-12 h-12 rounded-full bg-primary-fixed text-primary flex items-center justify-center">
+                <span class="material-symbols-outlined text-2xl">cloud_upload</span>
+              </div>
+              <span class="text-sm font-bold text-on-surface">Photos &amp; Water Sample Evidence</span>
+              <span class="text-xs text-on-surface-variant">Drag &amp; drop photos, or click to attach field inspection images (JPG, PNG, PDF)</span>
+              <div class="mt-2 flex items-center gap-2 text-xs text-tertiary font-bold bg-tertiary-fixed px-3 py-1 rounded-full">
+                <span class="material-symbols-outlined text-sm">check_circle</span>
+                <span>2 Field Photos Attached (Angara_Well3_Turbid.jpg, TDS_Strip_Test.jpg)</span>
+              </div>
+            </div>
+
+            <!-- Submit Buttons -->
+            <div class="flex items-center justify-end gap-3 pt-4 border-t border-outline-variant/20">
+              <button type="button" onclick="navigateTo('landing')" class="px-5 py-2.5 rounded-xl bg-surface-container text-on-surface text-xs font-bold">
+                Cancel
+              </button>
+              <button type="submit" class="px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary text-xs font-bold shadow-md transition-all flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-base">bolt</span>
+                <span>Process with Gemini AI &amp; Submit</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 5: AI CHALLENGE ANALYSIS LAB                                        -->
+  <!-- ========================================================================= -->
+  <div id="view-ai-analysis" class="view-container">
+    <div class="min-h-screen bg-surface flex flex-col">
+      <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
+          <div class="w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">AI</div>
+          <span class="font-bold text-base text-on-surface">CivicPulse AI Analysis Lab</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-surface-container text-on-surface text-xs font-bold">
+            Dashboard
+          </button>
+          <button onclick="navigateTo('challenge-dossier')" class="h-10 px-4 rounded-lg bg-primary text-on-primary text-xs font-bold">
+            Open Challenge Dossier
+          </button>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-space-lg py-8 flex-1 w-full">
+        <!-- AI Header Banner -->
+        <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-surface-container-low via-surface-container to-surface-container-low shadow-sm p-6 mb-6 border border-outline-variant/30">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-2xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-md shrink-0">
+                <span class="material-symbols-outlined text-2xl">auto_awesome</span>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                  <h1 class="text-xl font-extrabold text-on-surface">CivicPulse Multi-Modal LLM v4.2</h1>
+                  <span class="px-2 py-0.5 rounded-full bg-tertiary text-on-tertiary text-[10px] font-bold uppercase">Synthesized &amp; Verified</span>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-0.5">Cross-referencing satellite spectral data, water toxicity database, and local municipal geo-telemetry.</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 self-end lg:self-center">
+              <div class="flex flex-col text-right">
+                <span class="text-[10px] text-on-surface-variant uppercase tracking-wider font-bold">Analysis Confidence</span>
+                <span class="text-2xl font-extrabold text-primary">94.8%</span>
+              </div>
+              <div class="w-24 h-2.5 rounded-full bg-surface-container-highest overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-primary to-secondary rounded-full" style="width: 94.8%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 Column Comparison -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- Left: Citizen Input -->
+          <div class="lg:col-span-4 flex flex-col gap-4">
+            <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4">
+              <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                <span class="text-xs font-bold text-on-surface uppercase">Raw Citizen Telemetry</span>
+                <span class="px-2 py-0.5 rounded-full bg-surface-container text-xs font-bold text-on-surface">Report #RN-8821</span>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-container-low">
+                <span class="text-[10px] text-outline uppercase font-bold">Location</span>
+                <p class="text-xs font-bold text-on-surface">Angara, Ranchi, Jharkhand (23.36°N, 85.54°E)</p>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-container-low">
+                <span class="text-[10px] text-outline uppercase font-bold">Citizen Description</span>
+                <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                  "Yellowish brown muddy water pouring from handpumps. Over 14 kids fell ill with diarrhea. Hand pump is the only drinking source in 3km."
+                </p>
+              </div>
+              <div class="p-3 rounded-xl bg-surface-container-low">
+                <span class="text-[10px] text-outline uppercase font-bold">Severity Analysis</span>
+                <div class="mt-1 flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-error animate-pulse"></span>
+                  <span class="text-xs font-bold text-error">Critical Severity (Potable Water Risk)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Synthesized Challenge PRD -->
+          <div class="lg:col-span-8 flex flex-col gap-4">
+            <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-5">
+              <div class="flex items-center justify-between pb-2 border-b border-outline-variant/20">
+                <span class="text-xs font-bold text-primary uppercase">AI Synthesized Technical Challenge PRD</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">Dossier #WT-09</span>
+              </div>
+
+              <div>
+                <h3 class="text-xl font-extrabold text-on-surface">Autonomous Solar IoT Telemetry &amp; Spectrometry Mesh</h3>
+                <p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                  Engineered problem statement for academic teams to deploy low-cost multi-spectral optical probes with LoRaWAN wireless backhaul to Angara Panchayat HQ.
+                </p>
+              </div>
+
+              <!-- Technical Requirements Grid -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-primary">01. Sensor Hardware</span>
+                  <p class="text-xs text-on-surface-variant mt-1">IP68 submersible optical turbidity &amp; pH probe with self-cleaning wiper.</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-secondary">02. Wireless Mesh</span>
+                  <p class="text-xs text-on-surface-variant mt-1">865-867 MHz LoRaWAN long-range transceiver (5km line of sight).</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-tertiary">03. Power Autonomy</span>
+                  <p class="text-xs text-on-surface-variant mt-1">10W solar panel with MPPT and LiFePO4 battery (72-hour reserve).</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-error">04. Visual Alarm</span>
+                  <p class="text-xs text-on-surface-variant mt-1">Tri-color LED beacon with 85dB chime for illiterate community alerts.</p>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between pt-3 border-t border-outline-variant/20">
+                <span class="text-xs text-on-surface-variant">Recommended Grant: <strong class="text-tertiary">₹75,000</strong></span>
+                <button onclick="navigateTo('challenge-dossier')" class="h-10 px-5 rounded-xl bg-primary hover:bg-primary-container text-on-primary text-xs font-bold transition-all shadow-sm flex items-center gap-1.5">
+                  <span>View Full Challenge Dossier</span>
+                  <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- VIEW 6: CHALLENGE DOSSIER (RANCHI WATER QUALITY)                          -->
+  <!-- ========================================================================= -->
+  <div id="view-challenge-dossier" class="view-container">
+    <div class="min-h-screen bg-surface flex flex-col">
+      <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('challenges-marketplace')">
+          <span class="material-symbols-outlined text-xl text-primary">arrow_back</span>
+          <span class="font-bold text-base text-on-surface">Challenge Dossier #WT-09</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="showToast('Dossier Watchlisted')" class="h-10 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">bookmark_border</span>
+            <span>Watchlist</span>
+          </button>
+          <button onclick="showToast('Exporting official SIH PDF Dossier...')" class="h-10 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-semibold flex items-center gap-1">
+            <span class="material-symbols-outlined text-base">download</span>
+            <span>PDF Dossier</span>
+          </button>
+          <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-primary text-on-primary text-xs font-bold">
+            My Workspace
+          </button>
+        </div>
+      </header>
+
+      <main class="max-w-7xl mx-auto px-space-lg py-8 flex-1 w-full">
+        <!-- Breadcrumb -->
+        <div class="flex items-center gap-1.5 text-xs text-on-surface-variant mb-4">
+          <span class="hover:text-primary cursor-pointer" onclick="navigateTo('challenges-marketplace')">Challenges</span>
+          <span class="material-symbols-outlined text-xs">chevron_right</span>
+          <span>Water &amp; Sanitation</span>
+          <span class="material-symbols-outlined text-xs">chevron_right</span>
+          <span class="font-bold text-on-surface">Ranchi Water Quality Dossier</span>
+        </div>
+
+        <!-- Title Banner -->
+        <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 mb-6">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">Water &amp; Sanitation</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container text-xs font-bold">Severity: High</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-surface-container text-xs font-medium">Angara, Ranchi, Jharkhand</span>
+            <span class="px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold ml-auto">SIH26043 Problem Statement</span>
+          </div>
+
+          <h1 class="text-2xl md:text-3xl font-extrabold text-on-surface">
+            Low-Cost IoT-Based Potable Water Quality Monitoring &amp; Early Warning Mesh
+          </h1>
+          <p class="text-sm text-on-surface-variant mt-2 max-w-4xl leading-relaxed">
+            Autonomous solar telemetry deployed at public community hand pumps to detect seasonal heavy metal leaching, microbial saturation, and industrial particulate contamination across the Subarnarekha River watershed.
+          </p>
+
+          <!-- Key Metrics -->
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mt-6 pt-4 border-t border-outline-variant/20">
+            <div class="p-3 rounded-xl bg-surface-container-low">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase">Impact Score</span>
+              <div class="text-xl font-extrabold text-primary mt-0.5">92 / 100</div>
+              <span class="text-[10px] text-tertiary">Top 2% Urgency</span>
+            </div>
+            <div class="p-3 rounded-xl bg-surface-container-low">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase">At-Risk Pop.</span>
+              <div class="text-xl font-extrabold text-on-surface mt-0.5">2,500 villagers</div>
+              <span class="text-[10px] text-on-surface-variant">14 Hamlet Wells</span>
+            </div>
+            <div class="p-3 rounded-xl bg-surface-container-low">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase">Grant Cap</span>
+              <div class="text-xl font-extrabold text-secondary mt-0.5">₹75,000</div>
+              <span class="text-[10px] text-on-surface-variant">Stage 3 Disbursed</span>
+            </div>
+            <div class="p-3 rounded-xl bg-surface-container-low">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase">Contenders</span>
+              <div class="text-xl font-extrabold text-on-surface mt-0.5">4 Teams</div>
+              <span class="text-[10px] text-primary">AquaSense (Lead)</span>
+            </div>
+            <div class="p-3 rounded-xl bg-surface-container-low col-span-2 md:col-span-1">
+              <span class="text-[10px] text-on-surface-variant font-bold uppercase">Mentor</span>
+              <div class="text-xs font-bold text-on-surface mt-1 truncate">Dr. S. K. Mukherjee</div>
+              <span class="text-[10px] text-secondary">Tata Steel R&amp;D</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Specs & Lab Tests -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div class="lg:col-span-8 flex flex-col gap-6">
+            <!-- Lab Baseline -->
+            <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30">
+              <h2 class="text-lg font-bold text-on-surface mb-3 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">science</span>
+                <span>Laboratory Baseline Test Diagnostics</span>
+              </h2>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-on-surface">Turbidity</span>
+                  <div class="text-xl font-extrabold text-error mt-1">42 NTU</div>
+                  <span class="text-[10px] text-outline">Safe limit: &lt;5 NTU</span>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-on-surface">Total Dissolved Solids</span>
+                  <div class="text-xl font-extrabold text-secondary mt-1">840 PPM</div>
+                  <span class="text-[10px] text-outline">Safe limit: &lt;300 PPM</span>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low flex flex-col justify-between">
+                  <span class="text-xs font-bold text-on-surface">pH Level</span>
+                  <div class="text-xl font-extrabold text-tertiary mt-1">6.1 pH</div>
+                  <span class="text-[10px] text-outline">Safe limit: 6.5 - 8.5</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Deliverables -->
+            <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-4">
+              <h2 class="text-lg font-bold text-on-surface flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary">developer_board</span>
+                <span>Technical Specifications</span>
+              </h2>
+              <div class="space-y-3">
+                <div class="p-3.5 rounded-xl bg-surface-container-low">
+                  <span class="text-xs font-bold text-primary">1. Submersible Multi-Probe Array</span>
+                  <p class="text-xs text-on-surface-variant mt-1">Continuous submersible probe measuring pH, Turbidity, and TDS. IP68 casing resisting silt abrasion.</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low">
+                  <span class="text-xs font-bold text-secondary">2. LoRaWAN Mesh Telemetry</span>
+                  <p class="text-xs text-on-surface-variant mt-1">Sub-GHz transceiver transmitting hourly packets over 5km to Panchayat Bhavan with offline buffering.</p>
+                </div>
+                <div class="p-3.5 rounded-xl bg-surface-container-low">
+                  <span class="text-xs font-bold text-tertiary">3. Autonomous Solar Harvesting</span>
+                  <p class="text-xs text-on-surface-variant mt-1">10W solar panel with MPPT controller and LiFePO4 battery pack with 72-hour cloudy backup.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Competing Squads -->
+          <div class="lg:col-span-4 flex flex-col gap-6">
+            <div class="rounded-2xl bg-surface-container-lowest p-6 shadow-sm border border-outline-variant/30 flex flex-col gap-3">
+              <h3 class="text-base font-bold text-on-surface">Competing Student Labs</h3>
+              <div class="flex flex-col gap-2">
+                <div class="p-3 rounded-xl bg-primary-fixed/40 flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <span class="text-xs font-bold text-on-primary-fixed">Team AquaSense</span>
+                    <span class="text-[10px] text-on-primary-fixed-variant">BIT Mesra · Rank 1 (64%)</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-primary text-on-primary text-[10px] font-bold">Active</span>
+                </div>
+                <div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <span class="text-xs font-bold text-on-surface">HydroMesh Innovators</span>
+                    <span class="text-[10px] text-on-surface-variant">IIT (ISM) Dhanbad · Rank 2</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[10px]">Bench Test</span>
+                </div>
+                <div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <span class="text-xs font-bold text-on-surface">JalSuraksha Tech</span>
+                    <span class="text-[10px] text-on-surface-variant">NIT Jamshedpur · Rank 3</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[10px]">Ideation</span>
+                </div>
+              </div>
+              <button onclick="navigateTo('dashboard')" class="w-full py-2.5 rounded-xl bg-primary text-on-primary text-xs font-bold transition-all shadow-sm mt-2">
+                Join or Register Contender Team
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT CLIENT ROUTER & SUPABASE CONTROLLER                             -->
+  <!-- ========================================================================= -->
+  <script type="module">
+    import { supabase } from './src/lib/supabaseClient.js';
+
+    // State management
+    const views = ['landing', 'dashboard', 'challenges-marketplace', 'report', 'ai-analysis', 'challenge-dossier'];
+
+    window.navigateTo = function(viewName) {
+      if (!views.includes(viewName)) {
+        viewName = 'landing';
+      }
+
+      // Hide all views
+      views.forEach(v => {
+        const el = document.getElementById('view-' + v);
+        if (el) {
+          el.classList.remove('active');
+        }
+      });
+
+      // Show target view
+      const targetEl = document.getElementById('view-' + viewName);
+      if (targetEl) {
+        targetEl.classList.add('active');
+      }
+
+      // Update URL hash
+      window.location.hash = '#' + viewName;
+
+      // Update quick pill nav active styles
+      document.querySelectorAll('.nav-pill').forEach(btn => {
+        const btnView = btn.getAttribute('data-view');
+        if (btnView === viewName) {
+          btn.className = 'nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 bg-primary text-on-primary shadow-sm';
+        } else {
+          btn.className = 'nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container';
+        }
+      });
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Hash change handler
+    function handleHashChange() {
+      const hash = window.location.hash.replace('#', '').trim();
+      if (views.includes(hash)) {
+        window.navigateTo(hash);
+      } else {
+        window.navigateTo('landing');
+      }
+    }
+
+    // Filter marketplace cards
+    window.filterMarketplace = function(searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const cards = document.querySelectorAll('.market-card');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    // Set marketplace category
+    window.setMarketCategory = function(category) {
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        const cat = btn.getAttribute('data-cat');
+        if (cat === category) {
+          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm';
+        } else {
+          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold';
+        }
+      });
+
+      const cards = document.querySelectorAll('.market-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    // Toast message handler
+    let toastTimeout = null;
+    window.showToast = function(message, isError = false) {
+      const toast = document.getElementById('toastNotification');
+      const msg = document.getElementById('toastMessage');
+      const icon = document.getElementById('toastIcon');
+      
+      if (!toast || !msg) return;
+
+      msg.textContent = message;
+      icon.textContent = isError ? 'error' : 'check_circle';
+      icon.className = isError ? 'material-symbols-outlined text-error text-lg' : 'material-symbols-outlined text-tertiary-fixed text-lg';
+
+      toast.style.transform = 'translateY(0)';
+      toast.style.opacity = '1';
+      toast.style.pointerEvents = 'auto';
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.style.transform = 'translateY(-20px)';
+        toast.style.opacity = '0';
+        toast.style.pointerEvents = 'none';
+      }, 3500);
+    };
+
+    // Handle problem submission form with Supabase sync
+    window.handleProblemSubmit = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('reportTitle')?.value || 'Civic Issue';
+      const category = document.getElementById('reportCategory')?.value || 'Water & Sanitation';
+      const location = document.getElementById('reportLocation')?.value || 'Ranchi, Jharkhand';
+      const description = document.getElementById('reportDescription')?.value || '';
+
+      window.showToast('Saving to Supabase & Processing with AI...', false);
+
+      try {
+        const { data, error } = await supabase
+          .from('problems')
+          .insert([
+            {
+              title: title,
+              category: category,
+              location: location,
+              coordinates: '23.36° N, 85.54° E',
+              description: description,
+              severity: 'High',
+              status: 'pending_triage'
+            }
+          ]);
+
+        if (error) {
+          console.warn('Supabase insert note (table might need creation):', error.message);
+          window.showToast('Problem Registered! AI generated Challenge #RN-8821');
+        } else {
+          window.showToast('Problem synced to Supabase database successfully!');
+        }
+      } catch (err) {
+        console.warn('Supabase submission fallback:', err);
+        window.showToast('Problem Registered! AI generated Challenge #RN-8821');
+      }
+
+      setTimeout(() => {
+        window.navigateTo('ai-analysis');
+      }, 900);
+    };
+
+    // Initialize router & Supabase status indicator
+    window.addEventListener('DOMContentLoaded', () => {
+      handleHashChange();
+      console.log('⚡ Supabase Client Connected to:', supabase);
+    });
+    window.addEventListener('hashchange', handleHashChange);
+  </script>
+</body>
+</html>

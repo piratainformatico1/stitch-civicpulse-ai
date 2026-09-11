@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <defs>
+    <linearGradient id="civicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3155D9"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#3155D9"/>
+    </linearGradient>
+  </defs>
+  <!-- Background subtle squircle -->
+  <rect width="200" height="200" rx="44" fill="#0F172A"/>
+  <!-- Central Pulse Ring -->
+  <circle cx="100" cy="100" r="64" stroke="url(#civicGrad)" stroke-width="6" stroke-dasharray="12 8" opacity="0.6"/>
+  <!-- Ashoka/Civic Star node geometric arrangement -->
+  <circle cx="100" cy="100" r="28" fill="url(#civicGrad)"/>
+  <!-- Connected innovation satellite nodes -->
+  <circle cx="100" cy="46" r="10" fill="#38BDF8"/>
+  <circle cx="148" cy="80" r="10" fill="#818CF8"/>
+  <circle cx="132" cy="142" r="10" fill="#C084FC"/>
+  <circle cx="68" cy="142" r="10" fill="#34D399"/>
+  <circle cx="52" cy="80" r="10" fill="#F59E0B"/>
+  <!-- Connecting network vectors -->
+  <path d="M100 46 L100 72 M148 80 L124 90 M132 142 L116 122 M68 142 L84 122 M52 80 L76 90" stroke="#94A3B8" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <!-- Inner AI spark symbol -->
+  <path d="M100 88 L103 97 L112 100 L103 103 L100 112 L97 103 L88 100 L97 97 Z" fill="#FFFFFF"/>
+</svg>
