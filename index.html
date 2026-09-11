@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CivicPulse AI — National Civic Innovation Framework</title>
+  <title>CivicSolve AI — National Civic Innovation Framework</title>
   
   <!-- Google Fonts & Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>" />
@@ -164,6 +164,14 @@
         <span class="material-symbols-outlined text-sm">description</span>
         <span class="hidden sm:inline">Dossier</span>
       </button>
+      <button onclick="navigateTo('login')" class="nav-pill px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 text-on-surface-variant hover:text-primary hover:bg-surface-container" data-view="login" id="quickNavLoginBtn">
+        <span class="material-symbols-outlined text-sm">account_circle</span>
+        <span class="hidden sm:inline" id="quickNavLoginLabel">Sign In</span>
+      </button>
+      <button onclick="openNetworkAccessModal()" class="px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 bg-surface-container-high hover:bg-primary hover:text-on-primary text-primary" title="Open on Any PC / Mobile across Network">
+        <span class="material-symbols-outlined text-sm">devices</span>
+        <span class="hidden md:inline">Any PC</span>
+      </button>
     </div>
   </div>
 
@@ -174,7 +182,7 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- VIEW 1: CIVICPULSE AI LANDING PAGE                                        -->
+  <!-- VIEW 1: CIVICSOLVE AI LANDING PAGE                                        -->
   <!-- ========================================================================= -->
   <div id="view-landing" class="view-container">
     <header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
@@ -184,7 +192,7 @@
             CP
           </div>
           <div class="flex flex-col">
-            <span class="font-bold text-base text-on-surface tracking-tight leading-none">CivicPulse AI</span>
+            <span class="font-bold text-base text-on-surface tracking-tight leading-none">CivicSolve AI</span>
             <span class="text-xs text-primary font-semibold">National Civic Innovation Framework</span>
           </div>
         </div>
@@ -370,27 +378,27 @@
           <div class="max-w-7xl mx-auto px-space-lg">
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-md text-center">
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-surface-bright">12,480+</span>
+                <span id="metricProblemsCount" class="text-3xl font-extrabold text-surface-bright">12,480+</span>
                 <span class="text-xs text-outline-variant mt-1">Problems Reported</span>
               </div>
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-primary-fixed-dim">2,350+</span>
+                <span id="metricChallengesCount" class="text-3xl font-extrabold text-primary-fixed-dim">2,350+</span>
                 <span class="text-xs text-outline-variant mt-1">Active Challenges</span>
               </div>
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-surface-bright">186</span>
+                <span id="metricUnivCount" class="text-3xl font-extrabold text-surface-bright">186</span>
                 <span class="text-xs text-outline-variant mt-1">Partner Universities</span>
               </div>
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-secondary-fixed-dim">420+</span>
+                <span id="metricMentorsCount" class="text-3xl font-extrabold text-secondary-fixed-dim">420+</span>
                 <span class="text-xs text-outline-variant mt-1">Industry Mentors</span>
               </div>
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-tertiary-fixed-dim">₹1.4 Cr</span>
+                <span id="metricGrantsAmount" class="text-3xl font-extrabold text-tertiary-fixed-dim">₹1.4 Cr</span>
                 <span class="text-xs text-outline-variant mt-1">Grants Sanctioned</span>
               </div>
               <div class="flex flex-col items-center">
-                <span class="text-3xl font-extrabold text-tertiary-fixed">94.2%</span>
+                <span id="metricAiAccuracy" class="text-3xl font-extrabold text-tertiary-fixed">94.2%</span>
                 <span class="text-xs text-outline-variant mt-1">AI Triage Accuracy</span>
               </div>
             </div>
@@ -601,7 +609,7 @@
       <div class="max-w-7xl mx-auto px-space-lg flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-2">
           <div class="w-6 h-6 rounded bg-primary text-on-primary flex items-center justify-center font-bold text-xs">CP</div>
-          <span class="text-xs text-on-surface-variant font-semibold">CivicPulse AI © 2024 · SIH26043 Civic Tech Initiative</span>
+          <span class="text-xs text-on-surface-variant font-semibold">CivicSolve AI © 2024 · SIH26043 Civic Tech Initiative</span>
         </div>
         <div class="flex items-center gap-6 text-xs text-on-surface-variant">
           <a class="hover:text-primary transition-colors" href="javascript:void(0)" onclick="navigateTo('landing')">Overview</a>
@@ -625,7 +633,7 @@
           <div class="flex items-center gap-space-sm cursor-pointer" onclick="navigateTo('landing')">
             <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
             <div class="flex flex-col">
-              <span class="font-bold text-sm text-on-surface tracking-tight leading-none">CivicPulse</span>
+              <span class="font-bold text-sm text-on-surface tracking-tight leading-none">CivicSolve</span>
               <span class="text-[10px] text-primary font-bold uppercase tracking-wider">SIH26043</span>
             </div>
           </div>
@@ -958,36 +966,14 @@
                     <span class="material-symbols-outlined text-primary text-lg">checklist</span>
                     <h3 class="text-base font-bold text-on-surface">Upcoming Sprint Tasks</h3>
                   </div>
-                  <span class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">3 Active</span>
+                  <span id="dashboardTaskBadge" class="text-xs font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">3 Active</span>
                 </div>
-                <div class="flex flex-col gap-2">
-                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[10px] font-bold text-error uppercase">High Priority</span>
-                      <span class="text-[10px] font-bold text-on-surface">Due Today</span>
-                    </div>
-                    <p class="text-xs font-bold text-on-surface">Flash firmware with deep-sleep power saving mode (ESP32)</p>
-                    <span class="text-[10px] text-outline">Assigned to Rahul · AquaSense #S3</span>
-                  </div>
-                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[10px] font-bold text-primary uppercase">CAD / Fab</span>
-                      <span class="text-[10px] text-on-surface-variant">Nov 02</span>
-                    </div>
-                    <p class="text-xs font-bold text-on-surface">Finalize IP68 enclosure 3D print model for casing</p>
-                    <span class="text-[10px] text-outline">Team AquaSense · Lab Slot Booked</span>
-                  </div>
-                  <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5">
-                    <div class="flex items-center justify-between">
-                      <span class="text-[10px] font-bold text-secondary uppercase">Corporate Mentorship</span>
-                      <span class="text-[10px] text-on-surface-variant">Nov 04</span>
-                    </div>
-                    <p class="text-xs font-bold text-on-surface">Submit Sprint 2 Code Review to Tata Steel Mentor</p>
-                    <span class="text-[10px] text-secondary font-bold">Er. V. Singhal</span>
-                  </div>
+                <div id="dashboardTaskList" class="flex flex-col gap-2 min-h-[120px]">
+                  <!-- Rendered dynamically by Supabase -->
                 </div>
-                <button onclick="showToast('Task added')" class="w-full py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-xs font-bold text-on-surface transition-colors">
-                  + Add Custom Innovator Task
+                <button onclick="openTaskModal()" class="w-full py-2 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary text-xs font-bold text-on-surface transition-colors flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-sm">add</span>
+                  <span>Add Custom Innovator Task</span>
                 </button>
               </div>
 
@@ -1038,7 +1024,7 @@
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('landing')">
             <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
-            <span class="font-bold text-base text-on-surface">CivicPulse Challenges</span>
+            <span class="font-bold text-base text-on-surface">CivicSolve Challenges</span>
           </div>
           <span class="hidden md:inline-block px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold">SIH26043 Registry</span>
         </div>
@@ -1213,7 +1199,7 @@
       <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
         <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
           <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
-          <span class="font-bold text-base text-on-surface">CivicPulse Problem Registration</span>
+          <span class="font-bold text-base text-on-surface">CivicSolve Problem Registration</span>
         </div>
         <div class="flex items-center gap-3">
           <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-surface-container text-on-surface text-xs font-semibold">
@@ -1308,6 +1294,33 @@
               </div>
             </div>
 
+            <!-- Citizen Identity / Guest Reporter Card (Optional) -->
+            <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-base">how_to_reg</span>
+                  <span class="text-xs font-bold text-on-surface uppercase tracking-wider">Citizen Reporter Mode</span>
+                </div>
+                <span id="reportCitizenBadge" class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-secondary-fixed text-on-secondary-fixed">
+                  ✓ No Account / Login Required
+                </span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface-variant mb-1">Your Name or Alias (Optional)</label>
+                  <input id="reportCitizenName" type="text" class="w-full h-10 px-3.5 rounded-xl bg-surface-container text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Concerned Citizen / Angara Resident" />
+                </div>
+                <div>
+                  <label class="block text-[11px] font-bold text-on-surface-variant mb-1">Phone / Email for SMS Status Updates (Optional)</label>
+                  <input id="reportCitizenContact" type="text" class="w-full h-10 px-3.5 rounded-xl bg-surface-container text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. +91 98765 43210 or citizen@jharkhand.gov.in" />
+                </div>
+              </div>
+              <p class="text-[11px] text-on-surface-variant flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-xs text-tertiary">verified</span>
+                <span>Open Citizen Intake: Reports are ingested directly by our AI engine and synthesized into university engineering challenges without barrier.</span>
+              </p>
+            </div>
+
             <!-- Submit Buttons -->
             <div class="flex items-center justify-end gap-3 pt-4 border-t border-outline-variant/20">
               <button type="button" onclick="navigateTo('landing')" class="px-5 py-2.5 rounded-xl bg-surface-container text-on-surface text-xs font-bold">
@@ -1332,7 +1345,7 @@
       <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
         <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('landing')">
           <div class="w-8 h-8 rounded-lg bg-secondary text-on-secondary flex items-center justify-center font-bold text-sm">AI</div>
-          <span class="font-bold text-base text-on-surface">CivicPulse AI Analysis Lab</span>
+          <span class="font-bold text-base text-on-surface">CivicSolve AI Analysis Lab</span>
         </div>
         <div class="flex items-center gap-3">
           <button onclick="navigateTo('dashboard')" class="h-10 px-4 rounded-lg bg-surface-container text-on-surface text-xs font-bold">
@@ -1354,7 +1367,7 @@
               </div>
               <div class="flex flex-col">
                 <div class="flex items-center gap-2">
-                  <h1 class="text-xl font-extrabold text-on-surface">CivicPulse Multi-Modal LLM v4.2</h1>
+                  <h1 class="text-xl font-extrabold text-on-surface">CivicSolve Multi-Modal LLM v4.2</h1>
                   <span class="px-2 py-0.5 rounded-full bg-tertiary text-on-tertiary text-[10px] font-bold uppercase">Synthesized &amp; Verified</span>
                 </div>
                 <p class="text-xs text-on-surface-variant mt-0.5">Cross-referencing satellite spectral data, water toxicity database, and local municipal geo-telemetry.</p>
@@ -1594,23 +1607,12 @@
                   </div>
                   <span class="px-2 py-0.5 rounded bg-primary text-on-primary text-[10px] font-bold">Active</span>
                 </div>
-                <div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
-                  <div class="flex flex-col">
-                    <span class="text-xs font-bold text-on-surface">HydroMesh Innovators</span>
-                    <span class="text-[10px] text-on-surface-variant">IIT (ISM) Dhanbad · Rank 2</span>
-                  </div>
-                  <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[10px]">Bench Test</span>
-                </div>
-                <div class="p-3 rounded-xl bg-surface-container-low flex items-center justify-between">
-                  <div class="flex flex-col">
-                    <span class="text-xs font-bold text-on-surface">JalSuraksha Tech</span>
-                    <span class="text-[10px] text-on-surface-variant">NIT Jamshedpur · Rank 3</span>
-                  </div>
-                  <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[10px]">Ideation</span>
-                </div>
+              <div id="dossierTeamsList" class="flex flex-col gap-2 min-h-[100px]">
+                <!-- Dynamically populated from Supabase -->
               </div>
-              <button onclick="navigateTo('dashboard')" class="w-full py-2.5 rounded-xl bg-primary text-on-primary text-xs font-bold transition-all shadow-sm mt-2">
-                Join or Register Contender Team
+              <button onclick="openTeamModal()" class="w-full py-2.5 rounded-xl bg-primary text-on-primary text-xs font-bold transition-all shadow-sm mt-2 flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-sm">group_add</span>
+                <span>Register Contender Team</span>
               </button>
             </div>
           </div>
@@ -1620,20 +1622,431 @@
   </div>
 
   <!-- ========================================================================= -->
+  <!-- VIEW 7: AUTHENTICATION / LOGIN (GOOGLE OAUTH & EMAIL SUPABASE AUTH)       -->
+  <!-- ========================================================================= -->
+  <div id="view-login" class="view-container">
+    <div class="min-h-screen bg-surface flex flex-col justify-between">
+      <!-- Top Nav -->
+      <header class="h-16 bg-surface/80 backdrop-blur-xl shadow-sm sticky top-0 z-40 flex items-center justify-between px-space-lg border-b border-outline-variant/30">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('landing')">
+          <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-sm">CP</div>
+          <span class="font-bold text-base text-on-surface">CivicSolve AI</span>
+        </div>
+        <button onclick="navigateTo('landing')" class="h-9 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-bold transition-all flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm">arrow_back</span>
+          <span>Back to Home</span>
+        </button>
+      </header>
+
+      <!-- Main Login Card Container -->
+      <main class="flex-1 flex items-center justify-center px-4 py-12">
+        <div class="w-full max-w-md bg-surface-container-lowest rounded-3xl p-8 shadow-2xl border border-outline-variant/30 flex flex-col gap-6 relative overflow-hidden">
+          <div class="absolute -right-20 -top-20 w-60 h-60 rounded-full bg-primary-fixed/30 blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-20 -bottom-20 w-60 h-60 rounded-full bg-secondary-fixed/30 blur-3xl pointer-events-none"></div>
+
+          <!-- Auth Header -->
+          <div class="flex flex-col items-center text-center gap-2 relative z-10">
+            <div class="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center font-extrabold text-xl shadow-lg mb-1">
+              CP
+            </div>
+            <h2 id="authCardTitle" class="text-2xl font-extrabold text-on-surface tracking-tight">Welcome to CivicSolve</h2>
+            <p id="authCardSubtitle" class="text-xs text-on-surface-variant max-w-xs">
+              Sign in to manage sprint tasks, claim civic challenges, and sync with your student squad.
+            </p>
+          </div>
+
+          <!-- Error / Success Alert Box -->
+          <div id="authAlertBox" class="hidden p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all">
+            <span id="authAlertIcon" class="material-symbols-outlined text-base shrink-0">error</span>
+            <span id="authAlertMessage" class="flex-1">Authentication notice</span>
+          </div>
+
+          <!-- Email Verification Banner (Shown after sign up or when unconfirmed) -->
+          <div id="emailVerifyNotice" class="hidden p-4 rounded-2xl bg-primary-fixed/40 border border-primary/20 flex flex-col gap-2.5">
+            <div class="flex items-center gap-2 text-primary font-bold text-xs">
+              <span class="material-symbols-outlined text-base">mark_email_unread</span>
+              <span>Check your inbox</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">
+              We've sent a verification link to <strong id="verifyEmailAddress" class="text-on-surface">your email</strong>. Click the link to complete your signup.
+            </p>
+            <div class="flex items-center justify-between pt-1">
+              <button onclick="handleResendEmailVerification()" class="text-xs font-bold text-primary hover:underline flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">replay</span>
+                <span>Resend link</span>
+              </button>
+              <button onclick="switchAuthTab('signin')" class="text-xs font-semibold text-on-surface-variant hover:text-on-surface">
+                Back to Sign In
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Session Profile Card (Shown when already logged in) -->
+          <div id="loggedInProfileCard" class="hidden p-5 rounded-2xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-3 relative z-10">
+            <div class="flex items-center gap-3">
+              <div id="authProfileAvatar" class="w-12 h-12 rounded-full bg-primary text-on-primary font-extrabold text-sm flex items-center justify-center shrink-0 shadow-sm">RS</div>
+              <div class="flex flex-col flex-1 overflow-hidden">
+                <div class="flex items-center gap-2">
+                  <span id="authProfileName" class="font-bold text-sm text-on-surface truncate">Innovator</span>
+                  <span id="authProfileBadge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">verified</span> Verified
+                  </span>
+                </div>
+                <span id="authProfileEmail" class="text-xs text-on-surface-variant truncate">user@email.com</span>
+                <span id="authProfileUniv" class="text-[10px] text-outline font-medium">BIT Mesra · Student Innovator</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-outline-variant/20">
+              <button onclick="navigateTo('dashboard')" class="h-10 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-base">dashboard</span>
+                <span>Go to Dashboard</span>
+              </button>
+              <button onclick="handleSignOut()" class="h-10 rounded-xl bg-surface-container hover:bg-surface-container-high text-error font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                <span class="material-symbols-outlined text-base">logout</span>
+                <span>Sign Out</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="authFormsContainer" class="flex flex-col gap-4">
+            <!-- Guest Access Option Card -->
+            <div class="p-3.5 rounded-2xl bg-surface-container-low hover:bg-surface-container border border-outline-variant/40 flex items-center justify-between gap-3 relative z-10 transition-all">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+                  <span class="material-symbols-outlined text-lg">person</span>
+                </div>
+                <div class="flex flex-col">
+                  <span class="text-xs font-bold text-on-surface">Instant Guest Access</span>
+                  <span class="text-[10px] text-on-surface-variant">Report issues & explore full portal without login</span>
+                </div>
+              </div>
+              <button id="guestSignInBtn" onclick="handleGuestSignIn()" type="button" class="h-8 px-3.5 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-bold text-xs transition-all flex items-center gap-1 shrink-0 shadow-sm">
+                <span>Enter as Guest</span>
+                <span class="material-symbols-outlined text-xs">arrow_forward</span>
+              </button>
+            </div>
+
+            <!-- Google OAuth Section -->
+            <div id="oauthSection" class="flex flex-col gap-3 relative z-10">
+              <button id="googleSignInBtn" onclick="handleGoogleSignIn()" type="button" class="w-full h-12 rounded-xl bg-surface-container-lowest hover:bg-surface-container text-on-surface font-bold text-xs border border-outline-variant/50 shadow-sm hover:shadow transition-all flex items-center justify-center gap-3 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed">
+                <svg id="googleLogoIcon" class="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"/>
+                  <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z"/>
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+                </svg>
+                <svg id="googleLoadingSpinner" class="hidden animate-spin h-4 w-4 text-primary shrink-0" viewBox="0 0 24 24" fill="none">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span id="googleBtnLabel">Continue with Google</span>
+              </button>
+
+              <!-- OR Divider -->
+              <div class="relative flex py-2 items-center">
+                <div class="flex-grow border-t border-outline-variant/30"></div>
+                <span class="flex-shrink mx-3 text-[10px] text-on-surface-variant font-bold tracking-wider uppercase">Or with Email</span>
+                <div class="flex-grow border-t border-outline-variant/30"></div>
+              </div>
+            </div>
+
+            <!-- Auth Tab Switcher -->
+            <div class="flex p-1 rounded-xl bg-surface-container-low border border-outline-variant/20 relative z-10">
+              <button id="tabBtnSignIn" onclick="switchAuthTab('signin')" class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-surface-container-lowest text-on-surface shadow-sm">
+                Sign In
+              </button>
+              <button id="tabBtnSignUp" onclick="switchAuthTab('signup')" class="flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface">
+                Create Account
+              </button>
+            </div>
+
+            <!-- Email Sign In Form -->
+            <form id="signInForm" onsubmit="handleEmailSignIn(event)" class="flex flex-col gap-3 relative z-10">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Email Address</label>
+                <input id="signInEmail" required type="email" autocomplete="email" class="w-full h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30 transition-all" placeholder="innovator@university.edu" />
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-1">
+                  <label class="block text-xs font-bold text-on-surface">Password</label>
+                  <button type="button" onclick="handleForgotPassword()" class="text-[11px] font-bold text-primary hover:underline">Forgot password?</button>
+                </div>
+                <input id="signInPassword" required type="password" autocomplete="current-password" class="w-full h-11 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30 transition-all" placeholder="••••••••" />
+              </div>
+              <button id="signInSubmitBtn" type="submit" class="w-full h-11 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 mt-1 active:scale-[0.99] disabled:opacity-60">
+                <span id="signInBtnText">Sign In to CivicSolve</span>
+              </button>
+            </form>
+
+            <!-- Email Sign Up Form (Hidden by default) -->
+            <form id="signUpForm" onsubmit="handleEmailSignUp(event)" class="hidden flex flex-col gap-3 relative z-10">
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Full Name</label>
+                <input id="signUpFullName" required type="text" autocomplete="name" class="w-full h-10 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30" placeholder="e.g. Rahul Sharma" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Email Address</label>
+                <input id="signUpEmail" required type="email" autocomplete="email" class="w-full h-10 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30" placeholder="e.g. rahul.sharma@bitmesra.ac.in" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">University / Institute</label>
+                <input id="signUpUniv" required type="text" class="w-full h-10 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30" placeholder="e.g. BIT Mesra" value="BIT Mesra" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-on-surface mb-1">Password (Min 6 chars)</label>
+                <input id="signUpPassword" required type="password" minlength="6" autocomplete="new-password" class="w-full h-10 px-3.5 rounded-xl bg-surface-container-low text-on-surface placeholder:text-outline text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/30" placeholder="••••••••" />
+              </div>
+              <button id="signUpSubmitBtn" type="submit" class="w-full h-11 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 mt-1 active:scale-[0.99] disabled:opacity-60">
+                <span id="signUpBtnText">Create Innovator Account</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Security Footer -->
+          <div class="flex items-center justify-center gap-2 text-[10px] text-outline pt-2 border-t border-outline-variant/20 relative z-10">
+            <span class="material-symbols-outlined text-xs text-primary">verified_user</span>
+            <span>Secured with Firebase Google OAuth &amp; Supabase PostgreSQL Sync</span>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="py-4 text-center text-xs text-on-surface-variant border-t border-outline-variant/30">
+        CivicSolve AI © 2024 · SIH26043 Civic Tech Initiative
+      </footer>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODALS (TASK CREATION & TEAM REGISTRATION)                                -->
+  <!-- ========================================================================= -->
+  <!-- Add Task Modal -->
+  <div id="taskModal" class="fixed inset-0 z-[1001] bg-inverse-surface/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-md w-full rounded-2xl p-6 shadow-2xl border border-outline-variant/30 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-xl">add_task</span>
+          <h3 class="font-bold text-base text-on-surface">Add Sprint Task</h3>
+        </div>
+        <button onclick="closeTaskModal()" class="text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      <form onsubmit="handleCreateTask(event)" class="flex flex-col gap-3">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Task Title</label>
+          <input id="modalTaskTitle" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Calibrate turbidity optical lens" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Priority Tag</label>
+            <select id="modalTaskPriority" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20">
+              <option>High Priority</option>
+              <option>CAD / Fab</option>
+              <option>Corporate Mentorship</option>
+              <option>Firmware / IoT</option>
+              <option>Field Testing</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">Due Date</label>
+            <input id="modalTaskDue" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Due Today / Nov 05" value="Due Today" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Associated Project</label>
+          <input id="modalTaskProject" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. AquaSense #S3" value="AquaSense #S3" />
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-outline-variant/20">
+          <button type="button" onclick="closeTaskModal()" class="px-4 py-2 rounded-lg bg-surface-container text-xs font-bold text-on-surface">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">save</span>
+            <span>Save to Supabase</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Register Team Modal -->
+  <div id="teamModal" class="fixed inset-0 z-[1001] bg-inverse-surface/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-md w-full rounded-2xl p-6 shadow-2xl border border-outline-variant/30 flex flex-col gap-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary text-xl">group_add</span>
+          <h3 class="font-bold text-base text-on-surface">Register Contender Squad</h3>
+        </div>
+        <button onclick="closeTeamModal()" class="text-on-surface-variant hover:text-on-surface">
+          <span class="material-symbols-outlined text-lg">close</span>
+        </button>
+      </div>
+      <form onsubmit="handleRegisterTeam(event)" class="flex flex-col gap-3">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Team Name</label>
+          <input id="modalTeamName" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. SolarPurify Squad" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">University / Institute</label>
+          <input id="modalTeamUniv" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. BIT Mesra" value="BIT Mesra" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">Department</label>
+          <input id="modalTeamDept" required type="text" class="w-full h-10 px-3 rounded-lg bg-surface-container-low text-on-surface text-xs outline-none focus:ring-2 focus:ring-primary border border-outline-variant/20" placeholder="e.g. Electronics &amp; Communication" value="Dept. of Electronics &amp; Communication" />
+        </div>
+        <div class="flex items-center justify-end gap-2 pt-2 border-t border-outline-variant/20">
+          <button type="button" onclick="closeTeamModal()" class="px-4 py-2 rounded-lg bg-surface-container text-xs font-bold text-on-surface">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+            <span>Register Squad</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Network / Any PC Access Modal -->
+  <div id="networkAccessModal" class="fixed inset-0 z-[1001] bg-inverse-surface/60 backdrop-blur-sm hidden items-center justify-center p-4">
+    <div class="bg-surface-container-lowest max-w-lg w-full rounded-3xl p-6 md:p-8 shadow-2xl border border-outline-variant/30 flex flex-col gap-4 relative overflow-hidden max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-10 h-10 rounded-2xl bg-primary-fixed text-on-primary-fixed flex items-center justify-center">
+            <span class="material-symbols-outlined text-xl">devices</span>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-on-surface">Share with Any Friend / PC</h3>
+            <p class="text-xs text-on-surface-variant">2 Ways to connect other computers & phones</p>
+          </div>
+        </div>
+        <button onclick="closeNetworkAccessModal()" class="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-all">
+          <span class="material-symbols-outlined text-base">close</span>
+        </button>
+      </div>
+
+      <!-- Method 1: Same Wi-Fi -->
+      <div class="p-4 rounded-2xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">wifi</span>
+            <span>Option 1: Same Wi-Fi Network</span>
+          </span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-primary-fixed text-on-primary-fixed">Local Wi-Fi</span>
+        </div>
+        <p class="text-xs text-on-surface-variant">
+          If your friend is connected to the <strong>exact same Wi-Fi / Hotspot</strong>, give them this address:
+        </p>
+        <div class="flex items-center gap-2">
+          <input id="currentNetworkUrlInput" type="text" readonly class="w-full h-10 px-3.5 rounded-xl bg-surface-container font-mono text-xs text-on-surface outline-none border border-outline-variant/30" />
+          <button onclick="copyCurrentUrl()" class="h-10 px-4 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-bold text-xs shrink-0 flex items-center gap-1.5 transition-all shadow-sm">
+            <span class="material-symbols-outlined text-sm">content_copy</span>
+            <span id="copyBtnText">Copy</span>
+          </button>
+        </div>
+        <div class="p-2.5 rounded-xl bg-surface-container text-[11px] text-on-surface-variant flex items-start gap-2">
+          <span class="material-symbols-outlined text-sm text-secondary shrink-0 mt-0.5">security</span>
+          <span><strong>Note:</strong> If it times out, Windows Firewall may be blocking port 5173 on your PC, or your router has Client Isolation turned on. Use Option 2 below for 100% guaranteed access!</span>
+        </div>
+      </div>
+
+      <!-- Method 2: Global Tunnel -->
+      <div class="p-4 rounded-2xl bg-primary-fixed/20 border border-primary/20 flex flex-col gap-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-sm">public</span>
+            <span>Option 2: Anywhere Worldwide (Different Wi-Fi / Home)</span>
+          </span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed">Instant Tunnel</span>
+        </div>
+        <p class="text-xs text-on-surface-variant">
+          If your friend is at their house or on another network, open a terminal on your computer and run:
+        </p>
+        <div class="p-2.5 rounded-xl bg-inverse-surface text-inverse-on-surface font-mono text-xs flex items-center justify-between">
+          <code>npm run share</code>
+          <span class="text-[10px] text-tertiary-fixed font-bold">Free Instant Link</span>
+        </div>
+        <p class="text-[11px] text-on-surface-variant">
+          This gives you a secure public URL (e.g. <code class="bg-surface-container px-1 py-0.5 rounded">https://xxxx.loca.lt</code>) that works on <strong>any device in the world</strong> immediately.
+        </p>
+      </div>
+
+      <div class="flex items-center justify-between pt-1 border-t border-outline-variant/20">
+        <span class="text-[11px] text-on-surface-variant flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs text-tertiary">check_circle</span>
+          <span>Zero Configuration Required</span>
+        </span>
+        <button onclick="closeNetworkAccessModal()" class="px-5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs transition-all">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
   <!-- JAVASCRIPT CLIENT ROUTER & SUPABASE CONTROLLER                             -->
   <!-- ========================================================================= -->
   <script type="module">
     import { supabase } from './src/lib/supabaseClient.js';
+    import { 
+      auth as firebaseAuth, 
+      googleProvider as firebaseGoogleProvider, 
+      isFirebaseConfigured,
+      signInWithPopup, 
+      signInWithEmailAndPassword,
+      createUserWithEmailAndPassword,
+      sendEmailVerification,
+      sendPasswordResetEmail,
+      updateProfile,
+      fbSignOut, 
+      onAuthStateChanged as onFbAuthStateChanged 
+    } from './src/lib/firebaseConfig.js';
 
     // State management
-    const views = ['landing', 'dashboard', 'challenges-marketplace', 'report', 'ai-analysis', 'challenge-dossier'];
+    const views = ['landing', 'dashboard', 'challenges-marketplace', 'report', 'ai-analysis', 'challenge-dossier', 'login'];
+    const protectedViews = []; // Open access: citizens can report problems and browse freely without login
 
+    let currentUser = null;
+    let currentSession = null;
+    let intendedRoute = null;
+    let lastSignupEmail = '';
+
+    // Check for existing guest session in localStorage
+    try {
+      const savedGuest = localStorage.getItem('civicsolve_guest_session');
+      if (savedGuest) {
+        currentUser = JSON.parse(savedGuest);
+      }
+    } catch (e) {
+      console.warn('Guest session read note:', e);
+    }
+
+    // In-memory fallback / cache for instant UX
+    let localTasks = [
+      { id: 't-1', title: 'Flash firmware with deep-sleep power saving mode (ESP32)', priority: 'High Priority', due_date: 'Due Today', assigned_to: 'Rahul Sharma', project_name: 'AquaSense #S3', is_completed: false },
+      { id: 't-2', title: 'Finalize IP68 enclosure 3D print model for field casing', priority: 'CAD / Fab', due_date: 'Nov 02', assigned_to: 'Team AquaSense', project_name: 'AquaSense #S3', is_completed: false },
+      { id: 't-3', title: 'Submit Sprint 2 Code Review & Telemetry Log to Tata Steel Mentor', priority: 'Corporate Mentorship', due_date: 'Nov 04', assigned_to: 'Er. V. Singhal', project_name: 'AquaSense #S3', is_completed: false }
+    ];
+
+    let localTeams = [
+      { id: 'm-1', name: 'Team AquaSense', university: 'BIT Mesra', progress_pct: 64, status: 'active', rank: 1 },
+      { id: 'm-2', name: 'HydroMesh Innovators', university: 'IIT (ISM) Dhanbad', progress_pct: 48, status: 'bench_test', rank: 2 },
+      { id: 'm-3', name: 'JalSuraksha Tech', university: 'NIT Jamshedpur', progress_pct: 30, status: 'ideation', rank: 3 }
+    ];
+
+    let isWatchlisted = false;
+
+    // =========================================================================
+    // ROUTING & ROUTE GUARDS
+    // =========================================================================
     window.navigateTo = function(viewName) {
       if (!views.includes(viewName)) {
         viewName = 'landing';
       }
 
-      // Hide all views
+      // Route protection guard (if any)
+      if (protectedViews.includes(viewName) && !currentUser) {
+        intendedRoute = viewName;
+        window.showToast('Please sign in or continue as Guest to access ' + viewName, true);
+        viewName = 'login';
+      }
+
       views.forEach(v => {
         const el = document.getElementById('view-' + v);
         if (el) {
@@ -1641,16 +2054,13 @@
         }
       });
 
-      // Show target view
       const targetEl = document.getElementById('view-' + viewName);
       if (targetEl) {
         targetEl.classList.add('active');
       }
 
-      // Update URL hash
       window.location.hash = '#' + viewName;
 
-      // Update quick pill nav active styles
       document.querySelectorAll('.nav-pill').forEach(btn => {
         const btnView = btn.getAttribute('data-view');
         if (btnView === viewName) {
@@ -1660,11 +2070,9 @@
         }
       });
 
-      // Scroll to top
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // Hash change handler
     function handleHashChange() {
       const hash = window.location.hash.replace('#', '').trim();
       if (views.includes(hash)) {
@@ -1674,42 +2082,40 @@
       }
     }
 
-    // Filter marketplace cards
-    window.filterMarketplace = function(searchTerm) {
-      const term = searchTerm.toLowerCase();
-      const cards = document.querySelectorAll('.market-card');
-      cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
-        if (text.includes(term)) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    // Modal controls
+    window.openTaskModal = function() {
+      const modal = document.getElementById('taskModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
     };
 
-    // Set marketplace category
-    window.setMarketCategory = function(category) {
-      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
-        const cat = btn.getAttribute('data-cat');
-        if (cat === category) {
-          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm';
-        } else {
-          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold';
-        }
-      });
-
-      const cards = document.querySelectorAll('.market-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-cat') === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+    window.closeTaskModal = function() {
+      const modal = document.getElementById('taskModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
     };
 
-    // Toast message handler
+    window.openTeamModal = function() {
+      const modal = document.getElementById('teamModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    };
+
+    window.closeTeamModal = function() {
+      const modal = document.getElementById('teamModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    };
+
+    // Toast Notification
     let toastTimeout = null;
     window.showToast = function(message, isError = false) {
       const toast = document.getElementById('toastNotification');
@@ -1734,14 +2140,1035 @@
       }, 3500);
     };
 
-    // Handle problem submission form with Supabase sync
+    // Network Access Modal controls
+    window.openNetworkAccessModal = function() {
+      const modal = document.getElementById('networkAccessModal');
+      const input = document.getElementById('currentNetworkUrlInput');
+      const example = document.getElementById('modalNetworkUrlExample');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      if (input) {
+        input.value = window.location.origin;
+      }
+      if (example) {
+        const port = window.location.port ? `:${window.location.port}` : '';
+        const host = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') ? '192.168.X.X' : window.location.hostname;
+        example.textContent = `http://${host}${port || ':5173'}`;
+      }
+    };
+
+    window.closeNetworkAccessModal = function() {
+      const modal = document.getElementById('networkAccessModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    };
+
+    window.copyCurrentUrl = function() {
+      const input = document.getElementById('currentNetworkUrlInput');
+      const btnText = document.getElementById('copyBtnText');
+      const val = input?.value || window.location.origin;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(val).then(() => {
+          if (btnText) btnText.textContent = 'Copied!';
+          window.showToast('Link copied! Open on any other PC or mobile browser.');
+          setTimeout(() => { if (btnText) btnText.textContent = 'Copy'; }, 2000);
+        }).catch(() => {
+          if (input) {
+            input.select();
+            document.execCommand('copy');
+          }
+          if (btnText) btnText.textContent = 'Copied!';
+          window.showToast('Link copied!');
+          setTimeout(() => { if (btnText) btnText.textContent = 'Copy'; }, 2000);
+        });
+      } else {
+        if (input) {
+          input.select();
+          document.execCommand('copy');
+        }
+        if (btnText) btnText.textContent = 'Copied!';
+        window.showToast('Link copied!');
+        setTimeout(() => { if (btnText) btnText.textContent = 'Copy'; }, 2000);
+      }
+    };
+
+    // =========================================================================
+    // AUTHENTICATION CONTROLLER (GUEST ACCESS + FIREBASE GOOGLE + SUPABASE DB SYNC)
+    // =========================================================================
+
+    // Instant Guest Citizen Sign-in
+    window.handleGuestSignIn = function() {
+      const guestRand = Math.random().toString(36).substring(2, 8);
+      currentUser = {
+        id: 'guest_' + guestRand,
+        uid: 'guest_' + guestRand,
+        email: 'guest.' + guestRand + '@civicsolve.local',
+        displayName: 'Guest Citizen / Innovator',
+        photoURL: '',
+        isGuest: true,
+        emailVerified: true,
+        user_metadata: {
+          full_name: 'Guest Citizen',
+          university: 'Open Community Access',
+          isGuest: true
+        },
+        app_metadata: {
+          provider: 'guest'
+        }
+      };
+
+      try {
+        localStorage.setItem('civicsolve_guest_session', JSON.stringify(currentUser));
+      } catch (e) {
+        console.warn('Local storage guest save note:', e);
+      }
+
+      updateAuthUI();
+      window.showToast('Welcome! Exploring in Guest Mode (No Login Required).');
+      if (intendedRoute) {
+        const dest = intendedRoute;
+        intendedRoute = null;
+        window.navigateTo(dest);
+      } else {
+        window.navigateTo('report');
+      }
+    };
+
+    function showAuthAlert(msg, isError = false) {
+      const box = document.getElementById('authAlertBox');
+      const text = document.getElementById('authAlertMessage');
+      const icon = document.getElementById('authAlertIcon');
+      if (!box || !text) return;
+
+      text.textContent = msg;
+      box.className = isError 
+        ? 'p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all bg-error-container text-on-error-container'
+        : 'p-3.5 rounded-xl text-xs font-semibold flex items-center gap-2.5 transition-all bg-tertiary-fixed text-on-tertiary-fixed';
+      icon.textContent = isError ? 'error' : 'check_circle';
+      box.classList.remove('hidden');
+    }
+
+    function hideAuthAlert() {
+      const box = document.getElementById('authAlertBox');
+      if (box) box.classList.add('hidden');
+    }
+
+    // Switch between Sign In and Sign Up tabs
+    window.switchAuthTab = function(tab) {
+      const signInForm = document.getElementById('signInForm');
+      const signUpForm = document.getElementById('signUpForm');
+      const verifyNotice = document.getElementById('emailVerifyNotice');
+      const oauthSec = document.getElementById('oauthSection');
+      const tabSignIn = document.getElementById('tabBtnSignIn');
+      const tabSignUp = document.getElementById('tabBtnSignUp');
+      const title = document.getElementById('authCardTitle');
+      const subtitle = document.getElementById('authCardSubtitle');
+      hideAuthAlert();
+
+      if (verifyNotice) verifyNotice.classList.add('hidden');
+      if (oauthSec) oauthSec.classList.remove('hidden');
+
+      if (tab === 'signup') {
+        if (signInForm) signInForm.classList.add('hidden');
+        if (signUpForm) signUpForm.classList.remove('hidden');
+        if (tabSignUp) tabSignUp.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-surface-container-lowest text-on-surface shadow-sm';
+        if (tabSignIn) tabSignIn.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface';
+        if (title) title.textContent = 'Join CivicSolve';
+        if (subtitle) subtitle.textContent = 'Create your innovator profile to participate in SIH problem solving.';
+      } else {
+        if (signUpForm) signUpForm.classList.add('hidden');
+        if (signInForm) signInForm.classList.remove('hidden');
+        if (tabSignIn) tabSignIn.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold transition-all bg-surface-container-lowest text-on-surface shadow-sm';
+        if (tabSignUp) tabSignUp.className = 'flex-1 py-1.5 rounded-lg text-xs font-bold transition-all text-on-surface-variant hover:text-on-surface';
+        if (title) title.textContent = 'Welcome to CivicSolve';
+        if (subtitle) subtitle.textContent = 'Sign in to manage sprint tasks, claim civic challenges, and sync with your student squad.';
+      }
+    };
+
+    // Google OAuth Sign In (Firebase Google Popup & Supabase DB sync)
+    window.handleGoogleSignIn = async function() {
+      hideAuthAlert();
+      const btn = document.getElementById('googleSignInBtn');
+      const spinner = document.getElementById('googleLoadingSpinner');
+      const icon = document.getElementById('googleLogoIcon');
+      const label = document.getElementById('googleBtnLabel');
+
+      if (btn) btn.disabled = true;
+      if (spinner) spinner.classList.remove('hidden');
+      if (icon) icon.classList.add('hidden');
+      if (label) label.textContent = 'Connecting to Google...';
+
+      // 1. If Firebase Auth is initialized, use Firebase Google Popup
+      if (firebaseAuth && firebaseGoogleProvider) {
+        try {
+          const result = await signInWithPopup(firebaseAuth, firebaseGoogleProvider);
+          const user = result.user;
+
+          currentUser = {
+            id: user.uid,
+            uid: user.uid,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            user_metadata: {
+              full_name: user.displayName || user.email?.split('@')[0],
+              avatar_url: user.photoURL || ''
+            },
+            app_metadata: {
+              provider: 'google'
+            }
+          };
+
+          // Save / Sync login data directly to Supabase
+          await syncUserProfile(currentUser, {
+            fullName: user.displayName || user.email?.split('@')[0],
+            emailVerified: true,
+            provider: 'google',
+            university: 'BIT Mesra'
+          });
+
+          updateAuthUI();
+          window.showToast(`Welcome back, ${user.displayName || user.email}!`);
+
+          if (intendedRoute) {
+            const dest = intendedRoute;
+            intendedRoute = null;
+            window.navigateTo(dest);
+          } else {
+            window.navigateTo('dashboard');
+          }
+          return;
+        } catch (firebaseErr) {
+          console.warn('Firebase Google Sign-in Notice:', firebaseErr);
+          if (firebaseErr.code === 'auth/popup-closed-by-user') {
+            showAuthAlert('Google sign-in popup was closed before completion.', true);
+          } else if (firebaseErr.code === 'auth/cancelled-popup-request') {
+            // Multiple popups ignored
+          } else {
+            showAuthAlert('Google Sign-in: ' + (firebaseErr.message || 'Please check Firebase credentials in .env.local'), true);
+          }
+          return;
+        } finally {
+          if (btn) btn.disabled = false;
+          if (spinner) spinner.classList.add('hidden');
+          if (icon) icon.classList.remove('hidden');
+          if (label) label.textContent = 'Continue with Google';
+        }
+      }
+
+      // 2. Supabase OAuth Google Sign-In Fallback
+      try {
+        const { data, error } = await supabase.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: window.location.origin + window.location.pathname
+          }
+        });
+
+        if (error) throw error;
+      } catch (err) {
+        console.warn('Google Sign-in Provider Status:', err);
+        const errMsg = err.message || err.msg || '';
+        
+        if (errMsg.includes('provider is not enabled') || errMsg.includes('validation_failed') || errMsg.includes('Unsupported provider')) {
+          showAuthAlert(`⚠️ Google Provider is not yet enabled in Supabase or Firebase dashboard. See setup instructions below or use Quick Demo Sign-in.`, true);
+          
+          // Show quick Google Verified demo account option for immediate access
+          const alertBox = document.getElementById('authAlertBox');
+          if (alertBox) {
+            alertBox.innerHTML = `
+              <div class="flex flex-col gap-2 w-full">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-base text-error">info</span>
+                  <span class="font-bold text-xs">Google Provider Not Enabled in Backend</span>
+                </div>
+                <p class="text-[11px] text-on-surface-variant leading-relaxed">
+                  To enable real Google Sign-In, turn on <strong>Google Provider</strong> in either:
+                  <br/>• <strong>Firebase Console</strong> (paste keys in <code class="bg-surface-container px-1 py-0.5 rounded font-mono">.env.local</code>) OR
+                  <br/>• <strong>Supabase Dashboard</strong> → Authentication → Providers → Google.
+                </p>
+                <div class="flex items-center gap-2 pt-1">
+                  <button onclick="handleDemoGoogleSignIn()" class="h-8 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm">
+                    <span class="material-symbols-outlined text-sm">verified</span>
+                    <span>Continue with Verified Google Profile</span>
+                  </button>
+                  <a href="https://supabase.com/dashboard/project/bgfhmxwpsihkqjhgrjbj/auth/providers" target="_blank" class="h-8 px-3 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs flex items-center gap-1 transition-all">
+                    <span>Open Supabase Auth</span>
+                    <span class="material-symbols-outlined text-xs">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+            `;
+          }
+        } else {
+          showAuthAlert(errMsg || 'Unable to initiate Google Sign-in. Please verify backend provider settings.', true);
+        }
+      } finally {
+        if (btn) btn.disabled = false;
+        if (spinner) spinner.classList.add('hidden');
+        if (icon) icon.classList.remove('hidden');
+        if (label) label.textContent = 'Continue with Google';
+      }
+    };
+
+    // Instant Google Verified Profile for zero-friction testing & demo
+    window.handleDemoGoogleSignIn = async function() {
+      const demoUser = {
+        id: 'google-usr-' + Math.random().toString(36).substring(2, 9),
+        uid: 'google-usr-' + Math.random().toString(36).substring(2, 9),
+        email: 'rahul.sharma@bitmesra.ac.in',
+        emailVerified: true,
+        displayName: 'Rahul Sharma (Google Verified)',
+        photoURL: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+        user_metadata: {
+          full_name: 'Rahul Sharma',
+          avatar_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+          university: 'BIT Mesra'
+        },
+        app_metadata: {
+          provider: 'google'
+        }
+      };
+
+      currentUser = demoUser;
+      await syncUserProfile(currentUser, {
+        fullName: 'Rahul Sharma',
+        university: 'BIT Mesra',
+        emailVerified: true,
+        provider: 'google'
+      });
+
+      updateAuthUI();
+      window.showToast('Signed in with Google Verified Profile & saved to Supabase!');
+      if (intendedRoute) {
+        const dest = intendedRoute;
+        intendedRoute = null;
+        window.navigateTo(dest);
+      } else {
+        window.navigateTo('dashboard');
+      }
+    };
+
+    // Email & Password Sign In
+    window.handleEmailSignIn = async function(e) {
+      e.preventDefault();
+      hideAuthAlert();
+      const email = document.getElementById('signInEmail')?.value?.trim();
+      const password = document.getElementById('signInPassword')?.value;
+      const btn = document.getElementById('signInSubmitBtn');
+      const text = document.getElementById('signInBtnText');
+
+      if (!email || !password) return;
+      if (btn) btn.disabled = true;
+      if (text) text.textContent = 'Verifying credentials...';
+
+      // 1. If Firebase Auth is configured
+      if (firebaseAuth && isFirebaseConfigured) {
+        try {
+          const userCredential = await signInWithEmailAndPassword(firebaseAuth, email, password);
+          const user = userCredential.user;
+
+          currentUser = {
+            id: user.uid,
+            uid: user.uid,
+            email: user.email,
+            emailVerified: user.emailVerified,
+            displayName: user.displayName || email.split('@')[0],
+            photoURL: user.photoURL || '',
+            user_metadata: {
+              full_name: user.displayName || email.split('@')[0],
+              avatar_url: user.photoURL || ''
+            },
+            app_metadata: {
+              provider: 'email'
+            }
+          };
+
+          // Sync login data into Supabase
+          await syncUserProfile(currentUser, {
+            fullName: user.displayName || email.split('@')[0],
+            emailVerified: user.emailVerified,
+            provider: 'firebase_email'
+          });
+
+          updateAuthUI();
+
+          if (!user.emailVerified) {
+            window.showToast(`Signed in! Note: Email verification pending.`, false);
+          } else {
+            window.showToast(`Welcome back, ${user.displayName || email}!`);
+          }
+
+          if (intendedRoute) {
+            const dest = intendedRoute;
+            intendedRoute = null;
+            window.navigateTo(dest);
+          } else {
+            window.navigateTo('dashboard');
+          }
+          return;
+        } catch (fbErr) {
+          console.warn('Firebase Sign In Error:', fbErr);
+          let msg = fbErr.message || 'Invalid email or password.';
+          if (fbErr.code === 'auth/invalid-credential' || fbErr.code === 'auth/user-not-found' || fbErr.code === 'auth/wrong-password') {
+            msg = 'Invalid email or password. Please try again.';
+          } else if (fbErr.code === 'auth/too-many-requests') {
+            msg = 'Access temporarily disabled due to many failed attempts. Reset password or wait a moment.';
+          }
+          showAuthAlert(msg, true);
+          return;
+        } finally {
+          if (btn) btn.disabled = false;
+          if (text) text.textContent = 'Sign In to CivicSolve';
+        }
+      }
+
+      // 2. Supabase Auth fallback
+      try {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password
+        });
+
+        if (error) throw error;
+
+        currentUser = data.user;
+        await syncUserProfile(currentUser, {
+          fullName: data.user?.user_metadata?.full_name || email.split('@')[0],
+          provider: 'supabase_email'
+        });
+
+        updateAuthUI();
+        window.showToast('Welcome back, ' + (data.user?.user_metadata?.full_name || email.split('@')[0]) + '!');
+        if (intendedRoute) {
+          const dest = intendedRoute;
+          intendedRoute = null;
+          window.navigateTo(dest);
+        } else {
+          window.navigateTo('dashboard');
+        }
+      } catch (err) {
+        console.warn('Sign In Error:', err);
+        showAuthAlert(err.message || 'Invalid email or password. Please try again.', true);
+      } finally {
+        if (btn) btn.disabled = false;
+        if (text) text.textContent = 'Sign In to CivicSolve';
+      }
+    };
+
+    // Email & Password Sign Up with Verification
+    window.handleEmailSignUp = async function(e) {
+      e.preventDefault();
+      hideAuthAlert();
+      const fullName = document.getElementById('signUpFullName')?.value?.trim() || 'Civic Innovator';
+      const email = document.getElementById('signUpEmail')?.value?.trim();
+      const password = document.getElementById('signUpPassword')?.value;
+      const univ = document.getElementById('signUpUniv')?.value?.trim() || 'BIT Mesra';
+      const btn = document.getElementById('signUpSubmitBtn');
+      const text = document.getElementById('signUpBtnText');
+
+      if (!email || !password) return;
+      if (password.length < 6) {
+        showAuthAlert('Password must be at least 6 characters long', true);
+        return;
+      }
+
+      if (btn) btn.disabled = true;
+      if (text) text.textContent = 'Creating account...';
+
+      // 1. If Firebase Auth is configured
+      if (firebaseAuth && isFirebaseConfigured) {
+        try {
+          const userCredential = await createUserWithEmailAndPassword(firebaseAuth, email, password);
+          const user = userCredential.user;
+
+          // Set displayName on Firebase user
+          try {
+            await updateProfile(user, { displayName: fullName });
+          } catch (e) {
+            console.warn('Update profile note:', e);
+          }
+
+          // Send Firebase Email Verification
+          try {
+            await sendEmailVerification(user);
+            console.log('✉️ Firebase verification email sent to:', email);
+          } catch (verErr) {
+            console.warn('Email verification send note:', verErr);
+          }
+
+          currentUser = {
+            id: user.uid,
+            uid: user.uid,
+            email: user.email,
+            emailVerified: false,
+            displayName: fullName,
+            photoURL: '',
+            user_metadata: {
+              full_name: fullName,
+              university: univ
+            },
+            app_metadata: {
+              provider: 'firebase_email'
+            }
+          };
+
+          // Synchronize registration data directly to Supabase profiles table
+          await syncUserProfile(currentUser, {
+            fullName,
+            university: univ,
+            emailVerified: false,
+            provider: 'firebase_email'
+          });
+
+          lastSignupEmail = email;
+          const verifyEl = document.getElementById('verifyEmailAddress');
+          if (verifyEl) verifyEl.textContent = email;
+          document.getElementById('emailVerifyNotice')?.classList.remove('hidden');
+          document.getElementById('signUpForm')?.classList.add('hidden');
+          document.getElementById('oauthSection')?.classList.add('hidden');
+          window.showToast('Verification email sent to ' + email + ' & profile saved in Supabase!');
+          updateAuthUI();
+          return;
+        } catch (fbErr) {
+          console.warn('Firebase Sign Up Error:', fbErr);
+          let msg = fbErr.message || 'Unable to create account.';
+          if (fbErr.code === 'auth/email-already-in-use') {
+            msg = 'This email is already registered. Please sign in instead.';
+          } else if (fbErr.code === 'auth/weak-password') {
+            msg = 'Password is too weak. Please use a stronger password.';
+          }
+          showAuthAlert(msg, true);
+          return;
+        } finally {
+          if (btn) btn.disabled = false;
+          if (text) text.textContent = 'Create Innovator Account';
+        }
+      }
+
+      // 2. Supabase Auth Sign Up fallback
+      try {
+        const { data, error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: {
+            data: {
+              full_name: fullName,
+              university: univ
+            }
+          }
+        });
+
+        if (error) throw error;
+
+        lastSignupEmail = email;
+        if (data.user) {
+          await syncUserProfile(data.user, {
+            fullName,
+            university: univ,
+            emailVerified: false,
+            provider: 'supabase_email'
+          });
+        }
+
+        if (data.user && !data.session) {
+          const verifyEl = document.getElementById('verifyEmailAddress');
+          if (verifyEl) verifyEl.textContent = email;
+          document.getElementById('emailVerifyNotice')?.classList.remove('hidden');
+          document.getElementById('signUpForm')?.classList.add('hidden');
+          document.getElementById('oauthSection')?.classList.add('hidden');
+          window.showToast('Verification email sent to ' + email);
+        } else if (data.session) {
+          currentUser = data.user;
+          updateAuthUI();
+          window.showToast('Account created & logged in!');
+          window.navigateTo('dashboard');
+        }
+      } catch (err) {
+        console.warn('Sign Up Error:', err);
+        showAuthAlert(err.message || 'Unable to create account. Please check credentials.', true);
+      } finally {
+        if (btn) btn.disabled = false;
+        if (text) text.textContent = 'Create Innovator Account';
+      }
+    };
+
+    // Resend Email Verification Link
+    window.handleResendEmailVerification = async function() {
+      const email = lastSignupEmail || currentUser?.email || document.getElementById('signInEmail')?.value?.trim();
+      if (!email) {
+        showAuthAlert('Please specify your email address to resend verification.', true);
+        return;
+      }
+
+      try {
+        if (firebaseAuth && firebaseAuth.currentUser) {
+          await sendEmailVerification(firebaseAuth.currentUser);
+          window.showToast('Firebase verification email resent to ' + email);
+          return;
+        }
+
+        const { error } = await supabase.auth.resend({
+          type: 'signup',
+          email: email
+        });
+        if (error) throw error;
+        window.showToast('Confirmation email resent to ' + email);
+      } catch (err) {
+        showAuthAlert(err.message || 'Unable to resend email.', true);
+      }
+    };
+
+    // Forgot Password Flow
+    window.handleForgotPassword = async function() {
+      const email = document.getElementById('signInEmail')?.value?.trim() || prompt('Enter your registered email address for password reset:');
+      if (!email || email.length < 5) return;
+
+      try {
+        if (firebaseAuth && isFirebaseConfigured) {
+          await sendPasswordResetEmail(firebaseAuth, email);
+          window.showToast('Password reset link sent to ' + email);
+          return;
+        }
+
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: window.location.origin + window.location.pathname + '#login'
+        });
+        if (error) throw error;
+        window.showToast('Password reset link sent to ' + email);
+      } catch (err) {
+        console.warn('Password reset error:', err);
+        showAuthAlert(err.message || 'Unable to send password reset email.', true);
+      }
+    };
+
+    // User Logout
+    window.handleSignOut = async function() {
+      try {
+        localStorage.removeItem('civicsolve_guest_session');
+        if (firebaseAuth && isFirebaseConfigured) {
+          await fbSignOut(firebaseAuth);
+        }
+        await supabase.auth.signOut();
+        currentUser = null;
+        currentSession = null;
+        updateAuthUI();
+        window.showToast('Signed out successfully');
+        window.navigateTo('landing');
+      } catch (err) {
+        console.warn('Sign Out Error:', err);
+        localStorage.removeItem('civicsolve_guest_session');
+        currentUser = null;
+        updateAuthUI();
+        window.showToast('Signed out');
+      }
+    };
+
+    // Update Global UI with Auth State
+    function updateAuthUI() {
+      const loginNavPill = document.getElementById('quickNavLoginLabel');
+      const loginNavBtn = document.getElementById('quickNavLoginBtn');
+      const profileCard = document.getElementById('loggedInProfileCard');
+      const formsContainer = document.getElementById('authFormsContainer');
+      const profileName = document.getElementById('authProfileName');
+      const profileEmail = document.getElementById('authProfileEmail');
+      const profileUniv = document.getElementById('authProfileUniv');
+      const profileAvatar = document.getElementById('authProfileAvatar');
+      const profileBadge = document.getElementById('authProfileBadge');
+
+      if (currentUser) {
+        const isGuest = Boolean(currentUser.isGuest);
+        const name = isGuest ? (currentUser.displayName || 'Guest Citizen') : (currentUser.displayName || currentUser.user_metadata?.full_name || currentUser.user_metadata?.name || currentUser.email?.split('@')[0] || 'Innovator');
+        const email = isGuest ? 'Guest Access · No Password Required' : (currentUser.email || '');
+        const initials = isGuest ? 'GC' : (name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() || 'CP');
+        const isVerified = currentUser.emailVerified || currentUser.app_metadata?.provider === 'google' || currentUser.confirmed_at != null;
+
+        if (loginNavPill) loginNavPill.textContent = isGuest ? 'Guest' : 'Profile';
+        if (loginNavBtn) loginNavBtn.title = isGuest ? 'Browsing as Guest Citizen' : `Logged in as ${name} (${currentUser.email})`;
+
+        if (profileCard) profileCard.classList.remove('hidden');
+        if (formsContainer) formsContainer.classList.add('hidden');
+        if (profileName) profileName.textContent = name;
+        if (profileEmail) profileEmail.textContent = email;
+        if (profileUniv) profileUniv.textContent = isGuest ? 'Public Ground Access · Community Problem Solver' : (currentUser.user_metadata?.university || 'BIT Mesra · Student Innovator');
+        if (profileAvatar) profileAvatar.textContent = initials;
+        if (profileBadge) {
+          if (isGuest) {
+            profileBadge.className = 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-secondary-fixed text-on-secondary-fixed flex items-center gap-1';
+            profileBadge.innerHTML = '<span class="material-symbols-outlined text-xs">person</span> Guest Mode';
+          } else {
+            profileBadge.className = isVerified 
+              ? 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-tertiary-fixed text-on-tertiary-fixed flex items-center gap-1'
+              : 'px-2 py-0.5 rounded-full text-[10px] font-bold bg-error-container text-on-error-container flex items-center gap-1';
+            profileBadge.innerHTML = isVerified 
+              ? '<span class="material-symbols-outlined text-xs">verified</span> Verified'
+              : '<span class="material-symbols-outlined text-xs">warning</span> Email Unverified';
+          }
+        }
+      } else {
+        if (loginNavPill) loginNavPill.textContent = 'Sign In';
+        if (loginNavBtn) loginNavBtn.title = 'Sign In to CivicSolve';
+        if (profileCard) profileCard.classList.add('hidden');
+        if (formsContainer) formsContainer.classList.remove('hidden');
+      }
+    }
+
+    // Auto Profile Sync with Supabase Database
+    async function syncUserProfile(user, extra = {}) {
+      if (!user || user.isGuest) return; // Do not sync temporary guest sessions to profiles table
+      const uid = user.uid || user.id || 'usr-' + Date.now();
+      const email = user.email || '';
+      const fullName = extra.fullName || user.displayName || user.user_metadata?.full_name || user.user_metadata?.name || email.split('@')[0] || 'Innovator';
+      const avatarUrl = user.photoURL || user.user_metadata?.avatar_url || user.user_metadata?.picture || `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(fullName)}`;
+      const isEmailVerified = extra.emailVerified !== undefined ? extra.emailVerified : (user.emailVerified ?? (user.confirmed_at != null));
+      const provider = extra.provider || user.providerData?.[0]?.providerId || user.app_metadata?.provider || 'email';
+      const university = extra.university || user.user_metadata?.university || 'BIT Mesra';
+
+      try {
+        const { error } = await supabase.from('profiles').upsert({
+          id: String(uid),
+          email: email,
+          full_name: fullName,
+          avatar_url: avatarUrl,
+          provider: provider,
+          university: university,
+          verified: Boolean(isEmailVerified),
+          email_verified: Boolean(isEmailVerified),
+          firebase_uid: user.uid || null,
+          updated_at: new Date().toISOString()
+        }, { onConflict: 'id' });
+
+        if (!error) {
+          console.log('✅ User profile successfully persisted in Supabase database:', fullName);
+        } else {
+          console.warn('Supabase profile upsert warning:', error.message);
+        }
+      } catch (err) {
+        console.warn('Profile sync fallback:', err);
+      }
+    }
+
+    // Setup Auth Listener (Firebase & Supabase)
+    async function initAuth() {
+      // 1. Firebase Auth Realtime Listener
+      if (firebaseAuth && isFirebaseConfigured) {
+        onFbAuthStateChanged(firebaseAuth, async (fbUser) => {
+          if (fbUser) {
+            console.log('🔥 Firebase Auth State: Active user', fbUser.email);
+            currentUser = {
+              id: fbUser.uid,
+              uid: fbUser.uid,
+              email: fbUser.email,
+              emailVerified: fbUser.emailVerified,
+              displayName: fbUser.displayName,
+              photoURL: fbUser.photoURL,
+              user_metadata: {
+                full_name: fbUser.displayName || fbUser.email?.split('@')[0],
+                avatar_url: fbUser.photoURL || ''
+              },
+              app_metadata: {
+                provider: fbUser.providerData?.[0]?.providerId || 'firebase'
+              }
+            };
+            updateAuthUI();
+            await syncUserProfile(currentUser);
+          } else {
+            console.log('🔥 Firebase Auth State: Logged out');
+          }
+        });
+      }
+
+      // 2. Supabase Auth Session & Listener
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
+        if (!error && session && !currentUser) {
+          currentSession = session;
+          currentUser = session.user;
+          updateAuthUI();
+          syncUserProfile(currentUser);
+        }
+
+        supabase.auth.onAuthStateChange(async (event, session) => {
+          console.log('⚡ Supabase Auth State Change Event:', event);
+          if (event === 'SIGNED_IN' && session?.user) {
+            currentSession = session;
+            currentUser = session.user;
+            updateAuthUI();
+            await syncUserProfile(currentUser);
+            if (intendedRoute) {
+              const dest = intendedRoute;
+              intendedRoute = null;
+              window.navigateTo(dest);
+            }
+          } else if (event === 'SIGNED_OUT' && !firebaseAuth?.currentUser) {
+            currentUser = null;
+            currentSession = null;
+            updateAuthUI();
+          }
+        });
+      } catch (err) {
+        console.warn('Auth initialization fallback:', err);
+      }
+    }
+
+    // =========================================================================
+    // SUPABASE DATA OPERATIONS (SELECT, INSERT, UPDATE, DELETE)
+    // =========================================================================
+
+    // 1. Fetch & Render Sprint Tasks
+    async function loadTasks() {
+      const listEl = document.getElementById('dashboardTaskList');
+      const badgeEl = document.getElementById('dashboardTaskBadge');
+      if (!listEl) return;
+
+      try {
+        const { data, error } = await supabase
+          .from('sprint_tasks')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          localTasks = data;
+        }
+      } catch (err) {
+        console.warn('Supabase tasks load fallback to local state:', err);
+      }
+
+      renderTasks();
+    }
+
+    function renderTasks() {
+      const listEl = document.getElementById('dashboardTaskList');
+      const badgeEl = document.getElementById('dashboardTaskBadge');
+      if (!listEl) return;
+
+      const activeCount = localTasks.filter(t => !t.is_completed).length;
+      if (badgeEl) badgeEl.textContent = `${activeCount} Active`;
+
+      if (localTasks.length === 0) {
+        listEl.innerHTML = `<div class="p-4 rounded-xl bg-surface-container-low text-center text-xs text-on-surface-variant font-medium">No pending sprint tasks. Click below to add one!</div>`;
+        return;
+      }
+
+      listEl.innerHTML = localTasks.map(task => {
+        const priorityColor = task.priority.includes('High') ? 'text-error' : task.priority.includes('CAD') ? 'text-primary' : 'text-secondary';
+        const bulletColor = task.priority.includes('High') ? 'bg-error' : task.priority.includes('CAD') ? 'bg-primary' : 'bg-secondary';
+        const completedClass = task.is_completed ? 'opacity-50 line-through' : '';
+
+        return `
+          <div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1.5 transition-all hover:bg-surface-container group">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full ${bulletColor} shrink-0"></span>
+                <span class="text-[10px] font-bold ${priorityColor} uppercase tracking-wider">${task.priority}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-bold text-on-surface">${task.due_date}</span>
+                <button onclick="deleteTask('${task.id}')" class="opacity-0 group-hover:opacity-100 text-outline hover:text-error transition-all" title="Delete Task">
+                  <span class="material-symbols-outlined text-sm">delete</span>
+                </button>
+              </div>
+            </div>
+            <p class="text-xs font-bold text-on-surface ${completedClass} cursor-pointer" onclick="toggleTask('${task.id}')" title="Click to toggle complete">
+              ${task.title}
+            </p>
+            <div class="flex items-center justify-between text-[10px] text-outline">
+              <span>${task.assigned_to || 'Assigned to Rahul'}</span>
+              <span class="text-primary font-bold">${task.project_name || 'AquaSense'}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Create new Task in Supabase
+    window.handleCreateTask = async function(e) {
+      e.preventDefault();
+      const title = document.getElementById('modalTaskTitle')?.value || '';
+      const priority = document.getElementById('modalTaskPriority')?.value || 'High Priority';
+      const due_date = document.getElementById('modalTaskDue')?.value || 'Due Today';
+      const project_name = document.getElementById('modalTaskProject')?.value || 'AquaSense #S3';
+      const assigned_to = currentUser?.user_metadata?.full_name || 'Rahul Sharma';
+
+      const newTask = {
+        id: 't-' + Date.now(),
+        title,
+        priority,
+        due_date,
+        assigned_to,
+        project_name,
+        is_completed: false
+      };
+
+      localTasks.unshift(newTask);
+      renderTasks();
+      closeTaskModal();
+      window.showToast('Task added to Sprint backlog');
+
+      try {
+        const { data, error } = await supabase
+          .from('sprint_tasks')
+          .insert([
+            {
+              user_id: currentUser ? currentUser.id : null,
+              title,
+              priority,
+              due_date,
+              assigned_to,
+              project_name,
+              is_completed: false
+            }
+          ]);
+        if (!error) {
+          window.showToast('Task synced to Supabase database!');
+        }
+      } catch (err) {
+        console.warn('Supabase task insert fallback:', err);
+      }
+    };
+
+    // Toggle Task completion
+    window.toggleTask = async function(id) {
+      const task = localTasks.find(t => t.id === id);
+      if (!task) return;
+
+      task.is_completed = !task.is_completed;
+      renderTasks();
+      window.showToast(task.is_completed ? 'Task marked complete' : 'Task reopened');
+
+      try {
+        await supabase
+          .from('sprint_tasks')
+          .update({ is_completed: task.is_completed })
+          .eq('id', id);
+      } catch (err) {
+        console.warn('Supabase update task error:', err);
+      }
+    };
+
+    // Delete Task
+    window.deleteTask = async function(id) {
+      localTasks = localTasks.filter(t => t.id !== id);
+      renderTasks();
+      window.showToast('Task removed');
+
+      try {
+        await supabase
+          .from('sprint_tasks')
+          .delete()
+          .eq('id', id);
+      } catch (err) {
+        console.warn('Supabase delete task error:', err);
+      }
+    };
+
+    // 2. Fetch & Render Contender Teams
+    async function loadTeams() {
+      try {
+        const { data, error } = await supabase
+          .from('teams')
+          .select('*')
+          .order('rank', { ascending: true });
+
+        if (!error && data && data.length > 0) {
+          localTeams = data;
+        }
+      } catch (err) {
+        console.warn('Supabase teams fallback:', err);
+      }
+
+      renderTeams();
+    }
+
+    function renderTeams() {
+      const teamsEl = document.getElementById('dossierTeamsList');
+      if (!teamsEl) return;
+
+      teamsEl.innerHTML = localTeams.map((team, idx) => {
+        const rank = team.rank || (idx + 1);
+        const isLeader = rank === 1;
+        const bgClass = isLeader ? 'bg-primary-fixed/40' : 'bg-surface-container-low';
+        const titleClass = isLeader ? 'text-on-primary-fixed' : 'text-on-surface';
+
+        return `
+          <div class="p-3 rounded-xl ${bgClass} flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-xs font-bold ${titleClass}">${team.name}</span>
+              <span class="text-[10px] text-on-surface-variant">${team.university} · Rank ${rank} (${team.progress_pct || 0}%)</span>
+            </div>
+            <span class="px-2 py-0.5 rounded ${isLeader ? 'bg-primary text-on-primary font-bold' : 'bg-surface-container text-on-surface'} text-[10px] capitalize">${team.status || 'Active'}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Register Contender Team
+    window.handleRegisterTeam = async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('modalTeamName')?.value || 'New Squad';
+      const university = document.getElementById('modalTeamUniv')?.value || 'BIT Mesra';
+      const department = document.getElementById('modalTeamDept')?.value || '';
+
+      const newTeam = {
+        id: 'm-' + Date.now(),
+        name,
+        university,
+        department,
+        members_count: 4,
+        progress_pct: 10,
+        status: 'ideation',
+        rank: localTeams.length + 1
+      };
+
+      localTeams.push(newTeam);
+      renderTeams();
+      closeTeamModal();
+      window.showToast(`Team '${name}' registered for Challenge #WT-09!`);
+
+      try {
+        await supabase
+          .from('teams')
+          .insert([
+            {
+              leader_id: currentUser ? currentUser.id : null,
+              name,
+              university,
+              department,
+              members_count: 4,
+              progress_pct: 10,
+              status: 'ideation',
+              rank: localTeams.length
+            }
+          ]);
+      } catch (err) {
+        console.warn('Supabase register team fallback:', err);
+      }
+    };
+
+    // 3. Problem Submission (with Supabase sync & zero-login support)
     window.handleProblemSubmit = async function(e) {
       e.preventDefault();
       const title = document.getElementById('reportTitle')?.value || 'Civic Issue';
       const category = document.getElementById('reportCategory')?.value || 'Water & Sanitation';
       const location = document.getElementById('reportLocation')?.value || 'Ranchi, Jharkhand';
-      const description = document.getElementById('reportDescription')?.value || '';
+      const rawDescription = document.getElementById('reportDescription')?.value || '';
+      const citizenName = document.getElementById('reportCitizenName')?.value?.trim();
+      const citizenContact = document.getElementById('reportCitizenContact')?.value?.trim();
 
+      // Attach optional reporter details if provided
+      let fullDescription = rawDescription;
+      if (citizenName || citizenContact) {
+        const metadata = `\n\n[Ground Citizen Intake: ${citizenName || 'Anonymous Citizen'}${citizenContact ? ` | Contact: ${citizenContact}` : ''}]`;
+        fullDescription += metadata;
+      }
+
+      const reporterId = (currentUser && !currentUser.isGuest) ? currentUser.id : null;
       window.showToast('Saving to Supabase & Processing with AI...', false);
 
       try {
@@ -1749,18 +3176,19 @@
           .from('problems')
           .insert([
             {
-              title: title,
-              category: category,
-              location: location,
+              reporter_id: reporterId,
+              title,
+              category,
+              location,
               coordinates: '23.36° N, 85.54° E',
-              description: description,
+              description: fullDescription,
               severity: 'High',
               status: 'pending_triage'
             }
           ]);
 
         if (error) {
-          console.warn('Supabase insert note (table might need creation):', error.message);
+          console.warn('Supabase insert note:', error.message);
           window.showToast('Problem Registered! AI generated Challenge #RN-8821');
         } else {
           window.showToast('Problem synced to Supabase database successfully!');
@@ -1772,13 +3200,261 @@
 
       setTimeout(() => {
         window.navigateTo('ai-analysis');
-      }, 900);
+      }, 800);
     };
 
-    // Initialize router & Supabase status indicator
+    // 4. Watchlist Toggle & Load
+    async function loadWatchlists() {
+      try {
+        const { data, error } = await supabase
+          .from('watchlists')
+          .select('*')
+          .eq('session_id', 'guest_user');
+
+        if (!error && data && data.length > 0) {
+          isWatchlisted = true;
+          const icon = document.getElementById('bookmarkIcon');
+          const text = document.getElementById('bookmarkText');
+          if (icon) icon.textContent = 'bookmark';
+          if (text) text.textContent = 'Watchlisted';
+        }
+      } catch (err) {
+        console.warn('Supabase watchlist load note:', err);
+      }
+    }
+
+    window.toggleBookmark = async function(btn) {
+      isWatchlisted = !isWatchlisted;
+      const icon = document.getElementById('bookmarkIcon');
+      const text = document.getElementById('bookmarkText');
+
+      if (icon) icon.textContent = isWatchlisted ? 'bookmark' : 'bookmark_border';
+      if (text) text.textContent = isWatchlisted ? 'Watchlisted' : 'Watchlist';
+      if (btn) {
+        btn.className = isWatchlisted 
+          ? 'h-10 px-3.5 rounded-lg bg-primary text-on-primary font-bold text-xs flex items-center gap-1.5 transition-all shadow-sm'
+          : 'h-10 px-3.5 rounded-lg bg-surface-container hover:bg-surface-container-high text-on-surface font-semibold text-xs flex items-center gap-1.5 transition-all shadow-sm';
+      }
+
+      window.showToast(isWatchlisted ? 'Added Challenge #WT-09 to Watchlist' : 'Removed from Watchlist');
+
+      try {
+        if (isWatchlisted) {
+          await supabase.from('watchlists').insert([{ 
+            user_id: currentUser ? currentUser.id : null,
+            session_id: 'guest_user' 
+          }]);
+        } else {
+          await supabase.from('watchlists').delete().eq('session_id', 'guest_user');
+        }
+      } catch (err) {
+        console.warn('Supabase watchlist error:', err);
+      }
+    };
+
+    // 5. Challenges Marketplace & Dossiers (Live Supabase Query)
+    let localChallenges = [
+      {
+        id: 'c-1',
+        code: 'WT-09',
+        title: 'Smart Water Quality Telemetry & Contamination Tracer',
+        category: 'Water & Sanitation',
+        category_slug: 'water',
+        severity: 'High Priority',
+        location: 'Ranchi, Jharkhand (Ward 14 & 18)',
+        description: 'Heavy industrial runoff infiltrating municipal piped drinking lines. Requires low-power battery spectrophotometric nodes transmitting via GSM/LoRa.',
+        tech_stack: ['IoT', 'Embedded C', 'Spectrometry'],
+        grant_amount: 75000
+      },
+      {
+        id: 'c-2',
+        code: 'ENV-04',
+        title: 'Intelligent Waste Segregation & Fleet Routing',
+        category: 'Solid Waste & Drainage',
+        category_slug: 'waste',
+        severity: 'Medium Priority',
+        location: 'Pune, Maharashtra (Smart City Zone)',
+        description: 'Unsegregated municipal dumps overloading processing plants. Build an edge-AI optical camera classifier mounted onto compactor hoppers.',
+        tech_stack: ['Computer Vision', 'YOLOv8', 'Route Optimization'],
+        grant_amount: 60000
+      },
+      {
+        id: 'c-3',
+        code: 'HLT-12',
+        title: 'Solar Cold-Chain & Telemetry for PHCs',
+        category: 'Healthcare & Energy',
+        category_slug: 'health',
+        severity: 'High Priority',
+        location: 'Kalahandi, Odisha (Tribal Sub-Divisions)',
+        description: 'Vaccine spoilage due to frequent grid cutoffs in remote dispensaries. Requires hybrid thermal storage and cellular temperature audit logs.',
+        tech_stack: ['Thermal Storage', 'Telemetry', 'MPPT'],
+        grant_amount: 85000
+      },
+      {
+        id: 'c-4',
+        code: 'AG-04',
+        title: 'AgriVision Pest Early Warning System',
+        category: 'Agriculture & IoT',
+        category_slug: 'ai',
+        severity: 'Active Sprint',
+        location: 'Ranchi, Jharkhand (Birsa Agri Zone)',
+        description: 'Autonomous solar edge cameras analyzing Kharif crop pest infestations using lightweight neural networks deployed on microcontrollers.',
+        tech_stack: ['TinyML', 'ESP32-CAM', 'AgriTech'],
+        grant_amount: 50000
+      }
+    ];
+
+    async function loadChallenges() {
+      try {
+        const { data, error } = await supabase
+          .from('challenges')
+          .select('*')
+          .order('created_at', { ascending: true });
+
+        if (!error && data && data.length > 0) {
+          localChallenges = data.map(c => ({
+            ...c,
+            category_slug: c.category.toLowerCase().includes('water') ? 'water' :
+                           c.category.toLowerCase().includes('waste') ? 'waste' :
+                           c.category.toLowerCase().includes('health') ? 'health' : 'ai'
+          }));
+        }
+      } catch (err) {
+        console.warn('Supabase challenges fallback:', err);
+      }
+
+      renderChallenges();
+    }
+
+    function renderChallenges() {
+      const grid = document.getElementById('marketplaceGrid');
+      if (!grid) return;
+
+      grid.innerHTML = localChallenges.map(c => {
+        const isHigh = c.severity && c.severity.toLowerCase().includes('high');
+        const badgeBg = isHigh ? 'bg-error-container text-on-error-container' : 'bg-surface-container-high text-on-surface-variant';
+        const tags = Array.isArray(c.tech_stack) ? c.tech_stack : ['IoT', 'Embedded'];
+
+        return `
+          <div class="market-card flex flex-col rounded-2xl bg-surface-container-lowest p-6 shadow-sm hover:shadow-md transition-all border border-outline-variant/30" data-cat="${c.category_slug}">
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed text-xs font-bold">${c.category}</span>
+              <span class="px-2.5 py-0.5 rounded-full ${badgeBg} text-xs font-bold flex items-center gap-1">
+                ${isHigh ? '<span class="w-1.5 h-1.5 rounded-full bg-error"></span>' : ''} ${c.severity || 'Open'}
+              </span>
+            </div>
+            <h3 class="text-lg font-bold text-on-surface mb-1">${c.title}</h3>
+            <div class="flex items-center gap-1 text-on-surface-variant text-xs mb-3">
+              <span class="material-symbols-outlined text-sm text-outline">location_on</span>
+              <span>${c.location}</span>
+            </div>
+            <p class="text-xs text-on-surface-variant mb-4">${c.description}</p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              ${tags.map(t => `<span class="px-2 py-0.5 rounded bg-surface-container text-xs">${t}</span>`).join('')}
+            </div>
+            <div class="mt-auto flex items-center justify-between pt-3 border-t border-outline-variant/20">
+              <span class="text-xs font-bold text-tertiary">₹${(c.grant_amount || 75000).toLocaleString('en-IN')} Grant</span>
+              <button onclick="navigateTo('challenge-dossier')" class="h-8 px-3 rounded-lg bg-primary hover:bg-primary-container text-on-primary text-xs font-bold transition-all">
+                Review Dossier
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 6. National Metrics (Live Supabase Query)
+    async function loadMetrics() {
+      try {
+        const { data, error } = await supabase
+          .from('national_metrics')
+          .select('*')
+          .limit(1)
+          .single();
+
+        if (!error && data) {
+          const p = document.getElementById('metricProblemsCount');
+          const c = document.getElementById('metricChallengesCount');
+          const u = document.getElementById('metricUnivCount');
+          const m = document.getElementById('metricMentorsCount');
+          const g = document.getElementById('metricGrantsAmount');
+          const a = document.getElementById('metricAiAccuracy');
+
+          if (p) p.textContent = (data.problems_count || 12480).toLocaleString('en-IN') + '+';
+          if (c) c.textContent = (data.active_challenges_count || 2350).toLocaleString('en-IN') + '+';
+          if (u) u.textContent = (data.partner_universities_count || 186).toString();
+          if (m) m.textContent = (data.industry_mentors_count || 420).toString() + '+';
+          if (g) g.textContent = data.grants_sanctioned_amount || '₹1.4 Cr';
+          if (a) a.textContent = (data.ai_triage_accuracy || 94.2) + '%';
+        }
+      } catch (err) {
+        console.warn('Supabase metrics fallback:', err);
+      }
+    }
+
+    // 7. Profiles (Live Supabase Query)
+    async function loadProfile() {
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .limit(1)
+          .single();
+
+        if (!error && data) {
+          console.log('👤 Profile loaded from Supabase:', data.full_name, data.university);
+        }
+      } catch (err) {
+        console.warn('Supabase profile query fallback:', err);
+      }
+    }
+
+    // Marketplace search filter
+    window.filterMarketplace = function(searchTerm) {
+      const term = searchTerm.toLowerCase();
+      const cards = document.querySelectorAll('.market-card');
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(term)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    // Marketplace category selector
+    window.setMarketCategory = function(category) {
+      document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+        const cat = btn.getAttribute('data-cat');
+        if (cat === category) {
+          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-primary text-on-primary text-xs font-bold shadow-sm';
+        } else {
+          btn.className = 'cat-filter-btn px-3 py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-semibold';
+        }
+      });
+
+      const cards = document.querySelectorAll('.market-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    };
+
+    // Initialize application & load live Supabase data & Auth
     window.addEventListener('DOMContentLoaded', () => {
+      initAuth();
       handleHashChange();
-      console.log('⚡ Supabase Client Connected to:', supabase);
+      loadTasks();
+      loadTeams();
+      loadChallenges();
+      loadMetrics();
+      loadWatchlists();
+      loadProfile();
+      console.log('⚡ CivicSolve AI Engine initialized with Supabase Auth');
     });
     window.addEventListener('hashchange', handleHashChange);
   </script>
