@@ -16,8 +16,9 @@ CivicSolve AI bridges the gap between raw citizen distress signals and actionabl
    - **Tangible Deployment:** Field prototypes and telemetry nodes deployed in pilot wards.
 
 2. **6 Interactive Views & Workspaces**
-   - **Overview / Landing (`#landing`):** Real-time national metrics, pipeline visualizer, and 5-stage lifecycle.
-   - **Student Innovator Dashboard (`#dashboard`):** Personalized console for lead innovators (featuring Rahul Sharma, BIT Mesra), active sprints, milestone tracking, and task backlog.
+   - **Overview / Landing (`#landing`):** Real-time national metrics, pipeline visualizer, 5-stage lifecycle, and the **Interactive Jharkhand Geospatial Problem & Telemetry Heatmap** with 8 district radar pins and live sensor feeds.
+   - **Student & Admin Dashboard (`#dashboard`):** Personalized console for lead administrators and innovators (featuring Ayush Daspute & Sarthak Panvelkar, BIT Mesra), active sprints, milestone tracking, and task backlog.
+   - **Interactive AI CivicBot:** Floating multi-modal AI Copilot for hardware specifications, problem triage, and challenge recommendations.
    - **Challenges Marketplace (`#challenges-marketplace`):** Search and filter real-world challenges across Water, Waste, Healthcare, and AgriTech.
    - **Report a Problem (`#report`):** Citizen ground intake form with geo-coordinates and instant AI triage routing.
    - **AI Analysis Lab (`#ai-analysis`):** Multi-modal severity analyzer, vector similarity clustering, and confidence scoring.
@@ -251,6 +252,16 @@ CivicSolve AI features a hybrid architecture combining **Firebase Authentication
 - **Row Level Security (RLS):** All 7 tables have RLS enabled with granular read, insert, update, and delete policies for public and authenticated access.
 - **Environment Isolation:** Secrets and keys are strictly managed through environment variables (`.env.local`) and Vite's `import.meta.env` loader.
 - **Resilient Fallback:** The frontend incorporates in-memory caching and optimistic UI updates, ensuring smooth interaction even during network interruptions.
+
+---
+
+## 👥 Core Project Team
+
+| Name | Role | Affiliation | Responsibilities |
+| :--- | :--- | :--- | :--- |
+| **Ayush Daspute** | **Lead Innovator** | BIT Mesra | System Architecture, AI Triage Pipeline, SIH Project Lead |
+| **Sarthak Panvelkar** | **Lead Innovator** | BIT Mesra | Hardware Telemetry, IoT & LoRaWAN Node Integration |
+| **Netra Patil** | **Developer** | BIT Mesra | Full-Stack Development, Supabase Cloud & UI Modules |
 
 ---
 

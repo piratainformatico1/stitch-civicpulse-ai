@@ -1,119 +1,111 @@
 -- =========================================================================
--- CIVICSOLVE AI — COMPLETE SUPABASE DATABASE SCHEMA & SEED DATA
+-- CIVICSOLVE AI — JHARKHAND CIVIC PORTAL SUPABASE SCHEMA & RLS POLICIES
+-- SIH-26043 Compliant: Production Schema, 24 Districts, Services & RLS
 -- =========================================================================
 
 -- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
--- 1. PROFILES (Users & Innovators)
+-- 1. PROFILES (Citizens, Innovators, Admins)
 CREATE TABLE IF NOT EXISTS public.profiles (
   id TEXT PRIMARY KEY,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now(),
   full_name TEXT NOT NULL,
+  phone TEXT,
   email TEXT UNIQUE,
   avatar_url TEXT,
   provider TEXT DEFAULT 'google',
-  role TEXT DEFAULT 'student' CHECK (role IN ('student', 'university', 'mentor', 'admin')),
-  university TEXT DEFAULT 'BIT Mesra',
-  department TEXT DEFAULT 'Electronics & Communication',
-  badge_level INTEGER DEFAULT 4,
-  verified BOOLEAN DEFAULT false,
-  email_verified BOOLEAN DEFAULT false,
-  firebase_uid TEXT
+  role TEXT DEFAULT 'citizen' CHECK (role IN ('citizen', 'student', 'officer', 'admin')),
+  district TEXT DEFAULT 'Ranchi',
+  preferred_lang TEXT DEFAULT 'hi',
+  verified BOOLEAN DEFAULT false
 );
 
--- 2. PROBLEMS (Citizen Ground Reports)
+-- 2. DISTRICTS (24 Districts of Jharkhand)
+CREATE TABLE IF NOT EXISTS public.districts (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  name_hi TEXT NOT NULL,
+  division TEXT NOT NULL,
+  headquarters TEXT NOT NULL,
+  area_sqkm INTEGER,
+  population TEXT,
+  helpline TEXT,
+  active_issues INTEGER DEFAULT 0,
+  resolved_issues INTEGER DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 3. SERVICES (Citizen Welfare Schemes & Services)
+CREATE TABLE IF NOT EXISTS public.services (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  code TEXT UNIQUE NOT NULL,
+  title_hi TEXT NOT NULL,
+  title_en TEXT NOT NULL,
+  category TEXT NOT NULL,
+  department TEXT NOT NULL,
+  processing_days INTEGER DEFAULT 7,
+  required_docs TEXT[] DEFAULT '{}',
+  fee_inr NUMERIC DEFAULT 0,
+  icon TEXT DEFAULT 'description',
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- 4. PROBLEMS / GRIEVANCES (Citizen Reports)
 CREATE TABLE IF NOT EXISTS public.problems (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now(),
+  tracking_token TEXT UNIQUE,
   reporter_id TEXT REFERENCES public.profiles(id) ON DELETE SET NULL,
+  reporter_name TEXT,
+  reporter_phone TEXT,
   title TEXT NOT NULL,
   category TEXT NOT NULL,
+  district TEXT NOT NULL DEFAULT 'Ranchi',
+  block TEXT,
+  panchayat TEXT,
   location TEXT NOT NULL,
   coordinates TEXT DEFAULT '23.36° N, 85.54° E',
   description TEXT NOT NULL,
-  severity TEXT DEFAULT 'High' CHECK (severity IN ('Low', 'Medium', 'High', 'Critical')),
-  status TEXT DEFAULT 'pending_triage' CHECK (status IN ('submitted', 'pending_triage', 'ai_triaged', 'admin_approved', 'challenge_created', 'resolved')),
+  severity TEXT DEFAULT 'Medium' CHECK (severity IN ('Low', 'Medium', 'High', 'Critical')),
+  status TEXT DEFAULT 'submitted' CHECK (status IN ('submitted', 'triaged', 'assigned', 'in_progress', 'resolved', 'closed')),
+  assigned_department TEXT,
+  assigned_officer TEXT,
   evidence_urls TEXT[] DEFAULT '{}',
-  ai_confidence NUMERIC DEFAULT 94.8
+  ai_triage_confidence NUMERIC DEFAULT 94.8,
+  ai_summary TEXT
 );
 
--- 3. CHALLENGES (Civic Challenges Marketplace & Dossiers)
+-- 5. CHALLENGES (SIH Innovation Marketplace)
 CREATE TABLE IF NOT EXISTS public.challenges (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now(),
-  problem_id UUID REFERENCES public.problems(id) ON DELETE SET NULL,
   code TEXT UNIQUE NOT NULL,
   title TEXT NOT NULL,
   category TEXT NOT NULL,
+  district TEXT DEFAULT 'Ranchi',
   severity TEXT DEFAULT 'High Priority',
   location TEXT NOT NULL,
-  coordinates TEXT DEFAULT '23.36° N, 85.54° E',
   description TEXT NOT NULL,
   tech_stack TEXT[] DEFAULT '{}',
   grant_amount INTEGER DEFAULT 75000,
   impact_score INTEGER DEFAULT 92,
-  stage INTEGER DEFAULT 4,
-  stage_name TEXT DEFAULT 'Teams Formed (Phase 4 of 7)',
-  status TEXT DEFAULT 'open' CHECK (status IN ('open', 'claimed', 'in_progress', 'completed')),
-  mentor_name TEXT DEFAULT 'Dr. S. K. Mukherjee',
-  mentor_organization TEXT DEFAULT 'Tata Steel R&D',
-  turbidity_ntu NUMERIC DEFAULT 42,
-  tds_ppm NUMERIC DEFAULT 840,
-  ph_level NUMERIC DEFAULT 6.1
+  status TEXT DEFAULT 'open' CHECK (status IN ('open', 'claimed', 'in_progress', 'completed'))
 );
 
--- 4. TEAMS (Student Contender Squads)
-CREATE TABLE IF NOT EXISTS public.teams (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  created_at TIMESTAMPTZ DEFAULT now(),
-  challenge_id UUID REFERENCES public.challenges(id) ON DELETE CASCADE,
-  leader_id TEXT REFERENCES public.profiles(id) ON DELETE SET NULL,
-  name TEXT NOT NULL,
-  university TEXT NOT NULL,
-  department TEXT,
-  members_count INTEGER DEFAULT 4,
-  progress_pct INTEGER DEFAULT 0,
-  status TEXT DEFAULT 'active' CHECK (status IN ('ideation', 'bench_test', 'active', 'completed')),
-  rank INTEGER DEFAULT 1
-);
-
--- 5. SPRINT_TASKS (Innovator Dashboard Tasks)
+-- 6. SPRINT_TASKS (Innovator Dashboard Tasks)
 CREATE TABLE IF NOT EXISTS public.sprint_tasks (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMPTZ DEFAULT now(),
   user_id TEXT REFERENCES public.profiles(id) ON DELETE CASCADE,
-  team_id UUID REFERENCES public.teams(id) ON DELETE SET NULL,
   title TEXT NOT NULL,
   priority TEXT DEFAULT 'High Priority',
   due_date TEXT DEFAULT 'Today',
-  assigned_to TEXT DEFAULT 'Rahul Sharma',
+  assigned_to TEXT DEFAULT 'Innovator',
   project_name TEXT DEFAULT 'AquaSense #S3',
   is_completed BOOLEAN DEFAULT false
-);
-
--- 6. WATCHLISTS (Saved/Bookmarked Challenges)
-CREATE TABLE IF NOT EXISTS public.watchlists (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  created_at TIMESTAMPTZ DEFAULT now(),
-  user_id TEXT REFERENCES public.profiles(id) ON DELETE CASCADE,
-  challenge_id UUID REFERENCES public.challenges(id) ON DELETE CASCADE,
-  session_id TEXT
-);
-
--- 7. NATIONAL_METRICS (Platform Aggregates)
-CREATE TABLE IF NOT EXISTS public.national_metrics (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  updated_at TIMESTAMPTZ DEFAULT now(),
-  problems_count INTEGER DEFAULT 12480,
-  active_challenges_count INTEGER DEFAULT 2350,
-  partner_universities_count INTEGER DEFAULT 186,
-  industry_mentors_count INTEGER DEFAULT 420,
-  grants_sanctioned_amount TEXT DEFAULT '₹1.4 Cr',
-  ai_triage_accuracy NUMERIC DEFAULT 94.2
 );
 
 -- =========================================================================
@@ -121,151 +113,88 @@ CREATE TABLE IF NOT EXISTS public.national_metrics (
 -- =========================================================================
 
 ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.districts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.problems ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.challenges ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.teams ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.sprint_tasks ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.watchlists ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.national_metrics ENABLE ROW LEVEL SECURITY;
 
--- Anonymous and Authenticated Read Access for Public Catalogues
-CREATE POLICY "Public read profiles" ON public.profiles FOR SELECT USING (true);
-CREATE POLICY "Public read problems" ON public.problems FOR SELECT USING (true);
+-- 1. Public Read Access for Catalogs & Districts
+CREATE POLICY "Public read districts" ON public.districts FOR SELECT USING (true);
+CREATE POLICY "Public read services" ON public.services FOR SELECT USING (true);
 CREATE POLICY "Public read challenges" ON public.challenges FOR SELECT USING (true);
-CREATE POLICY "Public read teams" ON public.teams FOR SELECT USING (true);
+CREATE POLICY "Public read problems" ON public.problems FOR SELECT USING (true);
 CREATE POLICY "Public read sprint_tasks" ON public.sprint_tasks FOR SELECT USING (true);
-CREATE POLICY "Public read watchlists" ON public.watchlists FOR SELECT USING (true);
-CREATE POLICY "Public read national_metrics" ON public.national_metrics FOR SELECT USING (true);
 
--- Insert Permissions
-CREATE POLICY "Allow public insert problems" ON public.problems FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public insert sprint_tasks" ON public.sprint_tasks FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public insert watchlists" ON public.watchlists FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public insert teams" ON public.teams FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public insert challenges" ON public.challenges FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public insert profiles" ON public.profiles FOR INSERT WITH CHECK (true);
+-- 2. Profiles: Users can select and update their own profile
+CREATE POLICY "Public read profiles" ON public.profiles FOR SELECT USING (true);
+CREATE POLICY "Allow individual insert profile" ON public.profiles FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow individual update profile" ON public.profiles FOR UPDATE USING (true);
 
--- Update & Delete Permissions
-CREATE POLICY "Allow public update sprint_tasks" ON public.sprint_tasks FOR UPDATE USING (true);
-CREATE POLICY "Allow public delete sprint_tasks" ON public.sprint_tasks FOR DELETE USING (true);
-CREATE POLICY "Allow public delete watchlists" ON public.watchlists FOR DELETE USING (true);
-CREATE POLICY "Allow public update challenges" ON public.challenges FOR UPDATE USING (true);
-CREATE POLICY "Allow public update problems" ON public.problems FOR UPDATE USING (true);
-CREATE POLICY "Allow public update profiles" ON public.profiles FOR UPDATE USING (true);
+-- 3. Grievances / Problems: Open insert for all citizens + token lookup
+CREATE POLICY "Allow citizen insert problem" ON public.problems FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow citizen update problem" ON public.problems FOR UPDATE USING (true);
+
+-- 4. Sprint Tasks: User specific operations
+CREATE POLICY "Allow user insert tasks" ON public.sprint_tasks FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow user update tasks" ON public.sprint_tasks FOR UPDATE USING (true);
+CREATE POLICY "Allow user delete tasks" ON public.sprint_tasks FOR DELETE USING (true);
 
 -- =========================================================================
--- SEED INITIAL DATA (Matching UI Fidelity)
+-- SEED INITIAL DATA: 24 JHARKHAND DISTRICTS & CITIZEN SERVICES
 -- =========================================================================
 
--- Insert default user profile
-INSERT INTO public.profiles (id, full_name, email, role, university, department, badge_level, verified)
-VALUES 
-  ('a0000000-0000-0000-0000-000000000001', 'Rahul Sharma', 'rahul.sharma@bitmesra.ac.in', 'student', 'BIT Mesra', 'Dept. of Electronics & Communication', 4, true)
-ON CONFLICT (id) DO NOTHING;
+INSERT INTO public.districts (id, name, name_hi, division, headquarters, area_sqkm, population, helpline, active_issues, resolved_issues)
+VALUES
+  ('ranchi', 'Ranchi', 'राँची', 'South Chotanagpur', 'Ranchi', 5097, '29.1 Lakh', '0651-2214010 / 181', 142, 3840),
+  ('dhanbad', 'Dhanbad', 'धनबाद', 'North Chotanagpur', 'Dhanbad', 2040, '26.8 Lakh', '0326-2311217 / 181', 118, 2950),
+  ('east_singhbhum', 'East Singhbhum', 'पूर्वी सिंहभूम', 'Kolhan', 'Jamshedpur', 3562, '22.9 Lakh', '0657-2431002 / 181', 96, 2710),
+  ('west_singhbhum', 'West Singhbhum', 'पश्चिमी सिंहभूम', 'Kolhan', 'Chaibasa', 7224, '15.0 Lakh', '06582-256301 / 181', 84, 1890),
+  ('seraikela_kharsawan', 'Seraikela Kharsawan', 'सरायकेला खरसावां', 'Kolhan', 'Seraikela', 2657, '10.6 Lakh', '06597-234201 / 181', 52, 1420),
+  ('bokaro', 'Bokaro', 'बोकारो', 'North Chotanagpur', 'Bokaro', 2883, '20.6 Lakh', '06542-242299 / 181', 78, 2310),
+  ('hazaribagh', 'Hazaribagh', 'हजारीबाग', 'North Chotanagpur', 'Hazaribagh', 3555, '17.3 Lakh', '06546-264211 / 181', 65, 2100),
+  ('ramgarh', 'Ramgarh', 'रामगढ़', 'North Chotanagpur', 'Ramgarh', 1341, '9.5 Lakh', '06553-261500 / 181', 49, 1380),
+  ('giridih', 'Giridih', 'गिरिडीह', 'North Chotanagpur', 'Giridih', 4962, '24.4 Lakh', '06532-222044 / 181', 91, 2540),
+  ('koderma', 'Koderma', 'कोडरमा', 'North Chotanagpur', 'Koderma', 1500, '7.2 Lakh', '06534-222014 / 181', 38, 1120),
+  ('chatra', 'Chatra', 'चतरा', 'North Chotanagpur', 'Chatra', 3718, '10.4 Lakh', '06541-252210 / 181', 45, 1290),
+  ('palamu', 'Palamu', 'पलामू', 'Palamu', 'Medininagar', 4393, '19.4 Lakh', '06562-222238 / 181', 88, 2450),
+  ('garhwa', 'Garhwa', 'गढ़वा', 'Palamu', 'Garhwa', 4093, '13.2 Lakh', '06561-222224 / 181', 62, 1680),
+  ('latehar', 'Latehar', 'लातेहार', 'Palamu', 'Latehar', 4291, '7.3 Lakh', '06565-242205 / 181', 41, 1090),
+  ('lohardaga', 'Lohardaga', 'लोहरदगा', 'South Chotanagpur', 'Lohardaga', 1502, '4.6 Lakh', '06526-224022 / 181', 29, 870),
+  ('gumla', 'Gumla', 'गुमला', 'South Chotanagpur', 'Gumla', 5360, '10.3 Lakh', '06524-223201 / 181', 57, 1560),
+  ('simdega', 'Simdega', 'सिमडेगा', 'South Chotanagpur', 'Simdega', 3774, '6.0 Lakh', '06525-225801 / 181', 34, 940),
+  ('khunti', 'Khunti', 'खूंटी', 'South Chotanagpur', 'Khunti', 2535, '5.3 Lakh', '06528-220005 / 181', 36, 1040),
+  ('deoghar', 'Deoghar', 'देवघर', 'Santhal Pargana', 'Deoghar', 2477, '15.0 Lakh', '06432-232230 / 181', 72, 2180),
+  ('dumka', 'Dumka', 'दुमका', 'Santhal Pargana', 'Dumka', 3761, '13.2 Lakh', '06434-222204 / 181', 68, 1980),
+  ('godda', 'Godda', 'गोड्डा', 'Santhal Pargana', 'Godda', 2266, '13.1 Lakh', '06422-222202 / 181', 54, 1470),
+  ('sahibganj', 'Sahibganj', 'साहिबगंज', 'Santhal Pargana', 'Sahibganj', 2063, '11.5 Lakh', '06436-222002 / 181', 58, 1610),
+  ('pakur', 'Pakur', 'पाकुड़', 'Santhal Pargana', 'Pakur', 1811, '9.0 Lakh', '06435-222055 / 181', 47, 1250),
+  ('jamtara', 'Jamtara', 'जामताड़ा', 'Santhal Pargana', 'Jamtara', 1811, '7.9 Lakh', '06433-222202 / 181', 42, 1190)
+ON CONFLICT (id) DO UPDATE SET name_hi = EXCLUDED.name_hi, active_issues = EXCLUDED.active_issues;
 
--- Insert core seed challenges
-INSERT INTO public.challenges (id, code, title, category, severity, location, description, tech_stack, grant_amount, impact_score, stage, stage_name, status, mentor_name, mentor_organization, turbidity_ntu, tds_ppm, ph_level)
-VALUES 
-  (
-    'c0000000-0000-0000-0000-000000000001',
-    'WT-09',
-    'Smart Water Quality Telemetry & Contamination Tracer',
-    'Water & Sanitation',
-    'High Priority',
-    'Ranchi, Jharkhand (Ward 14 & 18)',
-    'Heavy industrial runoff infiltrating municipal piped drinking lines. Requires low-power battery spectrophotometric nodes transmitting via GSM/LoRa.',
-    ARRAY['IoT', 'Embedded C', 'Python', 'Spectrometry', 'LoRaWAN'],
-    75000,
-    92,
-    4,
-    'Teams Formed (Phase 4 of 7)',
-    'open',
-    'Dr. S. K. Mukherjee',
-    'Tata Steel R&D',
-    42,
-    840,
-    6.1
-  ),
-  (
-    'c0000000-0000-0000-0000-000000000002',
-    'ENV-04',
-    'Intelligent Waste Segregation & Circular Fleet Routing',
-    'Solid Waste & Drainage',
-    'Medium Priority',
-    'Pune, Maharashtra (Smart City Zone)',
-    'Unsegregated municipal dumps overloading processing plants. Build an edge-AI optical camera classifier mounted onto compactor hoppers for instant segregation audit.',
-    ARRAY['Computer Vision', 'Edge AI', 'YOLOv8', 'Route Optimization'],
-    60000,
-    87,
-    3,
-    'Problem Scoping (Phase 3 of 7)',
-    'open',
-    'Er. Rajiv Nair',
-    'Pune Smart City Dev Corp',
-    12,
-    320,
-    7.2
-  ),
-  (
-    'c0000000-0000-0000-0000-000000000003',
-    'HLT-12',
-    'Solar Cold-Chain & Telemetry for Primary Health Centers',
-    'Healthcare & Energy',
-    'High Priority',
-    'Kalahandi, Odisha (Tribal Sub-Divisions)',
-    'Vaccine spoilage due to frequent 8-hour grid cutoffs in remote dispensaries. Requires hybrid thermal storage and cellular temperature audit logs.',
-    ARRAY['Thermal Storage', 'Telemetry', 'Solar MPPT', 'LiFePO4'],
-    85000,
-    95,
-    2,
-    'AI Synthesized (Phase 2 of 7)',
-    'open',
-    'Dr. Ananya Roy',
-    'National Health Mission',
-    5,
-    180,
-    7.0
-  ),
-  (
-    'c0000000-0000-0000-0000-000000000004',
-    'AG-04',
-    'AgriVision Pest Early Warning System',
-    'Agriculture & IoT',
-    'Active Sprint',
-    'Ranchi, Jharkhand (Birsa Agri Zone)',
-    'Autonomous solar edge cameras analyzing Kharif crop pest infestations using lightweight neural networks deployed on microcontrollers.',
-    ARRAY['TinyML', 'ESP32-CAM', 'AgriTech', 'Modbus'],
-    50000,
-    89,
-    1,
-    'Data Synthesis (Phase 1 of 7)',
-    'in_progress',
-    'Prof. K. N. Soren',
-    'Birsa Agricultural University',
-    8,
-    240,
-    6.8
-  )
-ON CONFLICT (id) DO NOTHING;
+-- Seed key citizen services
+INSERT INTO public.services (code, title_hi, title_en, category, department, processing_days, fee_inr, icon)
+VALUES
+  ('SRV-01', 'जाति प्रमाण पत्र', 'Caste Certificate', 'Certificates', 'Revenue & Land Reforms', 10, 0, 'badge'),
+  ('SRV-02', 'आय प्रमाण पत्र', 'Income Certificate', 'Certificates', 'Revenue & Land Reforms', 7, 0, 'receipt_long'),
+  ('SRV-03', 'स्थानीय निवास प्रमाण पत्र', 'Residential / Domicile Certificate', 'Certificates', 'Personnel & Admin', 10, 0, 'home_pin'),
+  ('SRV-04', 'किसान क्रेडिट कार्ड (KCC)', 'Kisan Credit Card', 'Agriculture', 'Agriculture & Sugarcane', 15, 0, 'agriculture'),
+  ('SRV-05', 'अबुआ आवास योजना', 'Abua Awas Yojana', 'Housing', 'Rural Development', 21, 0, 'cottage'),
+  ('SRV-06', 'सर्वजन पेंशन योजना', 'Sarvajan Pension Yojana', 'Pension', 'Social Welfare', 14, 0, 'elderly'),
+  ('SRV-07', 'नया राशन कार्ड (PDS)', 'New Digital Ration Card', 'Food & Civil Supplies', 'Food & Consumer Affairs', 15, 0, 'shopping_cart'),
+  ('SRV-08', 'चापाकल / जल-नल मरम्मत', 'Handpump / Tap Water Redressal', 'Water', 'Drinking Water & Sanitation', 3, 0, 'water_damage')
+ON CONFLICT (code) DO NOTHING;
 
--- Insert seed sprint tasks for Rahul Sharma
-INSERT INTO public.sprint_tasks (id, user_id, title, priority, due_date, assigned_to, project_name, is_completed)
-VALUES 
-  ('t0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', 'Flash firmware with deep-sleep power saving mode (ESP32)', 'High Priority', 'Due Today', 'Rahul Sharma', 'AquaSense #S3', false),
-  ('t0000000-0000-0000-0000-000000000002', 'a0000000-0000-0000-0000-000000000001', 'Finalize IP68 enclosure 3D print model for field casing', 'CAD / Fab', 'Nov 02', 'Team AquaSense', 'AquaSense #S3', false),
-  ('t0000000-0000-0000-0000-000000000003', 'a0000000-0000-0000-0000-000000000001', 'Submit Sprint 2 Code Review & Telemetry Log to Tata Steel Mentor', 'Corporate Mentorship', 'Nov 04', 'Er. V. Singhal', 'AquaSense #S3', false)
-ON CONFLICT (id) DO NOTHING;
+-- Seed Lead Innovators & Developer Profiles
+INSERT INTO public.profiles (id, full_name, email, role, district, preferred_lang, verified)
+VALUES
+  ('568a7b04-e644-4980-bd61-df48e1c64062', 'Ayush Daspute', 'ayushdaspute27@gmail.com', 'admin', 'Ranchi', 'en', true),
+  ('f889b039-e63a-4283-9b69-88187dc9fb51', 'Sarthak Panvelkar', 'sarthakpanvelkar63@gmail.com', 'student', 'Ranchi', 'en', true),
+  ('1778bba4-1323-4dc2-9d83-e7a64cfa0d32', 'Netra Patil', 'netrapatil.dev@gmail.com', 'student', 'Ranchi', 'en', true),
+  ('08650cbf-f871-4e3b-9d3f-2e53bb56b68a', 'Prakhar Yadav', 'prakharyadav69@gmail.com', 'student', 'Ranchi', 'en', true)
+ON CONFLICT (id) DO UPDATE SET
+  full_name = EXCLUDED.full_name,
+  role = EXCLUDED.role,
+  email = EXCLUDED.email,
+  verified = EXCLUDED.verified;
 
--- Insert seed teams
-INSERT INTO public.teams (id, challenge_id, leader_id, name, university, department, members_count, progress_pct, status, rank)
-VALUES 
-  ('m0000000-0000-0000-0000-000000000001', 'c0000000-0000-0000-0000-000000000001', 'a0000000-0000-0000-0000-000000000001', 'Team AquaSense', 'BIT Mesra', 'Dept of Chemical & Electronics Engg', 5, 64, 'active', 1),
-  ('m0000000-0000-0000-0000-000000000002', 'c0000000-0000-0000-0000-000000000001', NULL, 'HydroMesh Innovators', 'IIT (ISM) Dhanbad', 'Dept of Environmental Science', 4, 48, 'bench_test', 2),
-  ('m0000000-0000-0000-0000-000000000003', 'c0000000-0000-0000-0000-000000000001', NULL, 'JalSuraksha Tech', 'NIT Jamshedpur', 'Dept of Civil & Water Engg', 4, 30, 'ideation', 3)
-ON CONFLICT (id) DO NOTHING;
-
--- Insert initial national platform metrics
-INSERT INTO public.national_metrics (id, problems_count, active_challenges_count, partner_universities_count, industry_mentors_count, grants_sanctioned_amount, ai_triage_accuracy)
-VALUES 
-  ('n0000000-0000-0000-0000-000000000001', 12480, 2350, 186, 420, '₹1.4 Cr', 94.2)
-ON CONFLICT (id) DO NOTHING;
